@@ -68,13 +68,21 @@ html, body, form{overflow-y:auto;height:100%;}
 
 .visual{height:calc(100% - 33px);padding-top:10px;}
 
-.visual_box{height:33.3%;}
+.visual_box{height:33.3%; }
+/* .visual_box{height:33.3%; position:absolute; float:left; left:0; right:0} */
+
 .visual_box .visual_title{position:relative;height:35px;margin:5px 0;}
 .visual_box .visual_title span{color:#fff;font-size:18px;line-height:35px;}
 .visual_box .visual_title img{width:100%;position:absolute;left:0;bottom:0;}
 .visual_box .visual_chart{height:calc(100% - 35px);}
 
-.visual_left{width:25%;height:100%;float:left;}
+/* .visual_title{position:relative;height:35px;margin:5px 0;}
+.visual_title span{color:#fff;font-size:18px;line-height:35px;}
+.visual_title img{width:100%;position:absolute;left:0;bottom:0;}
+.visual_chart{height:calc(100% - 35px);} */
+
+
+.visual_left{width:25%;height:100%;float:left; position:relative;}
 .visual_left .sfzcll{position:relative;}
 .visual_left .sfzcll a{width:32%;text-align:center;line-height:25px;color:#fff;display:inline-block;}
 .visual_left .sfzcll .sfzcll_pos_box{width:100%;height:calc(100% - 30px);}
@@ -92,14 +100,14 @@ html, body, form{overflow-y:auto;height:100%;}
 .visual_left .sfzcll .sfzcll_box .sfzcll_smallBk .ygl{color:#00ffc6;}
 .visual_left .sfzcll .sfzcll_box .sfzcll_smallBk .ygh{color:#ffe400;}
 
-.visual_con{width:50%;height:100%;float:left;padding:25px 20px 0 20px;}
+.visual_con{width:50%;height:100%;float:left;padding:25px 20px 0 20px; position:relative;}
 .visual_con .visual_conTop{height:130px;margin-bottom:10px;}
 .visual_con .visual_conTop .visual_conTop_box{height:100%;padding:0 3px;}
 .visual_con .visual_conTop .visual_conTop1{width:20%;height:100%;float:left;}
 .visual_con .visual_conTop .visual_conTop1>div{background:url(../images/ksh40.png) no-repeat;background-size:100% 100%;}
 .visual_con .visual_conTop .visual_conTop2{width:30%;height:100%;float:left;}
 .visual_con .visual_conTop .visual_conTop2>div{background:url(../images/ksh39.png) no-repeat;background-size:100% 100%;}
-.visual_right{width:25%;height:100%;float:right;}
+.visual_right{width:25%;height:100%;float:right; position:relative;}
 .visual_con .visual_conTop .visual_conTop_box>div{height:100%;}
 .visual_con .visual_conTop .visual_conTop_box>div h3{color:#fff;font-size:16px;padding:16px 0 0 20px;}
 .visual_con .visual_conTop .visual_conTop_box>div p{width:33%;float:left;line-height:85px;color:#20dbfd;text-shadow:0 0 25px #00d8ff;font-size:46px;font-family: 'yjsz';text-align:right;}

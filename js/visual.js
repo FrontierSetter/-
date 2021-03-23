@@ -966,13 +966,13 @@ function random() {
 }
 setInterval(function () {
     var dynamicData = [random(), random(), random(), random(),random(), random(), random(), random(),random(),random()];
-    myChart.setOption({
-        series: [{
-            data: dynamicData.slice()
-        }, {
-            data: dynamicData.slice()
-        }]
-    })
+    // myChart.setOption({
+    //     series: [{
+    //         data: dynamicData.slice()
+    //     }, {
+    //         data: dynamicData.slice()
+    //     }]
+    // })
 }, 3000)
 //////////////////////收费站收费排行2 end
 
@@ -1017,7 +1017,7 @@ option5 = {
                 }
             }
         },
-        hoverAnimation: false,
+        hoverAnimation: true,
         data: [{
             value: value,
             name: 'completed',

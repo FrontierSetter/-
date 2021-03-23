@@ -2,17 +2,20 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>山西省交通大数据分析平台</title>
+    <title>智能车监管大数据平台</title>
     <!--设置是否为缩放模式 -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- 新 Bootstrap 核心 CSS 文件 -->
     <link rel="stylesheet" type="text/css" href="bootstrap/3.3.4/css/bootstrap.css">
     <!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
-    <script src="js/jquery.min.js"></script>
+    <!-- <script src="js/jquery.min.js"></script> -->
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.0/jquery.js"></script>
     <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
     <script src="js/bootstrap.min.js"></script>
     <!--echarts JS-->
-    <script src="js/echarts.min.js"></script>
+    <!-- <script src="js/echarts.min.js"></script> -->
+    <script src="https://cdn.bootcdn.net/ajax/libs/echarts/5.0.2/echarts.js"></script>
+
     <!-- 轮播swiper文件 -->
     <link rel="stylesheet" type="text/css" href="css/swiper.min.css">
     <script src="js/swiper.min.js"></script>
@@ -21,6 +24,14 @@
     <script src="js/china.js"></script>
     <script src="js/chartMap.js"></script>
     <link rel="stylesheet" type="text/css" href="css/visual.css">
+
+    <!-- semantic UI -->
+    <link href="https://cdn.bootcdn.net/ajax/libs/semantic-ui/2.4.1/components/shape.css" rel="stylesheet">
+    <script src="https://cdn.bootcdn.net/ajax/libs/semantic-ui/2.4.1/components/shape.js"></script>
+
+    <!-- 容器反转 -->
+    <link rel="stylesheet" type="text/css" href="css/flip.css">
+    <script src="js/flip.js"></script>
 
 </head>
 <body class="ksh">
@@ -31,19 +42,32 @@
             <img class="jzxz2" src="images/jzxz2.png">
         </div>
     </div>
-    <div class="head_top"><span>通用大数据可视化展示模版</span></div>
+    <div class="head_top"><span>智能车监管大数据平台</span></div>
     <div class="visual">
         <div class="visual_left">
-            <div class="visual_box">
-                <div class="visual_title">
-                    <span>交通流量</span>
-                    <img src="images/ksh33.png">
-                </div>
-                <div class="visual_chart" id="main1">
+            <div class="visual_box flip_card">
+                <div class="flip_card_side flip_card_front_side turn_front_finish ">
+                    <div class="visual_title">
+                        <span>交通流量</span>
+                        <img src="images/ksh33.png">
+                    </div>
+                    <div class="visual_chart" id="main1">
 
+                    </div>
+                </div>
+
+                <div class="flip_card_side flip_card_back_side turn_back_finish">
+                    <div class="visual_title">
+                        <span>交通工具流量</span>
+                        <img src="images/ksh33.png">
+                    </div>
+                    <div class="visual_chart" id="main2">
+    
+                    </div>
                 </div>
             </div>
-            <div class="visual_box">
+
+            <!-- <div class="visual_box">
                 <div class="visual_title">
                     <span>交通工具流量</span>
                     <img src="images/ksh33.png">
@@ -51,7 +75,18 @@
                 <div class="visual_chart" id="main2">
 
                 </div>
-            </div>
+            </div> -->
+
+            <!-- <div class="visual_box">
+                <div class="visual_title">
+                    <span>交通工具流量</span>
+                    <img src="images/ksh33.png">
+                </div>
+                <div class="visual_chart" id="main2">
+
+                </div>
+            </div> -->
+
             <div class="visual_box">
                 <div class="visual_title">
                     <span>收费站车流量</span>
@@ -264,6 +299,9 @@
         </div>
         <div class="clear"></div>
     </div>
+
+    
+
     <script type="text/javascript">
         $(function () {
             var a = $('.visualSssf_left a')
@@ -334,3 +372,9 @@
     </script>
 </body>
 </html>
+
+
+<script type="text/javascript">
+    setTimeout("turn_all_to_back()", 1000);
+    setTimeout(function(){myChart2.resize();}, 3005);
+</script>
