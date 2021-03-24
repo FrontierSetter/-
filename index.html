@@ -9,8 +9,9 @@
     <link rel="stylesheet" type="text/css" href="bootstrap/3.3.4/css/bootstrap.css">
     <!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
     <!-- <script src="js/jquery.min.js"></script> -->
-    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.0/jquery.js"></script>
-    <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+    <!-- <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.0/jquery.js"></script> -->
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+        <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
     <script src="js/bootstrap.min.js"></script>
     <!--echarts JS-->
     <!-- <script src="js/echarts.min.js"></script> -->
@@ -26,8 +27,20 @@
     <link rel="stylesheet" type="text/css" href="css/visual.css">
 
     <!-- semantic UI -->
-    <link href="https://cdn.bootcdn.net/ajax/libs/semantic-ui/2.4.1/components/shape.css" rel="stylesheet">
-    <script src="https://cdn.bootcdn.net/ajax/libs/semantic-ui/2.4.1/components/shape.js"></script>
+    <link href="https://cdn.bootcss.com/semantic-ui/2.4.1/components/icon.css" rel="stylesheet">
+    <link href="https://cdn.bootcdn.net/ajax/libs/semantic-ui/2.4.1/components/button.css" rel="stylesheet">
+    <script src="https://cdn.bootcdn.net/ajax/libs/semantic-ui/2.4.1/components/transition.js"></script>
+    <link href="https://cdn.bootcdn.net/ajax/libs/semantic-ui/2.4.1/components/transition.css" rel="stylesheet">
+    <link href="https://cdn.bootcdn.net/ajax/libs/semantic-ui/2.4.1/components/button.css" rel="stylesheet">
+    <link href="https://cdn.bootcss.com/semantic-ui/2.4.1/components/icon.css" rel="stylesheet">
+    <script src="https://cdn.bootcdn.net/ajax/libs/semantic-ui/2.4.1/components/dropdown.js"></script>
+    <link href="https://cdn.bootcdn.net/ajax/libs/semantic-ui/2.4.1/components/dropdown.css" rel="stylesheet">
+
+
+    <!-- semantic的下拉菜单不能反色，用formantic -->
+    <!-- <script src="https://cdn.bootcdn.net/ajax/libs/fomantic-ui/2.8.7/components/dropdown.js"></script>
+    <link href="https://cdn.bootcdn.net/ajax/libs/fomantic-ui/2.8.7/components/dropdown.css" rel="stylesheet"> -->
+
 
     <!-- 百度地图 -->
     <script type="text/javascript" src="http://api.map.baidu.com/api?v=3.0&ak=NjvQlGFSxuq5B7ld8vdIWwuGfdy2sTsq"></script>
@@ -40,6 +53,8 @@
     <!-- echarts 绘图脚本 -->
     <script src="js/charts.js"></script>
 
+    <!-- 时钟 -->
+    <link rel="stylesheet" href="css/clock.css">
 
 </head>
 <body class="ksh">
@@ -222,17 +237,38 @@
                 <div class="visual_chart" id="main5"></div>
                 <div class="visual_conBot_bot">
                     <div class="visualSssf_left">
-                        <h3>今日实时收费</h3>
-                        <a style="display:block">全省数据</a>
-                        <a>大同北</a>
-                        <a>大同南</a>
-                        <a>朔州</a>
-                        <a>吕梁北</a>
-                        <a>吕梁南</a>
-                        <a>太原</a>
-                        <a class="active">晋中</a>
-                        <a>太旧</a>
-                        <a>长治</a>
+                        <span style="font-size: 20px;">
+                            向我展示
+                            <div class="ui inline search dropdown" style="font-size: 20px;">
+                                <div class="text" >
+                                    全局信息
+                                </div>
+                                <i class="dropdown icon"></i>
+                                <div class="menu">
+                                    <div class="item" style="font-size: 20px;">
+                                        全局信息
+                                    </div>
+                                    <div class="item" style="font-size: 20px;">
+                                        LL3ACCJ22JA011664
+                                    </div>
+                                    <div class="item" style="font-size: 20px;">
+                                        12562041260147852
+                                    </div>
+                                </div>
+                            </div>
+                            
+                        </span>
+
+                        
+                        <!-- <div class="ui animated button" onclick="onClickSearchButton()" style="vertical-align: middle;">
+                            <div class="visible content">单车查询模式</div>
+                            <div class="hidden content"><i class="compass icon"></i></div>
+                        </div>  
+                        <br />
+                        <select class="ui search selection dropdown inverted blue" id="search-select" onchange="vinChange()" style="background-color: aqua;"> 
+                            <option value="LL3ACCJ22JA011664">LL3ACCJ22JA011664</option>
+                            <option value="12562041260147852">12562041260147852</option>        
+                        </select> -->
                     </div>
                     <div class="visualSssf_right">
                         <div class="visualSssf_right_box" id="main6_1"></div>
@@ -291,7 +327,7 @@
         <div class="clear"></div>
     </div>
 
-    
+    <script  src="js/clock.js"></script>
 
     <script type="text/javascript">
         $(function () {
@@ -321,10 +357,10 @@
 
         //第一列第一行，行驶里程/时长
         var myChart1_1 = echarts.init(document.getElementById('main1_1'));
-        myChart1_1.setOption(option1);
+        myChart1_1.setOption(option_global_mile_time);
         // var myChart1_2 = init_echarts(document.getElementById('main1_2'), option1);
         var myChart1_2 = echarts.init(document.getElementById('main1_2'));
-        myChart1_2.setOption(option1);
+        myChart1_2.setOption(option_single_mile_time);
 
         //第一列第二行，状态分布折线图
         var myChart2_1 = echarts.init(document.getElementById('main2_1'));
@@ -381,10 +417,5 @@
 
 
 <script type="text/javascript">
-    // setTimeout("turn_all_to_back()", 1000);
-    // setTimeout(function(){myChart1_2.resize();}, 3005);
-    // setTimeout(function(){myChart2_2.resize();}, 3005);
-    // setTimeout(function(){myChart7_2.resize();}, 3005);
-
-    // setTimeout("turn_all_to_front()", 4000);
+    $('.ui.dropdown').dropdown();
 </script>

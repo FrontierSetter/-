@@ -137,6 +137,10 @@ html, body, form{overflow-y:auto;height:100%;}
 .visualSssf_right{width:60%;height:100%;float:left;}
 .visualSssf_right .visualSssf_right_box{width:33%;float:left;height:100%;}
 
+.visualSssf_top_line{width: 100%; height: 20%; float:left;color:#fff;padding:10px 20px 0 20px;}
+.visualSssf_bot{width: 100%; height: 80%; float:left;color:#fff;padding:10px 20px 0 20px;}
+.visualSssf_bot .visualSssf_right_box{width:33%;float:left;height:100%;}
+
 .visualSfzsfl{position:relative;}
 .visualSfzsfl .visual_chart{opacity:0.6}
 .visualSfzsfl .visual_table{width:60%;position:absolute;z-index: 99;top:40px;left:0;}
