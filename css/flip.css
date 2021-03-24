@@ -9,13 +9,13 @@ img.left_down{display: block;position: absolute;width: 256px;height: 256px;left:
 .turn_to_front_first{animation:front_first 1s linear 1;}
 .turn_to_back_first{animation:back_first 1s linear 1;}
 
-.turn_front_middle{transform: rotateX(90deg); display: block;}
+.turn_front_middle{transform: rotateX(90deg); display: inline;}
 .turn_back_middle{transform: rotateX(90deg); display: none;}
 
 .turn_to_front_second{animation:front_second 1s linear 1;}
 .turn_to_back_second{animation:back_second 1s linear 1;}
 
-.turn_front_finish{transform: rotateX(0deg); display: block;}
+.turn_front_finish{transform: rotateX(0deg); display: inline;}
 .turn_back_finish{transform: rotateX(180deg); display: none;}
 
 /* 当前（物理上的）面出于（状态上的）什么面 */
