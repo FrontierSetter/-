@@ -48,17 +48,17 @@ function turn_all_to_front(){
 
 function turn_to_front_process(cur_element){
     cur_element.classList.add("turn_to_front_first")
-    setTimeout(function(){change_to_state(cur_element, ['turn_back_finish'], ['turn_front_middle'])},1000);
+    setTimeout(function(){change_to_state(cur_element, ['turn_back_finish'], ['turn_front_middle'])},900);
     setTimeout(function(){change_to_state(cur_element, ['turn_to_front_first'], ['turn_to_front_second'])},1000);
-    setTimeout(function(){change_to_state(cur_element, ['turn_front_middle'], ['turn_front_finish'])},2000);
+    setTimeout(function(){change_to_state(cur_element, ['turn_front_middle'], ['turn_front_finish'])},1900);
     setTimeout(function(){change_to_state(cur_element, ['turn_to_front_second'], [])},2000);
 }
 
 function turn_to_back_process(cur_element){
     cur_element.classList.add("turn_to_back_first")
-    setTimeout(function(){change_to_state(cur_element, ['turn_front_finish'], ['turn_back_middle'])},1000);
+    setTimeout(function(){change_to_state(cur_element, ['turn_front_finish'], ['turn_back_middle'])},900);
     setTimeout(function(){change_to_state(cur_element, ['turn_to_back_first'], ['turn_to_back_second'])},1000);
-    setTimeout(function(){change_to_state(cur_element, ['turn_back_middle'], ['turn_back_finish'])},2000);
+    setTimeout(function(){change_to_state(cur_element, ['turn_back_middle'], ['turn_back_finish'])},1900);
     setTimeout(function(){change_to_state(cur_element, ['turn_to_back_second'], [])},2000);
 }
 
