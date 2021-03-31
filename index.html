@@ -332,6 +332,33 @@
     </div>
 
     <!-- <script  src="js/clock.js"></script> -->
+    <script>
+        var queryLimit = "10000"; //查询时间窗口
+
+    </script>
+
+    <script type="text/javascript" src="js/subfig_2.js"></script>
+    <script type="text/javascript" src="js/baiduMap.js"></script>
+
+    <script>
+        function onClickMenu(e){
+            vin = $(e).text().split(' ')[0]
+            console.log('click: '+vin)
+
+            curCarVin = vin;
+
+            sunfigEnterSingle();
+            requestSingleCarSpeed();
+            do_initRequestSingleCar(vin);
+        }
+
+        function backToBackground(){
+            subfigBackToBackground();
+            shouldMapGlobal = true;
+            map.clearOverlays();
+            backgroundRequest();
+        }
+    </script>
 
     <script type="text/javascript">
         $(function () {
@@ -369,8 +396,8 @@
         //第一列第二行，状态分布折线图
         var myChart2_1 = echarts.init(document.getElementById('main2_1'));
         myChart2_1.setOption(option2);
-        var myChart2_2 = echarts.init(document.getElementById('main2_2'));
-        myChart2_2.setOption(option2);
+
+        init_subfig_2_2();
 
         //第三列第一行，本月发生事件
         var myChart7_1 = echarts.init(document.getElementById('main7_1'));
@@ -417,7 +444,7 @@
 </body>
 </html>
 
-<script type="text/javascript" src="js/baiduMap.js"></script>
+
 
 
 <script type="text/javascript">

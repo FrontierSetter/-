@@ -140,13 +140,6 @@ function wgs84tobdpoint(long, lati){
 var backgroundCarOverlayOld = new Array();
 var backgroundCarOverlayNew = new Array();
 
-function backToBackground(){
-    subfigBackToBackground();
-    shouldMapGlobal = true;
-    map.clearOverlays();
-    backgroundRequest();
-}
-
 function backgroundRequest(){
     if(!shouldMapGlobal){
         return;
@@ -284,16 +277,6 @@ function getMode(logTime, curTime){
 var curCarVin;
 var eagleEntity;
 var singleCarTraceInitFinish = false; // 防止单车初始化和单车查询冲突
-var queryLimit = "10000"; //查询时间窗口
-
-function onClickMenu(e){
-    vin = $(e).text().split(' ')[0]
-    console.log('click: '+vin)
-
-    sunfigEnterSingle();
-    do_initRequestSingleCar(vin)
-
-}
 
 
 function do_initRequestSingleCar(requestIdValue){
