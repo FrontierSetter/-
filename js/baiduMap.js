@@ -285,7 +285,7 @@ function do_initRequestSingleCar(requestIdValue){
     shouldMapGlobal = false;
     map.clearOverlays();
 
-    curCarVin = requestIdValue;
+    
 
     // TODO:鹰眼轨迹纠偏
     // eagleEntity = Date.parse(new Date()).toString()+"_"+curCarVin;
