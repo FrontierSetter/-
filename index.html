@@ -55,7 +55,10 @@
     <script src="js/charts.js"></script>
 
     <!-- 时钟 -->
-    <link rel="stylesheet" href="css/clock.css">
+    <!-- <link rel="stylesheet" href="css/clock.css"> -->
+
+    <!-- 坐标转换 -->
+    <script src="js/coordtransform.js"></script>
 
 </head>
 <body class="ksh">
@@ -242,19 +245,19 @@
                             向我展示
                             <div class="ui inline search dropdown" style="font-size: 20px;">
                                 <div class="text" >
-                                    全局信息
+                                    单车查询
                                 </div>
                                 <i class="dropdown icon"></i>
-                                <div class="menu">
-                                    <div class="item" style="font-size: 20px;">
+                                <div class="menu" id="vin_menu">
+                                    <div class="item" style="font-size: 20px;" onclick="backToBackground()">
                                         全局信息
                                     </div>
-                                    <div class="item" style="font-size: 20px;">
+                                    <!-- <div class="item" style="font-size: 20px;">
                                         LL3ACCJ22JA011664
                                     </div>
                                     <div class="item" style="font-size: 20px;">
                                         12562041260147852
-                                    </div>
+                                    </div> -->
                                 </div>
                             </div>
                             
@@ -328,7 +331,7 @@
         <div class="clear"></div>
     </div>
 
-    <script  src="js/clock.js"></script>
+    <!-- <script  src="js/clock.js"></script> -->
 
     <script type="text/javascript">
         $(function () {
@@ -419,4 +422,38 @@
 
 <script type="text/javascript">
     $('.ui.dropdown').dropdown();
+</script>
+
+<script>
+    function getVinList(){
+        $.ajax({
+            url: 'http://202.120.60.31:4000/query/all/vin', //请求的url
+            type: 'get', //请求的方式
+            error: function (data) {
+                console.log('backgroundRequest请求失败');
+            },
+            success: function (data) {
+
+                var obj = document.getElementById("vin_menu");
+
+                for(var i = 0; i < data.length; ++i){
+                    var new_tex = document.createElement("div");
+                    new_tex.setAttribute("class", "item");
+                    new_tex.setAttribute("style", "font-size: 20px;");
+                    new_tex.setAttribute("onclick", "onClickMenu(this)");
+                    new_tex.innerHTML = data[i]["VIN"];
+                    obj.appendChild(new_tex);
+                }
+            }
+        });
+
+    }
+</script>
+
+<script>
+    getVinList();
+
+    setTimeout(function(){
+        backgroundRequest();
+    }, 1000);
 </script>
