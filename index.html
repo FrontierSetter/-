@@ -28,7 +28,8 @@
     <link rel="stylesheet" type="text/css" href="css/visual.css">
 
     <!-- semantic UI -->
-    <link href="https://cdn.bootcss.com/semantic-ui/2.4.1/components/icon.css" rel="stylesheet">
+		<link href="https://cdn.bootcdn.net/ajax/libs/semantic-ui/2.4.1/components/icon.css" rel="stylesheet">
+        <!-- <link href="https://cdn.bootcss.com/semantic-ui/2.4.1/components/icon.css" rel="stylesheet"> -->
     <link href="https://cdn.bootcdn.net/ajax/libs/semantic-ui/2.4.1/components/button.css" rel="stylesheet">
     <script src="https://cdn.bootcdn.net/ajax/libs/semantic-ui/2.4.1/components/transition.js"></script>
     <link href="https://cdn.bootcdn.net/ajax/libs/semantic-ui/2.4.1/components/transition.css" rel="stylesheet">
@@ -59,6 +60,10 @@
 
     <!-- 坐标转换 -->
     <script src="js/coordtransform.js"></script>
+
+    <!-- 其他css -->
+    <link rel="stylesheet" type="text/css" href="css/mine.css">
+    <script src="js/mine.js"></script>
 
 </head>
 <body class="ksh">
@@ -317,7 +322,7 @@
             </div>
             <div class="visual_box">
                 <div class="visual_title">
-                    <span>危险场景演示</span>
+                    <span>危险场景演示<a id="liveButton" href="javascript:void(0)" onclick="switchToLive()" style="color: white;" class="title_link"><i class="external square alternate icon"></i></a></span>
                     <img src="images/ksh33.png">
                 </div>
                 <!-- <div class="swiper-container visual_swiper2 visual_chart">
