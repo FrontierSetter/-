@@ -12,18 +12,18 @@
 		<script src="http://libs.useso.com/js/html5shiv/3.7/html5shiv.min.js"></script>
 	<![endif]-->
 </head>
-<body>
-	<div class="htmleaf-container">
-		<div class="htmleaf-content">
+<body style="overflow: hidden;">
+	<div class="htmleaf-container" style="overflow: hidden;">
+		<div class="htmleaf-content" style="overflow: hidden;">
 			<div class="slider one">
 			  <header class="htmleaf-header">
 					<h1> <span>A Responsive Full Width Scroller slider</span></h1>
 		
 				</header>
 			</div>
-			<div class="slider two">
+			<div class="slider two" >
 				<!-- 甚至可以直接把index.html放在public文件下 -->
-                <iframe id="true_index" src="http://202.120.60.31:4000/content" style="width: 100%; height: 100%;"></iframe>
+                <iframe id="true_index" src="index.html" style="width: 100%; height: 100%;"></iframe>
 				<!-- <img src="img/atacertaintime.png"> -->
 			</div>
 			<!-- <div class="slider three">
@@ -75,8 +75,8 @@
 		    // elementCount += 1;
 		    // var position = -100 * value;
 		    var position = 100 * (elementCount-1-value);
-			console.log(value);
-			console.log(position);
+			// console.log(value);
+			// console.log(position);
 		    $(this).css("left", position + "%");
 		  });
 
@@ -88,7 +88,7 @@
 		}
 
 		function slideRight() {
-			console.log('right')
+			// console.log('right')
 		  $("div.slider").each(function(value) {
 		    $(this).addClass("zoomout");
 		    var position = parseInt($(this)[0].style.left) + 100;
@@ -103,11 +103,11 @@
 		    timer = setTimeout(removeZoom, 1000);
 		  });
 
-		  console.log(firstPos);
-		  console.log(elementCount)
+		//   console.log(firstPos);
+		//   console.log(elementCount)
 
 		  if (firstPos !== ((elementCount - 1) * 100)) {
-			  console.log('show')
+			//   console.log('show')
 		    $("#next").show();
 		    $("#previous").show();
 		  } else{
@@ -121,13 +121,13 @@
         
 
 		function slideLeft() {
-			console.log('left')
+			// console.log('left')
 		  $("div.slider").each(function(value) {
 		    $(this).addClass("zoomout");
 		    var position = parseInt($(this)[0].style.left) - 100;
 
-			console.log(value);
-			console.log(position);
+			// console.log(value);
+			// console.log(position);
 
 		    if (value === (elementCount - 1))
 		      lastPos = position;
@@ -136,7 +136,7 @@
 		    timer = setTimeout(removeZoom, 1000);
 		  });
 
-		  console.log(lastPos);
+		//   console.log(lastPos);
 
 		  if (lastPos !== ((elementCount - 1) * -100)) {
 		    $("#previous").show();

@@ -54,9 +54,9 @@ var myData = (function test() {
             },
             itemStyle: { //图形样式
                 normal: {
-                    barBorderRadius:0,
-                    borderWidth:1,
-                    borderColor:'#ddd',
+                    barBorderRadius: 0,
+                    borderWidth: 1,
+                    borderColor: '#ddd',
                     color: data.barColor[index]
                 },
             }
@@ -75,7 +75,7 @@ var myData = (function test() {
                 normal: {
                     color: data.lineColor[index],
                     lineStyle: {
-                        width: 2,//折线宽度
+                        width: 2, //折线宽度
                         type: 'solid',
                     }
                 }
@@ -100,173 +100,173 @@ option1 = {
 
 
 
-       
- grid: {
+
+    grid: {
         left: '0',
-		top: '30',
+        top: '30',
         right: '0',
         bottom: '10',
         containLabel: true
     },
-        legend: {
+    legend: {
 
-            top: 0,
+        top: 0,
 
-            textStyle: {
+        textStyle: {
 
             color: "#fff",
 
         },
 
-        itemWidth: 10,  // 设置宽度
+        itemWidth: 10, // 设置宽度
 
         itemHeight: 10, // 设置高度
 
+    },
+
+    tooltip: {
+
+        trigger: 'axis',
+
+        axisPointer: { // 坐标轴指示器，坐标轴触发有效
+
+            type: 'shadow' // 默认为直线，可选为：'line' | 'shadow'
+
+        }
+
+    },
+
+    xAxis: {
+
+        type: 'category',
+
+        data: ["字段1", "字段2", "字段3", "字段4", "字段5", "字段6"],
+
+        axisTick: { //---坐标轴 刻度
+
+            show: true, //---是否显示
+
         },
 
-        tooltip: {
+        axisLine: { //---坐标轴 轴线
 
-            trigger: 'axis',
+            show: true, //---是否显示
 
-            axisPointer: { // 坐标轴指示器，坐标轴触发有效
+            lineStyle: {
 
-                type: 'shadow' // 默认为直线，可选为：'line' | 'shadow'
+                color: 'rgba(255,255,255,.1)',
+
+                width: 1,
+
+                type: 'dotted',
+
+            },
+
+        },
+
+        axisLabel: { //X轴文字
+
+            textStyle: {
+
+                fontSize: 12,
+
+                color: '#fff'
+
+            },
+
+        },
+
+    },
+
+    yAxis: {
+
+        type: 'value',
+
+        splitLine: { //分割线
+
+            show: true,
+
+            lineStyle: {
+                color: 'rgba(255,255,255,.1)',
+
+                width: 1,
+                type: 'dotted'
 
             }
 
         },
 
-        xAxis: {
+        axisLabel: { //Y轴刻度值
 
-            type: 'category',
+            formatter: '{value}',
 
-            data: ["字段1","字段2","字段3","字段4","字段5","字段6"],
+            textStyle: {
 
-            axisTick: { //---坐标轴 刻度
+                fontSize: 12,
 
-                show: true, //---是否显示
-
-            },
-
-            axisLine: { //---坐标轴 轴线
-
-                show: true, //---是否显示
-
-                lineStyle: {
-
-                    color: 'rgba(255,255,255,.1)',
-
-                    width: 1,
-
-                    type: 'dotted',
-
-                },
-
-            },
-
-            axisLabel: {//X轴文字
-
-                textStyle: {
-
-                    fontSize: 12,
-
-                    color: '#fff'
-
-                },
+                color: '#fff'
 
             },
 
         },
 
-        yAxis: {
+        axisLine: { //---坐标轴 轴线
 
-            type: 'value',
-
-            splitLine: {//分割线
-
-                show: true,
-
-                lineStyle: {
- color: 'rgba(255,255,255,.1)',
-
-                    width: 1,
-                    type: 'dotted'
-
-                }
-
-            },
-
-            axisLabel: {//Y轴刻度值
-
-                formatter: '{value}',
-
-                textStyle: {
-
-                    fontSize: 12,
-
-                    color: '#fff'
-
-                },
-
-            },
-
-            axisLine: { //---坐标轴 轴线
-
-                show: false, //---是否显示
-
-            },
+            show: false, //---是否显示
 
         },
 
-        series: [{
+    },
 
-            name: '原方案',
+    series: [{
 
-            type: 'bar',
+        name: '原方案',
 
-            data: [3, 7, 4, 9, 3, 5],
+        type: 'bar',
 
-            barWidth: 15,
-	
-            barGap: 0.5, //柱子之间间距 //柱图宽度      两种情况都要设置，设置series 中对应数据柱形的itemStyle属性下的emphasis和normal的barBorderRadius属性初始化时候圆角  鼠标移上去圆角
+        data: [3, 7, 4, 9, 3, 5],
 
-            itemStyle: {
+        barWidth: 15,
 
-                normal: {
-					barBorderRadius: 50,
-                    color: "#446ACF",
+        barGap: 0.5, //柱子之间间距 //柱图宽度      两种情况都要设置，设置series 中对应数据柱形的itemStyle属性下的emphasis和normal的barBorderRadius属性初始化时候圆角  鼠标移上去圆角
 
-                }
+        itemStyle: {
 
-            },
+            normal: {
+                barBorderRadius: 50,
+                color: "#446ACF",
 
-        }, {
+            }
 
-            name: '建议方案',
+        },
 
-            type: 'bar',
-            data: [6, 2, 5, 2, 5, 6],
-            barWidth: 15, //柱图宽度
-			barGap: 0.5,
-            itemStyle: {
+    }, {
 
-                normal: { //设置颜色的渐变
-					barBorderRadius: 50,
-                    color: "#4fb69d",
+        name: '建议方案',
 
-                }
+        type: 'bar',
+        data: [6, 2, 5, 2, 5, 6],
+        barWidth: 15, //柱图宽度
+        barGap: 0.5,
+        itemStyle: {
 
-            },
+            normal: { //设置颜色的渐变
+                barBorderRadius: 50,
+                color: "#4fb69d",
 
-        }]
+            }
 
-    };
+        },
+
+    }]
+
+};
 //////////////////////交通流量 end
 
 //交通工具流量
 option2 = {
-    
-    tooltip: {//鼠标指上时的标线
+
+    tooltip: { //鼠标指上时的标线
         trigger: 'axis',
         axisPointer: {
             lineStyle: {
@@ -303,7 +303,7 @@ option2 = {
         },
         axisLabel: {
             textStyle: {
-                color:'#fff',
+                color: '#fff',
             },
         },
         data: ['1月', '2月', '3月', '4月', '5月', '6月', '7月', '8月', '9月', '10月', '11月', '12月']
@@ -316,7 +316,7 @@ option2 = {
         axisLine: {
             lineStyle: {
                 color: '#57617B',
-				
+
             }
         },
         axisLabel: {
@@ -325,13 +325,13 @@ option2 = {
                 fontSize: 14
             },
             textStyle: {
-                color:'#fff',
+                color: '#fff',
             },
         },
         splitLine: {
             lineStyle: {
                 color: 'rgba(255,255,255,.2)',
-				type:'dotted',
+                type: 'dotted',
             }
         }
     }],
@@ -362,7 +362,7 @@ option2 = {
                 color: 'rgb(137,189,27)'
             }
         },
-        data: [20,35,34,45,52,41,49,64,24,52.4,24,33]
+        data: [20, 35, 34, 45, 52, 41, 49, 64, 24, 52.4, 24, 33]
     }, {
         name: '中型车',
         type: 'line',
@@ -390,7 +390,7 @@ option2 = {
                 color: 'rgb(0,136,212)'
             }
         },
-        data: [97.3,99.2,99.3,100.0,99.6,90.6,80.0,91.5,69.8,67.5,90.4,84.9]
+        data: [97.3, 99.2, 99.3, 100.0, 99.6, 90.6, 80.0, 91.5, 69.8, 67.5, 90.4, 84.9]
     }, {
         name: '大型车',
         type: 'line',
@@ -418,7 +418,7 @@ option2 = {
                 color: 'rgb(219,50,51)'
             }
         },
-        data: [84.2,81.0,67.5,62.1,43.7,68.5,51.9,71.8,76.7,67.6,62.9,0]
+        data: [84.2, 81.0, 67.5, 62.1, 43.7, 68.5, 51.9, 71.8, 76.7, 67.6, 62.9, 0]
     }, ]
 };
 //////////////////////交通工具流量 end
@@ -448,7 +448,7 @@ var data = [{
 ];
 
 var max = data[0].value;
-data.forEach(function(d) {
+data.forEach(function (d) {
     max = d.value > max ? d.value : max;
 });
 
@@ -478,10 +478,10 @@ var renderData = [{
 }];
 
 
-data.forEach(function(d, i) {
+data.forEach(function (d, i) {
     var value = ['', '', '', '', ''];
     value[i] = max,
-    renderData[0].value[i] = d.value;
+        renderData[0].value[i] = d.value;
     renderData.push({
         value: value,
         symbol: 'circle',
@@ -500,7 +500,7 @@ data.forEach(function(d, i) {
 })
 var indicator = [];
 
-data.forEach(function(d) {
+data.forEach(function (d) {
     indicator.push({
         name: d.name,
         max: max,
@@ -515,7 +515,7 @@ option3 = {
         trigger: "item"
     },
     radar: {
-        center: ["50%", "50%"],//偏移位置
+        center: ["50%", "50%"], //偏移位置
         radius: "80%",
         startAngle: 40, // 起始角度
         splitNumber: 4,
@@ -577,7 +577,7 @@ var data = [{
 ];
 
 var max = data[0].value;
-data.forEach(function(d) {
+data.forEach(function (d) {
     max = d.value > max ? d.value : max;
 });
 
@@ -607,10 +607,10 @@ var renderData = [{
 }];
 
 
-data.forEach(function(d, i) {
+data.forEach(function (d, i) {
     var value = ['', '', '', '', ''];
     value[i] = max,
-    renderData[0].value[i] = d.value;
+        renderData[0].value[i] = d.value;
     renderData.push({
         value: value,
         symbol: 'circle',
@@ -629,7 +629,7 @@ data.forEach(function(d, i) {
 })
 var indicator = [];
 
-data.forEach(function(d) {
+data.forEach(function (d) {
     indicator.push({
         name: d.name,
         max: max,
@@ -644,7 +644,7 @@ option31 = {
         trigger: "item"
     },
     radar: {
-        center: ["50%", "50%"],//偏移位置
+        center: ["50%", "50%"], //偏移位置
         radius: "80%",
         startAngle: 40, // 起始角度
         splitNumber: 4,
@@ -690,126 +690,124 @@ var spirit = '../images.ksh45.png';
 var maxData = 200;
 
 option4 = {
-   "title": {
-      "text": " ",
-      "left": "center",
-      "y": "10",
-      "textStyle": {
-        "color": "#fff"
-      }
+    "title": {
+        "text": " ",
+        "left": "center",
+        "y": "10",
+        "textStyle": {
+            "color": "#fff"
+        }
     },
-    
+
     "grid": {
-      "left": 30,
-      "top": 0,
-      "bottom": 10
+        "left": 30,
+        "top": 0,
+        "bottom": 10
     },
     "tooltip": {
-      "trigger": "item",
-      "textStyle": {
-        "fontSize": 12
-      },
-      "formatter": "{b0}:{c0}"
+        "trigger": "item",
+        "textStyle": {
+            "fontSize": 12
+        },
+        "formatter": "{b0}:{c0}"
     },
     "xAxis": {
-      "max": 100,
-      "splitLine": {
-        "show": false
-      },
-      "axisLine": {
-        "show": false
-      },
-      "axisLabel": {
-        "show": false
-      },
-      "axisTick": {
-        "show": false
-      }
-    },
-    "yAxis": [
-      {
-        "type": "category",
-        "inverse": false,
-        "data": [
-          "晋城",
-          "太旧",
-          "太原",
-          "吕梁",
-          "长治",
-        ],
-        "axisLine": {
-          "show": false
+        "max": 100,
+        "splitLine": {
+            "show": false
         },
-        "axisTick": {
-          "show": false
+        "axisLine": {
+            "show": false
         },
         "axisLabel": {
-          "margin": -4,
-          "textStyle": {
-            "color": "#fff",
-            "fontSize": 16.25
-          }
-        }
-      },
-    
-    ],
-    "series": [
-      {
-        "type": "pictorialBar",
-        "symbol": "image://data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFoAAABaCAYAAAA4qEECAAADYElEQVR4nO2dz0sUYRjHP7tIdAmxQ1LdlhCKMohAIsgiyEuHjkUEFQTlpejS/xCCBB06RBGBBKIG4cGyH0qHBKE9eKyFqBQPRQeNCt06vGNY7bq7szPfeZLnAwuzM+/zgw/DDvMu70wOIVveLscJOwycA44A24CfwAfgKXAbeFVvovlC/o/vuVwuTj+x0FWiYdGbgXvA8RrjHgAXgIVaCbMU3SKr1BhtwEtgZx1jTwI7gG7ga5pNNUO+9pBMuEN9klfYD9xMqZdEsCj6AHAiRtxZYFeyrSSHRdGnYsblCD8jJrEoek8TsbsT6yJhLIrelFFsqlgUPZtRbKpYFP2kidjxxLpIGIuiB4AvMeLmgJGEe0kMi6I/AVdjxPVSx91hVlgUDXAXuEaY16jFMnAJeJhqR01iVTTAdeAYUFxjzBRwCLgl6agJrM51rDAO7AP2EmbxthPO8vfAc2Ams84axLpoCGKLrH1mm8eC6KPAGaAL2Fpj7AZgY7T9DfhRY/wc4eflPmH+OjOynI8uEGbpukXlJ4Dz84V8aWWHcj46q4thFzCNTjJRren2UrlLWPM3WYjuAMYIk/tq2oCx9lK5Q11YLboFGARaxXVX0woMtpfK0uuTWvRFoFNcsxKdhF5kqEX3iuuthbQXtehG/gdMG2kvlm/B1xUuWoSLFmFF9CRwg2TnM4pRzskEc8bGiugR4ArhNjkpJqKcJv51sSJ63eOiRbhoES5ahIsW4aJFuGgRLlqEixbhokW4aBEuWoSLFuGiRbhoES5ahIsW4aJFuGgRLlqEWvTHKvs/p1izWu5qvaSCWvTlCvtmgeEUaw5TeUVtpV5SQy16COgBRoHXhMWb3aS7PnAhqjEQ1RwFeuYL+aEUa/5DFmtYHkefOEwQVmcBvKD+FQNvgNN/P+pHiV8MRbhoES5ahIsW4aJFuGgRLlqEixbhokW4aBEuWoSLFuGiRbhoES5ahIsW4aJFuGgRLlqEixbhokVYEx3nudGKXE1jTfS6xUWLcNEiXLQIFy3CRYtw0SJctAgXLcJFi3DRIv430eUq2+axJvp7jePPqmzHySXFmuhHwFKVYzNA/6rv/VR/s9BSlMsM1kTPEN4DPkU4I8vAO6APOAgsrhq7GO3ri8aUo5ipKIep1zv9AtipgOACGIrLAAAAAElFTkSuQmCC",
-        "symbolRepeat": "fixed",
-        "symbolMargin": "5%",
-        "symbolClip": true,
-        "symbolSize": 22.5,
-        "symbolPosition": "start",
-        "symbolOffset": [
-          20,
-          0
-        ],
-        "symbolBoundingData": 300,
-        "data": [
-          13,
-          42,
-          67,
-          81,
-          86,
-          
-        ],
-        "z": 10
-      },
-      {
-        "type": "pictorialBar",
-        "itemStyle": {
-          "normal": {
-            "opacity": 0.3
-          }
-        },
-        "label": {
-          "normal": {
             "show": false
-          }
         },
-        "animationDuration": 0,
-        "symbolRepeat": "fixed",
-        "symbolMargin": "5%",
-        "symbol": "image://data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFoAAABaCAYAAAA4qEECAAADYElEQVR4nO2dz0sUYRjHP7tIdAmxQ1LdlhCKMohAIsgiyEuHjkUEFQTlpejS/xCCBB06RBGBBKIG4cGyH0qHBKE9eKyFqBQPRQeNCt06vGNY7bq7szPfeZLnAwuzM+/zgw/DDvMu70wOIVveLscJOwycA44A24CfwAfgKXAbeFVvovlC/o/vuVwuTj+x0FWiYdGbgXvA8RrjHgAXgIVaCbMU3SKr1BhtwEtgZx1jTwI7gG7ga5pNNUO+9pBMuEN9klfYD9xMqZdEsCj6AHAiRtxZYFeyrSSHRdGnYsblCD8jJrEoek8TsbsT6yJhLIrelFFsqlgUPZtRbKpYFP2kidjxxLpIGIuiB4AvMeLmgJGEe0kMi6I/AVdjxPVSx91hVlgUDXAXuEaY16jFMnAJeJhqR01iVTTAdeAYUFxjzBRwCLgl6agJrM51rDAO7AP2EmbxthPO8vfAc2Ams84axLpoCGKLrH1mm8eC6KPAGaAL2Fpj7AZgY7T9DfhRY/wc4eflPmH+OjOynI8uEGbpukXlJ4Dz84V8aWWHcj46q4thFzCNTjJRren2UrlLWPM3WYjuAMYIk/tq2oCx9lK5Q11YLboFGARaxXVX0woMtpfK0uuTWvRFoFNcsxKdhF5kqEX3iuuthbQXtehG/gdMG2kvlm/B1xUuWoSLFmFF9CRwg2TnM4pRzskEc8bGiugR4ArhNjkpJqKcJv51sSJ63eOiRbhoES5ahIsW4aJFuGgRLlqEixbhokW4aBEuWoSLFuGiRbhoES5ahIsW4aJFuGgRLlqEWvTHKvs/p1izWu5qvaSCWvTlCvtmgeEUaw5TeUVtpV5SQy16COgBRoHXhMWb3aS7PnAhqjEQ1RwFeuYL+aEUa/5DFmtYHkefOEwQVmcBvKD+FQNvgNN/P+pHiV8MRbhoES5ahIsW4aJFuGgRLlqEixbhokW4aBEuWoSLFuGiRbhoES5ahIsW4aJFuGgRLlqEixbhokVYEx3nudGKXE1jTfS6xUWLcNEiXLQIFy3CRYtw0SJctAgXLcJFi3DRIv430eUq2+axJvp7jePPqmzHySXFmuhHwFKVYzNA/6rv/VR/s9BSlMsM1kTPEN4DPkU4I8vAO6APOAgsrhq7GO3ri8aUo5ipKIep1zv9AtipgOACGIrLAAAAAElFTkSuQmCC",
-        "symbolSize": 22.5,
-        "symbolBoundingData": 300,
-        "symbolPosition": "start",
-        "symbolOffset": [
-          20,
-          0
-        ],
-        "data": [
-          13,
-          42,
-          67,
-          81,
-          86,
-          
-        ],
-        "z": 5
-      }
+        "axisTick": {
+            "show": false
+        }
+    },
+    "yAxis": [{
+            "type": "category",
+            "inverse": false,
+            "data": [
+                "晋城",
+                "太旧",
+                "太原",
+                "吕梁",
+                "长治",
+            ],
+            "axisLine": {
+                "show": false
+            },
+            "axisTick": {
+                "show": false
+            },
+            "axisLabel": {
+                "margin": -4,
+                "textStyle": {
+                    "color": "#fff",
+                    "fontSize": 16.25
+                }
+            }
+        },
+
+    ],
+    "series": [{
+            "type": "pictorialBar",
+            "symbol": "image://data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFoAAABaCAYAAAA4qEECAAADYElEQVR4nO2dz0sUYRjHP7tIdAmxQ1LdlhCKMohAIsgiyEuHjkUEFQTlpejS/xCCBB06RBGBBKIG4cGyH0qHBKE9eKyFqBQPRQeNCt06vGNY7bq7szPfeZLnAwuzM+/zgw/DDvMu70wOIVveLscJOwycA44A24CfwAfgKXAbeFVvovlC/o/vuVwuTj+x0FWiYdGbgXvA8RrjHgAXgIVaCbMU3SKr1BhtwEtgZx1jTwI7gG7ga5pNNUO+9pBMuEN9klfYD9xMqZdEsCj6AHAiRtxZYFeyrSSHRdGnYsblCD8jJrEoek8TsbsT6yJhLIrelFFsqlgUPZtRbKpYFP2kidjxxLpIGIuiB4AvMeLmgJGEe0kMi6I/AVdjxPVSx91hVlgUDXAXuEaY16jFMnAJeJhqR01iVTTAdeAYUFxjzBRwCLgl6agJrM51rDAO7AP2EmbxthPO8vfAc2Ams84axLpoCGKLrH1mm8eC6KPAGaAL2Fpj7AZgY7T9DfhRY/wc4eflPmH+OjOynI8uEGbpukXlJ4Dz84V8aWWHcj46q4thFzCNTjJRren2UrlLWPM3WYjuAMYIk/tq2oCx9lK5Q11YLboFGARaxXVX0woMtpfK0uuTWvRFoFNcsxKdhF5kqEX3iuuthbQXtehG/gdMG2kvlm/B1xUuWoSLFmFF9CRwg2TnM4pRzskEc8bGiugR4ArhNjkpJqKcJv51sSJ63eOiRbhoES5ahIsW4aJFuGgRLlqEixbhokW4aBEuWoSLFuGiRbhoES5ahIsW4aJFuGgRLlqEWvTHKvs/p1izWu5qvaSCWvTlCvtmgeEUaw5TeUVtpV5SQy16COgBRoHXhMWb3aS7PnAhqjEQ1RwFeuYL+aEUa/5DFmtYHkefOEwQVmcBvKD+FQNvgNN/P+pHiV8MRbhoES5ahIsW4aJFuGgRLlqEixbhokW4aBEuWoSLFuGiRbhoES5ahIsW4aJFuGgRLlqEixbhokVYEx3nudGKXE1jTfS6xUWLcNEiXLQIFy3CRYtw0SJctAgXLcJFi3DRIv430eUq2+axJvp7jePPqmzHySXFmuhHwFKVYzNA/6rv/VR/s9BSlMsM1kTPEN4DPkU4I8vAO6APOAgsrhq7GO3ri8aUo5ipKIep1zv9AtipgOACGIrLAAAAAElFTkSuQmCC",
+            "symbolRepeat": "fixed",
+            "symbolMargin": "5%",
+            "symbolClip": true,
+            "symbolSize": 22.5,
+            "symbolPosition": "start",
+            "symbolOffset": [
+                20,
+                0
+            ],
+            "symbolBoundingData": 300,
+            "data": [
+                13,
+                42,
+                67,
+                81,
+                86,
+
+            ],
+            "z": 10
+        },
+        {
+            "type": "pictorialBar",
+            "itemStyle": {
+                "normal": {
+                    "opacity": 0.3
+                }
+            },
+            "label": {
+                "normal": {
+                    "show": false
+                }
+            },
+            "animationDuration": 0,
+            "symbolRepeat": "fixed",
+            "symbolMargin": "5%",
+            "symbol": "image://data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFoAAABaCAYAAAA4qEECAAADYElEQVR4nO2dz0sUYRjHP7tIdAmxQ1LdlhCKMohAIsgiyEuHjkUEFQTlpejS/xCCBB06RBGBBKIG4cGyH0qHBKE9eKyFqBQPRQeNCt06vGNY7bq7szPfeZLnAwuzM+/zgw/DDvMu70wOIVveLscJOwycA44A24CfwAfgKXAbeFVvovlC/o/vuVwuTj+x0FWiYdGbgXvA8RrjHgAXgIVaCbMU3SKr1BhtwEtgZx1jTwI7gG7ga5pNNUO+9pBMuEN9klfYD9xMqZdEsCj6AHAiRtxZYFeyrSSHRdGnYsblCD8jJrEoek8TsbsT6yJhLIrelFFsqlgUPZtRbKpYFP2kidjxxLpIGIuiB4AvMeLmgJGEe0kMi6I/AVdjxPVSx91hVlgUDXAXuEaY16jFMnAJeJhqR01iVTTAdeAYUFxjzBRwCLgl6agJrM51rDAO7AP2EmbxthPO8vfAc2Ams84axLpoCGKLrH1mm8eC6KPAGaAL2Fpj7AZgY7T9DfhRY/wc4eflPmH+OjOynI8uEGbpukXlJ4Dz84V8aWWHcj46q4thFzCNTjJRren2UrlLWPM3WYjuAMYIk/tq2oCx9lK5Q11YLboFGARaxXVX0woMtpfK0uuTWvRFoFNcsxKdhF5kqEX3iuuthbQXtehG/gdMG2kvlm/B1xUuWoSLFmFF9CRwg2TnM4pRzskEc8bGiugR4ArhNjkpJqKcJv51sSJ63eOiRbhoES5ahIsW4aJFuGgRLlqEixbhokW4aBEuWoSLFuGiRbhoES5ahIsW4aJFuGgRLlqEWvTHKvs/p1izWu5qvaSCWvTlCvtmgeEUaw5TeUVtpV5SQy16COgBRoHXhMWb3aS7PnAhqjEQ1RwFeuYL+aEUa/5DFmtYHkefOEwQVmcBvKD+FQNvgNN/P+pHiV8MRbhoES5ahIsW4aJFuGgRLlqEixbhokW4aBEuWoSLFuGiRbhoES5ahIsW4aJFuGgRLlqEixbhokVYEx3nudGKXE1jTfS6xUWLcNEiXLQIFy3CRYtw0SJctAgXLcJFi3DRIv430eUq2+axJvp7jePPqmzHySXFmuhHwFKVYzNA/6rv/VR/s9BSlMsM1kTPEN4DPkU4I8vAO6APOAgsrhq7GO3ri8aUo5ipKIep1zv9AtipgOACGIrLAAAAAElFTkSuQmCC",
+            "symbolSize": 22.5,
+            "symbolBoundingData": 300,
+            "symbolPosition": "start",
+            "symbolOffset": [
+                20,
+                0
+            ],
+            "data": [
+                13,
+                42,
+                67,
+                81,
+                86,
+
+            ],
+            "z": 5
+        }
     ]
 };
 
@@ -819,7 +817,7 @@ function random() {
     return +(Math.random() * (maxData - 10)).toFixed(1);
 }
 setInterval(function () {
-    var dynamicData = [random(), random(), random(), random(),random(), random(), random(), random(),random(),random()];
+    var dynamicData = [random(), random(), random(), random(), random(), random(), random(), random(), random(), random()];
     //myChart.setOption({
     //    series: [{
     //        data: dynamicData.slice()
@@ -836,126 +834,124 @@ var spirit = '../images.ksh45.png';
 var maxData = 200;
 
 option41 = {
-   "title": {
-      "text": " ",
-      "left": "center",
-      "y": "10",
-      "textStyle": {
-        "color": "#fff"
-      }
+    "title": {
+        "text": " ",
+        "left": "center",
+        "y": "10",
+        "textStyle": {
+            "color": "#fff"
+        }
     },
-    
+
     "grid": {
-      "left": 30,
-      "top": 0,
-      "bottom": 10
+        "left": 30,
+        "top": 0,
+        "bottom": 10
     },
     "tooltip": {
-      "trigger": "item",
-      "textStyle": {
-        "fontSize": 12
-      },
-      "formatter": "{b0}:{c0}"
+        "trigger": "item",
+        "textStyle": {
+            "fontSize": 12
+        },
+        "formatter": "{b0}:{c0}"
     },
     "xAxis": {
-      "max": 100,
-      "splitLine": {
-        "show": false
-      },
-      "axisLine": {
-        "show": false
-      },
-      "axisLabel": {
-        "show": false
-      },
-      "axisTick": {
-        "show": false
-      }
-    },
-    "yAxis": [
-      {
-        "type": "category",
-        "inverse": false,
-        "data": [
-          "朔州",
-          "大同",
-          "运城",
-          "忻州",
-          "临汾",
-        ],
-        "axisLine": {
-          "show": false
+        "max": 100,
+        "splitLine": {
+            "show": false
         },
-        "axisTick": {
-          "show": false
+        "axisLine": {
+            "show": false
         },
         "axisLabel": {
-          "margin": -4,
-          "textStyle": {
-            "color": "#fff",
-            "fontSize": 16.25
-          }
-        }
-      },
-    
-    ],
-    "series": [
-      {
-        "type": "pictorialBar",
-        "symbol": "image://data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFoAAABaCAYAAAA4qEECAAADYElEQVR4nO2dz0sUYRjHP7tIdAmxQ1LdlhCKMohAIsgiyEuHjkUEFQTlpejS/xCCBB06RBGBBKIG4cGyH0qHBKE9eKyFqBQPRQeNCt06vGNY7bq7szPfeZLnAwuzM+/zgw/DDvMu70wOIVveLscJOwycA44A24CfwAfgKXAbeFVvovlC/o/vuVwuTj+x0FWiYdGbgXvA8RrjHgAXgIVaCbMU3SKr1BhtwEtgZx1jTwI7gG7ga5pNNUO+9pBMuEN9klfYD9xMqZdEsCj6AHAiRtxZYFeyrSSHRdGnYsblCD8jJrEoek8TsbsT6yJhLIrelFFsqlgUPZtRbKpYFP2kidjxxLpIGIuiB4AvMeLmgJGEe0kMi6I/AVdjxPVSx91hVlgUDXAXuEaY16jFMnAJeJhqR01iVTTAdeAYUFxjzBRwCLgl6agJrM51rDAO7AP2EmbxthPO8vfAc2Ams84axLpoCGKLrH1mm8eC6KPAGaAL2Fpj7AZgY7T9DfhRY/wc4eflPmH+OjOynI8uEGbpukXlJ4Dz84V8aWWHcj46q4thFzCNTjJRren2UrlLWPM3WYjuAMYIk/tq2oCx9lK5Q11YLboFGARaxXVX0woMtpfK0uuTWvRFoFNcsxKdhF5kqEX3iuuthbQXtehG/gdMG2kvlm/B1xUuWoSLFmFF9CRwg2TnM4pRzskEc8bGiugR4ArhNjkpJqKcJv51sSJ63eOiRbhoES5ahIsW4aJFuGgRLlqEixbhokW4aBEuWoSLFuGiRbhoES5ahIsW4aJFuGgRLlqEWvTHKvs/p1izWu5qvaSCWvTlCvtmgeEUaw5TeUVtpV5SQy16COgBRoHXhMWb3aS7PnAhqjEQ1RwFeuYL+aEUa/5DFmtYHkefOEwQVmcBvKD+FQNvgNN/P+pHiV8MRbhoES5ahIsW4aJFuGgRLlqEixbhokW4aBEuWoSLFuGiRbhoES5ahIsW4aJFuGgRLlqEixbhokVYEx3nudGKXE1jTfS6xUWLcNEiXLQIFy3CRYtw0SJctAgXLcJFi3DRIv430eUq2+axJvp7jePPqmzHySXFmuhHwFKVYzNA/6rv/VR/s9BSlMsM1kTPEN4DPkU4I8vAO6APOAgsrhq7GO3ri8aUo5ipKIep1zv9AtipgOACGIrLAAAAAElFTkSuQmCC",
-        "symbolRepeat": "fixed",
-        "symbolMargin": "5%",
-        "symbolClip": true,
-        "symbolSize": 22.5,
-        "symbolPosition": "start",
-        "symbolOffset": [
-          20,
-          0
-        ],
-        "symbolBoundingData": 300,
-        "data": [
-          51,
-          32,
-          82,
-          42,
-          81,
-          
-        ],
-        "z": 10
-      },
-      {
-        "type": "pictorialBar",
-        "itemStyle": {
-          "normal": {
-            "opacity": 0.3
-          }
-        },
-        "label": {
-          "normal": {
             "show": false
-          }
         },
-        "animationDuration": 0,
-        "symbolRepeat": "fixed",
-        "symbolMargin": "5%",
-        "symbol": "image://data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFoAAABaCAYAAAA4qEECAAADYElEQVR4nO2dz0sUYRjHP7tIdAmxQ1LdlhCKMohAIsgiyEuHjkUEFQTlpejS/xCCBB06RBGBBKIG4cGyH0qHBKE9eKyFqBQPRQeNCt06vGNY7bq7szPfeZLnAwuzM+/zgw/DDvMu70wOIVveLscJOwycA44A24CfwAfgKXAbeFVvovlC/o/vuVwuTj+x0FWiYdGbgXvA8RrjHgAXgIVaCbMU3SKr1BhtwEtgZx1jTwI7gG7ga5pNNUO+9pBMuEN9klfYD9xMqZdEsCj6AHAiRtxZYFeyrSSHRdGnYsblCD8jJrEoek8TsbsT6yJhLIrelFFsqlgUPZtRbKpYFP2kidjxxLpIGIuiB4AvMeLmgJGEe0kMi6I/AVdjxPVSx91hVlgUDXAXuEaY16jFMnAJeJhqR01iVTTAdeAYUFxjzBRwCLgl6agJrM51rDAO7AP2EmbxthPO8vfAc2Ams84axLpoCGKLrH1mm8eC6KPAGaAL2Fpj7AZgY7T9DfhRY/wc4eflPmH+OjOynI8uEGbpukXlJ4Dz84V8aWWHcj46q4thFzCNTjJRren2UrlLWPM3WYjuAMYIk/tq2oCx9lK5Q11YLboFGARaxXVX0woMtpfK0uuTWvRFoFNcsxKdhF5kqEX3iuuthbQXtehG/gdMG2kvlm/B1xUuWoSLFmFF9CRwg2TnM4pRzskEc8bGiugR4ArhNjkpJqKcJv51sSJ63eOiRbhoES5ahIsW4aJFuGgRLlqEixbhokW4aBEuWoSLFuGiRbhoES5ahIsW4aJFuGgRLlqEWvTHKvs/p1izWu5qvaSCWvTlCvtmgeEUaw5TeUVtpV5SQy16COgBRoHXhMWb3aS7PnAhqjEQ1RwFeuYL+aEUa/5DFmtYHkefOEwQVmcBvKD+FQNvgNN/P+pHiV8MRbhoES5ahIsW4aJFuGgRLlqEixbhokW4aBEuWoSLFuGiRbhoES5ahIsW4aJFuGgRLlqEixbhokVYEx3nudGKXE1jTfS6xUWLcNEiXLQIFy3CRYtw0SJctAgXLcJFi3DRIv430eUq2+axJvp7jePPqmzHySXFmuhHwFKVYzNA/6rv/VR/s9BSlMsM1kTPEN4DPkU4I8vAO6APOAgsrhq7GO3ri8aUo5ipKIep1zv9AtipgOACGIrLAAAAAElFTkSuQmCC",
-        "symbolSize": 22.5,
-        "symbolBoundingData": 300,
-        "symbolPosition": "start",
-        "symbolOffset": [
-          20,
-          0
-        ],
-        "data": [
-          51,
-          32,
-          82,
-          42,
-          81,
-          
-        ],
-        "z": 5
-      }
+        "axisTick": {
+            "show": false
+        }
+    },
+    "yAxis": [{
+            "type": "category",
+            "inverse": false,
+            "data": [
+                "朔州",
+                "大同",
+                "运城",
+                "忻州",
+                "临汾",
+            ],
+            "axisLine": {
+                "show": false
+            },
+            "axisTick": {
+                "show": false
+            },
+            "axisLabel": {
+                "margin": -4,
+                "textStyle": {
+                    "color": "#fff",
+                    "fontSize": 16.25
+                }
+            }
+        },
+
+    ],
+    "series": [{
+            "type": "pictorialBar",
+            "symbol": "image://data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFoAAABaCAYAAAA4qEECAAADYElEQVR4nO2dz0sUYRjHP7tIdAmxQ1LdlhCKMohAIsgiyEuHjkUEFQTlpejS/xCCBB06RBGBBKIG4cGyH0qHBKE9eKyFqBQPRQeNCt06vGNY7bq7szPfeZLnAwuzM+/zgw/DDvMu70wOIVveLscJOwycA44A24CfwAfgKXAbeFVvovlC/o/vuVwuTj+x0FWiYdGbgXvA8RrjHgAXgIVaCbMU3SKr1BhtwEtgZx1jTwI7gG7ga5pNNUO+9pBMuEN9klfYD9xMqZdEsCj6AHAiRtxZYFeyrSSHRdGnYsblCD8jJrEoek8TsbsT6yJhLIrelFFsqlgUPZtRbKpYFP2kidjxxLpIGIuiB4AvMeLmgJGEe0kMi6I/AVdjxPVSx91hVlgUDXAXuEaY16jFMnAJeJhqR01iVTTAdeAYUFxjzBRwCLgl6agJrM51rDAO7AP2EmbxthPO8vfAc2Ams84axLpoCGKLrH1mm8eC6KPAGaAL2Fpj7AZgY7T9DfhRY/wc4eflPmH+OjOynI8uEGbpukXlJ4Dz84V8aWWHcj46q4thFzCNTjJRren2UrlLWPM3WYjuAMYIk/tq2oCx9lK5Q11YLboFGARaxXVX0woMtpfK0uuTWvRFoFNcsxKdhF5kqEX3iuuthbQXtehG/gdMG2kvlm/B1xUuWoSLFmFF9CRwg2TnM4pRzskEc8bGiugR4ArhNjkpJqKcJv51sSJ63eOiRbhoES5ahIsW4aJFuGgRLlqEixbhokW4aBEuWoSLFuGiRbhoES5ahIsW4aJFuGgRLlqEWvTHKvs/p1izWu5qvaSCWvTlCvtmgeEUaw5TeUVtpV5SQy16COgBRoHXhMWb3aS7PnAhqjEQ1RwFeuYL+aEUa/5DFmtYHkefOEwQVmcBvKD+FQNvgNN/P+pHiV8MRbhoES5ahIsW4aJFuGgRLlqEixbhokW4aBEuWoSLFuGiRbhoES5ahIsW4aJFuGgRLlqEixbhokVYEx3nudGKXE1jTfS6xUWLcNEiXLQIFy3CRYtw0SJctAgXLcJFi3DRIv430eUq2+axJvp7jePPqmzHySXFmuhHwFKVYzNA/6rv/VR/s9BSlMsM1kTPEN4DPkU4I8vAO6APOAgsrhq7GO3ri8aUo5ipKIep1zv9AtipgOACGIrLAAAAAElFTkSuQmCC",
+            "symbolRepeat": "fixed",
+            "symbolMargin": "5%",
+            "symbolClip": true,
+            "symbolSize": 22.5,
+            "symbolPosition": "start",
+            "symbolOffset": [
+                20,
+                0
+            ],
+            "symbolBoundingData": 300,
+            "data": [
+                51,
+                32,
+                82,
+                42,
+                81,
+
+            ],
+            "z": 10
+        },
+        {
+            "type": "pictorialBar",
+            "itemStyle": {
+                "normal": {
+                    "opacity": 0.3
+                }
+            },
+            "label": {
+                "normal": {
+                    "show": false
+                }
+            },
+            "animationDuration": 0,
+            "symbolRepeat": "fixed",
+            "symbolMargin": "5%",
+            "symbol": "image://data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFoAAABaCAYAAAA4qEECAAADYElEQVR4nO2dz0sUYRjHP7tIdAmxQ1LdlhCKMohAIsgiyEuHjkUEFQTlpejS/xCCBB06RBGBBKIG4cGyH0qHBKE9eKyFqBQPRQeNCt06vGNY7bq7szPfeZLnAwuzM+/zgw/DDvMu70wOIVveLscJOwycA44A24CfwAfgKXAbeFVvovlC/o/vuVwuTj+x0FWiYdGbgXvA8RrjHgAXgIVaCbMU3SKr1BhtwEtgZx1jTwI7gG7ga5pNNUO+9pBMuEN9klfYD9xMqZdEsCj6AHAiRtxZYFeyrSSHRdGnYsblCD8jJrEoek8TsbsT6yJhLIrelFFsqlgUPZtRbKpYFP2kidjxxLpIGIuiB4AvMeLmgJGEe0kMi6I/AVdjxPVSx91hVlgUDXAXuEaY16jFMnAJeJhqR01iVTTAdeAYUFxjzBRwCLgl6agJrM51rDAO7AP2EmbxthPO8vfAc2Ams84axLpoCGKLrH1mm8eC6KPAGaAL2Fpj7AZgY7T9DfhRY/wc4eflPmH+OjOynI8uEGbpukXlJ4Dz84V8aWWHcj46q4thFzCNTjJRren2UrlLWPM3WYjuAMYIk/tq2oCx9lK5Q11YLboFGARaxXVX0woMtpfK0uuTWvRFoFNcsxKdhF5kqEX3iuuthbQXtehG/gdMG2kvlm/B1xUuWoSLFmFF9CRwg2TnM4pRzskEc8bGiugR4ArhNjkpJqKcJv51sSJ63eOiRbhoES5ahIsW4aJFuGgRLlqEixbhokW4aBEuWoSLFuGiRbhoES5ahIsW4aJFuGgRLlqEWvTHKvs/p1izWu5qvaSCWvTlCvtmgeEUaw5TeUVtpV5SQy16COgBRoHXhMWb3aS7PnAhqjEQ1RwFeuYL+aEUa/5DFmtYHkefOEwQVmcBvKD+FQNvgNN/P+pHiV8MRbhoES5ahIsW4aJFuGgRLlqEixbhokW4aBEuWoSLFuGiRbhoES5ahIsW4aJFuGgRLlqEixbhokVYEx3nudGKXE1jTfS6xUWLcNEiXLQIFy3CRYtw0SJctAgXLcJFi3DRIv430eUq2+axJvp7jePPqmzHySXFmuhHwFKVYzNA/6rv/VR/s9BSlMsM1kTPEN4DPkU4I8vAO6APOAgsrhq7GO3ri8aUo5ipKIep1zv9AtipgOACGIrLAAAAAElFTkSuQmCC",
+            "symbolSize": 22.5,
+            "symbolBoundingData": 300,
+            "symbolPosition": "start",
+            "symbolOffset": [
+                20,
+                0
+            ],
+            "data": [
+                51,
+                32,
+                82,
+                42,
+                81,
+
+            ],
+            "z": 5
+        }
     ]
 };
 
@@ -965,7 +961,7 @@ function random() {
     return +(Math.random() * (maxData - 10)).toFixed(1);
 }
 setInterval(function () {
-    var dynamicData = [random(), random(), random(), random(),random(), random(), random(), random(),random(),random()];
+    var dynamicData = [random(), random(), random(), random(), random(), random(), random(), random(), random(), random()];
     // myChart.setOption({
     //     series: [{
     //         data: dynamicData.slice()
@@ -981,13 +977,13 @@ setInterval(function () {
 var shadowColor = '#374b86';
 var value = 80;
 option5 = {
-    
+
     title: {
         //text: `${value}万辆`,
-        text: `车辆总数`,
+        text: '车辆总数',
         subtext: '',
         left: 'center',
-        top: 'center',//top待调整
+        top: 'center', //top待调整
         textStyle: {
             color: '#fff',
             fontSize: 16,
@@ -999,7 +995,7 @@ option5 = {
             fontFamily: 'PingFangSC-Regular',
             top: 'center'
         },
-        itemGap: -1//主副标题间距
+        itemGap: -1 //主副标题间距
     },
 
     series: [{
@@ -1017,14 +1013,14 @@ option5 = {
                 }
             }
         },
-        hoverAnimation: true,
+        hoverAnimation: false,
         data: [{
             value: value,
             name: 'completed',
             itemStyle: {
                 normal: {
                     borderWidth: 8,
-                    borderColor: { 
+                    borderColor: {
                         colorStops: [{
                             offset: 0,
                             color: '#1d54f7' || '#00cefc' // 0% 处的颜色
@@ -1073,13 +1069,13 @@ option5 = {
 var shadowColor = '#374b86';
 var value = 85;
 option6 = {
-    
+
     title: {
         //text: `${value}万辆`,
         text: `今日上线`,
         subtext: '',
         left: 'center',
-        top: 'center',//top待调整
+        top: 'center', //top待调整
         textStyle: {
             color: '#fff',
             fontSize: 16,
@@ -1091,7 +1087,7 @@ option6 = {
             fontFamily: 'PingFangSC-Regular',
             top: 'center'
         },
-        itemGap: -1//主副标题间距
+        itemGap: -1 //主副标题间距
     },
 
     series: [{
@@ -1116,7 +1112,7 @@ option6 = {
             itemStyle: {
                 normal: {
                     borderWidth: 8,
-                    borderColor: { 
+                    borderColor: {
                         colorStops: [{
                             offset: 0,
                             color: '#02df94' || '#25d6bc' // 0% 处的颜色
@@ -1165,13 +1161,13 @@ option6 = {
 var shadowColor = '#374b86';
 var value = 46;
 option7 = {
-    
+
     title: {
         //text: `${value}万辆`,
         text: `今日报警`,
         subtext: '',
         left: 'center',
-        top: 'center',//top待调整
+        top: 'center', //top待调整
         textStyle: {
             color: '#fff',
             fontSize: 16,
@@ -1183,7 +1179,7 @@ option7 = {
             fontFamily: 'PingFangSC-Regular',
             top: 'center'
         },
-        itemGap: -1//主副标题间距
+        itemGap: -1 //主副标题间距
     },
 
     series: [{
@@ -1208,8 +1204,8 @@ option7 = {
             itemStyle: {
                 normal: {
                     borderWidth: 8,
-                    borderColor: { 
-                    colorStops: [{
+                    borderColor: {
+                        colorStops: [{
                             offset: 0,
                             color: '#eb3600' || '#cc9a00' // 0% 处的颜色
                         }, {
@@ -1254,20 +1250,3 @@ option7 = {
     }]
 }
 //////////////////////今日实时收费 end
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

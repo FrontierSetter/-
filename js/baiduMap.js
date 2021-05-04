@@ -110,12 +110,12 @@ menuGlobal();
 // var gcj02tobd09 = coordtransform.gcj02tobd09(116.404, 39.915);
 
 // *地图车辆贴图
-var iconOnline = new BMapGL.Icon("http://202.120.60.31:4000/circle-blue.png", new BMapGL.Size(25, 25));
-var iconOffline = new BMapGL.Icon("http://202.120.60.31:4000/circle-green.png", new BMapGL.Size(25, 25));
-var iconCharging = new BMapGL.Icon("http://202.120.60.31:4000/icon-blue-small.gif", new BMapGL.Size(25, 25));
-var iconInitmode = new BMapGL.Icon("http://202.120.60.31:4000/icon-purple-small.gif", new BMapGL.Size(25, 25));
-var iconPoweron = new BMapGL.Icon("http://202.120.60.31:4000/icon-yellow-small.gif", new BMapGL.Size(25, 25));
-var iconUnknown = new BMapGL.Icon("http://202.120.60.31:4000/circle-yellow.png", new BMapGL.Size(25, 25));
+var iconOnline = new BMapGL.Icon("http://202.120.60.31:7199/circle-blue.png", new BMapGL.Size(25, 25));
+var iconOffline = new BMapGL.Icon("http://202.120.60.31:7199/circle-green.png", new BMapGL.Size(25, 25));
+var iconCharging = new BMapGL.Icon("http://202.120.60.31:7199/icon-blue-small.gif", new BMapGL.Size(25, 25));
+var iconInitmode = new BMapGL.Icon("http://202.120.60.31:7199/icon-purple-small.gif", new BMapGL.Size(25, 25));
+var iconPoweron = new BMapGL.Icon("http://202.120.60.31:7199/icon-yellow-small.gif", new BMapGL.Size(25, 25));
+var iconUnknown = new BMapGL.Icon("http://202.120.60.31:7199/circle-yellow.png", new BMapGL.Size(25, 25));
 
 var iconStart = new BMapGL.Icon("start.png", new BMapGL.Size(25, 25));
 var iconEnd = new BMapGL.Icon("final.png", new BMapGL.Size(25, 25));
@@ -145,38 +145,38 @@ function backgroundRequest(){
         return;
     }else{
         $.ajax({
-            url: 'http://202.120.60.31:4000/query/all/location/batch', //请求的url
+            // [{"Vin":"LL3ABCJ22KA011491","Longitude":118.0033,"Latitude":24.5253},{"Vin":"LL3ACCJ22JA011664","Longitude":118.0034,"Latitude":24.5251},{"Vin":"LL3ACCJ27JA011515","Longitude":118.0044,"Latitude":24.5253}]
+            url: 'http://202.120.60.31:7199/api/cars_location', //请求的url
             type: 'get', //请求的方式
             error: function (data) {
                 console.log('backgroundRequest请求失败');
             },
             success: function (data) {
+                // console.log('backgroundRequest请求成功');
+                // console.log("length: "+data.length);
 
-                console.log("before filter"+data.length);
-                filterBackgroundRequest(data);
-                console.log("after filter"+filteredData.length)
+                // 不用过滤了
+                // console.log("before filter"+data.length);
+                // filterBackgroundRequest(data);
+                // console.log("after filter"+filteredData.length)
 
-                var curTime = new Date().getTime();
+                // var curTime = new Date().getTime();
+
+                filteredData = data;
 
                 for(var i = 0; i < filteredData.length; ++i){
-                    // ?五菱的后台服务器存在缺陷，所以车辆的status状态需要自己判断
-                    var curType = getMode(filteredData[i]['collectTime'], curTime);
+                    // var curType = getMode(filteredData[i]['collectTime'], curTime);
+                    var curType = 0; // 默认为启动状态
 
-                    // var curGcjCoord = coordtransform.wgs84togcj02(filteredData[i]['longitude'], filteredData[i]['latitude']);
-                    // var curBaiduCoord = coordtransform.gcj02tobd09(curGcjCoord[0], curGcjCoord[1]);
-                    
-                    // var curPoint = new BMapGL.Point(curBaiduCoord[0], curBaiduCoord[1]);
-
-                    var curPoint = wgs84tobdpoint(filteredData[i]['longitude'], filteredData[i]['latitude']);
+                    var curPoint = wgs84tobdpoint(filteredData[i]['Longitude'], filteredData[i]['Latitude']);
 
                     var marker = new BMapGL.Marker(curPoint);
                     marker.setIcon(iconArr[curType]);
 
-                    var content = filteredData[i]['VIN'];
+                    var content = filteredData[i]['Vin'];
                     addMouseHandler(content, marker);
 
                     backgroundCarOverlayNew.push(marker);
-                    
                 }
 
                 if(shouldMapGlobal && needUpdateMap){
@@ -212,10 +212,6 @@ function backgroundRequest(){
 
         filteredData = new Array();
         for(var k in filterDic){
-            if(k == "LK6ADCE20HB005678"){
-                console.log("LK6ADCE20HB005678: ")
-                console.log(filterDic[k]);
-            }
             filteredData.push(filterDic[k]);
         }
 
@@ -248,17 +244,37 @@ function openInfo(content, e){
 }
 
 function drawOverlay(){
-    for(var i = 0; i < backgroundCarOverlayOld.length; ++i){
-        map.removeOverlay(backgroundCarOverlayOld[i]);
+    // console.log("drawOverlay")
+    // console.log(backgroundCarOverlayOld)
+    // console.log(backgroundCarOverlayNew)
+    var shouldZoom = false;
+    bPoints = new Array();
+
+    if(backgroundCarOverlayOld.length == 0){
+        shouldZoom = true;
+    }else{
+        for(var i = 0; i < backgroundCarOverlayOld.length; ++i){
+            map.removeOverlay(backgroundCarOverlayOld[i]);
+        }
     }
     backgroundCarOverlayOld = new Array();
     for(var i = 0; i < backgroundCarOverlayNew.length; ++i){
         if(shouldMapGlobal){
+            if(shouldZoom){
+                bPoints.push(backgroundCarOverlayNew[i].getPosition())
+            }
             map.addOverlay(backgroundCarOverlayNew[i]);
         }
         backgroundCarOverlayOld.push(backgroundCarOverlayNew[i]);
     }
     backgroundCarOverlayNew = new Array();
+
+    if(shouldZoom && shouldMapGlobal){
+        var view = map.getViewport(bPoints);
+        var mapZoom = view.zoom;
+        var centerPoint = view.center;
+        map.centerAndZoom(centerPoint, mapZoom);
+    }
 }
 
 var activeThreshold = 1000*60*3;

@@ -53,6 +53,8 @@
     <!-- 百度地图 -->
     <script type="text/javascript" src="http://api.map.baidu.com/api?v=3.0&ak=NjvQlGFSxuq5B7ld8vdIWwuGfdy2sTsq"></script>
     <script type="text/javascript" src="http://api.map.baidu.com/api?v=1.0&type=webgl&ak=NjvQlGFSxuq5B7ld8vdIWwuGfdy2sTsq"></script>
+        <!-- 百度地图绘图需要的css，存在跨域问题，所以手动复制下来作为静态资源提供 -->
+    <link rel="stylesheet" type="text/css" href="css/bmap.css">
 
     <!-- 容器反转 -->
     <link rel="stylesheet" type="text/css" href="css/flip.css">
@@ -60,6 +62,10 @@
 
     <!-- echarts 绘图脚本 -->
     <script src="js/charts.js"></script>
+
+    <!-- 数据请求脚本 -->
+    <script src="js/dashboard.js"></script>
+    <script src="js/scoreboard.js"></script>
 
     <!-- 时钟 -->
     <!-- <link rel="stylesheet" href="css/clock.css"> -->
@@ -189,10 +195,10 @@
                 <div class="visual_conTop_box visual_conTop2">
                     <div>
                         <h3>平均车速(KM/H)</h3>
-                        <p>120</p>
+                        <p id="average_speed">120</p>
                         <div class="conTop_smil">
                             <a class="null">null</a>
-                            <a class="">缓行</a>
+                            <a id="average_speed_state" class="">缓行</a>
                         </div>
                     </div>
                 </div>
@@ -234,7 +240,7 @@
                             向我展示
                             <div class="ui inline search dropdown" style="font-size: 20px;">
                                 <div class="text" >
-                                    单车查询
+                                    全局信息
                                 </div>
                                 <i class="dropdown icon"></i>
                                 <div class="menu" id="vin_menu">
@@ -336,9 +342,10 @@
 
             curCarVin = vin;
 
-            sunfigEnterSingle();
-            requestSingleCarSpeed();
-            do_initRequestSingleCar(vin);
+            // 网页结构修改，不再需要单车模式
+            // sunfigEnterSingle();
+            // requestSingleCarSpeed();
+            // do_initRequestSingleCar(vin);
         }
 
         function backToBackground(){
@@ -453,8 +460,6 @@
 </html>
 
 
-
-
 <script type="text/javascript">
     $('.ui.dropdown').dropdown();
 </script>
@@ -462,12 +467,15 @@
 <script>
     function getVinList(){
         $.ajax({
-            url: 'http://202.120.60.31:4000/query/all/vin', //请求的url
+            url: 'http://202.120.60.31:7199/api/current_vin', //请求的url
             type: 'get', //请求的方式
             error: function (data) {
-                console.log('backgroundRequest请求失败');
+                console.log('getVinList请求失败');
             },
             success: function (data) {
+
+                console.log('getVinList请求成功');
+                console.log(data);
 
                 var obj = document.getElementById("vin_menu");
 
@@ -476,7 +484,7 @@
                     new_tex.setAttribute("class", "item");
                     new_tex.setAttribute("style", "font-size: 20px;");
                     new_tex.setAttribute("onclick", "onClickMenu(this)");
-                    new_tex.innerHTML = data[i]["VIN"];
+                    new_tex.innerHTML = data[i];
                     obj.appendChild(new_tex);
                 }
             }
@@ -491,6 +499,16 @@
     setTimeout(function(){
         backgroundRequest();
     }, 1000);
+
+    // dashboard
+    requestTotalCarNum();
+    setTimeout(function(){
+        requestOnCarNum();
+    }, 100);
+
+    // scoreboard
+    requestAverageSpeed();
+
 </script>
 
 <script>
