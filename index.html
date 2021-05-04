@@ -11,8 +11,14 @@
     <!-- <script src="js/jquery.min.js"></script> -->
     <!-- <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.0/jquery.js"></script> -->
     <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-        <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+    <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
     <script src="js/bootstrap.min.js"></script>
+
+    <!-- 弹出式窗口 -->
+    <link rel="stylesheet" type="text/css" href="css/default.css" />
+    <link rel="stylesheet" type="text/css" href="css/component.css" />
+    <script src="js/modernizr.custom.js"></script>
+
     <!--echarts JS-->
     <!-- <script src="js/echarts.min.js"></script> -->
     <script src="https://cdn.bootcdn.net/ajax/libs/echarts/5.0.2/echarts.js"></script>
@@ -28,8 +34,8 @@
     <link rel="stylesheet" type="text/css" href="css/visual.css">
 
     <!-- semantic UI -->
-		<link href="https://cdn.bootcdn.net/ajax/libs/semantic-ui/2.4.1/components/icon.css" rel="stylesheet">
-        <!-- <link href="https://cdn.bootcss.com/semantic-ui/2.4.1/components/icon.css" rel="stylesheet"> -->
+    <link href="https://cdn.bootcdn.net/ajax/libs/semantic-ui/2.4.1/components/icon.css" rel="stylesheet">
+    <!-- <link href="https://cdn.bootcss.com/semantic-ui/2.4.1/components/icon.css" rel="stylesheet"> -->
     <link href="https://cdn.bootcdn.net/ajax/libs/semantic-ui/2.4.1/components/button.css" rel="stylesheet">
     <script src="https://cdn.bootcdn.net/ajax/libs/semantic-ui/2.4.1/components/transition.js"></script>
     <link href="https://cdn.bootcdn.net/ajax/libs/semantic-ui/2.4.1/components/transition.css" rel="stylesheet">
@@ -67,6 +73,36 @@
 
 </head>
 <body class="ksh">
+    <!-- 告警信息必须放置在body的头部，并且不能包含在div中 -->
+    <div class="md-modal md-effect-1" id="modal-1">
+        <div class="md-content">
+            <h3>告警详情1</h3>
+            <div>
+                <p>车辆告警详情:</p>
+                <ul>
+                    <li><strong>危险程度:</strong> 危险.</li>
+                    <li><strong>位置:</strong> xxxx, xxxx.</li>
+                    <li><strong>详情:</strong> xxxxxx.</li>
+                </ul>
+                <button class="md-close">Close me!</button>
+            </div>
+        </div>
+    </div>
+    <div class="md-modal md-effect-1" id="modal-2">
+        <div class="md-content">
+            <h3>告警详情2</h3>
+            <div>
+                <p>车辆告警详情:</p>
+                <ul>
+                    <li><strong>危险程度:</strong> 危险.</li>
+                    <li><strong>位置:</strong> xxxx, xxxx.</li>
+                    <li><strong>详情:</strong> xxxxxx.</li>
+                </ul>
+                <button class="md-close">Close me!</button>
+            </div>
+        </div>
+    </div>
+    
     <div id="load">
         <div class="load_img">
             <!-- 加载动画 -->
@@ -123,70 +159,29 @@
 
             <div class="visual_box">
                 <div class="visual_title">
-                    <span>收费站车流量</span>
+                    <span>告警信息</span>
                     <img src="images/ksh33.png">
                 </div>
-                <div class="visual_chart sfzcll">
-                    <a>运输方式</a>
-                    <a>客运量</a>
-                    <a>货运量</a>
-                    <div class="sfzcll_pos_box">
-                        <div class="sfzcll_box">
-                            <img class="sfzcll_bkJk" src="images/ksh34.png">
-                            <img class="sfzcll_bkJk" src="images/ksh34.png">
-                            <img class="sfzcll_bkJk" src="images/ksh34.png">
-                            <img class="sfzcll_bkJk" src="images/ksh34.png">
-                            <label><img src="images/ksh35.png">公路运输</label>
-                            <div class="sfzcll_smallBk">
-                                <div class="ygl">
-                                    <span>4347.2万</span>人
-                                </div>
-                            </div>
-                            <div class="sfzcll_smallBk">
-                                <div class="ygh">
-                                    <span>4347.2万</span>人
-                                </div>
-                            </div>
-                            <div class="clear"></div>
-                        </div>
-                        <div class="sfzcll_box">
-                            <img class="sfzcll_bkJk" src="images/ksh34.png">
-                            <img class="sfzcll_bkJk" src="images/ksh34.png">
-                            <img class="sfzcll_bkJk" src="images/ksh34.png">
-                            <img class="sfzcll_bkJk" src="images/ksh34.png">
-                            <label><img src="images/ksh35.png">公路运输</label>
-                            <div class="sfzcll_smallBk">
-                                <div class="ygl">
-                                    <span>4347.2万</span>人
-                                </div>
-                            </div>
-                            <div class="sfzcll_smallBk">
-                                <div class="ygh">
-                                    <span>4347.2万</span>人
-                                </div>
-                            </div>
-                            <div class="clear"></div>
-                        </div>
-                        <div class="sfzcll_box">
-                            <img class="sfzcll_bkJk" src="images/ksh34.png">
-                            <img class="sfzcll_bkJk" src="images/ksh34.png">
-                            <img class="sfzcll_bkJk" src="images/ksh34.png">
-                            <img class="sfzcll_bkJk" src="images/ksh34.png">
-                            <label><img src="images/ksh35.png">公路运输</label>
-                            <div class="sfzcll_smallBk">
-                                <div class="ygl">
-                                    <span>4347.2万</span>人
-                                </div>
-                            </div>
-                            <div class="sfzcll_smallBk">
-                                <div class="ygh">
-                                    <span>4347.2万</span>人
-                                </div>
-                            </div>
-                            <div class="clear"></div>
-                        </div>
+                <div class="visual_chart" >
+                    <!-- 把宽度设大一点，藏住右边的滚动条 -->
+                    <div style="width: 105%; height: 100%; overflow: auto;">
+                        <button class="md-trigger" data-modal="modal-1">告警信息1</button>
+                        <button class="md-trigger" data-modal="modal-2">告警信息2</button>
+                        <button class="md-trigger" data-modal="modal-2">短</button>
+                        <button class="md-trigger" data-modal="modal-2">很长很长的告警信息</button>
+                        <button class="md-trigger" data-modal="modal-2">告警信息2</button>
+                        <button class="md-trigger" data-modal="modal-2">告警信息2</button>
+                        <button class="md-trigger" data-modal="modal-2">告警信息2</button>
+                        <button class="md-trigger" data-modal="modal-2">告警信息2</button>
+                        <button class="md-trigger" data-modal="modal-2">告警信息2</button>
+                        <button class="md-trigger" data-modal="modal-2">告警信息2</button>
+                        <button class="md-trigger" data-modal="modal-2">告警信息2</button>
+                        <button class="md-trigger" data-modal="modal-2">告警信息2</button>
+                        <button class="md-trigger" data-modal="modal-2">告警信息2</button>
+                        <button class="md-trigger" data-modal="modal-2">告警信息2</button>
+                        <button class="md-trigger" data-modal="modal-2">告警信息2</button>
+                        <button class="md-trigger" data-modal="modal-2">告警信息2</button>
                     </div>
-
                 </div>
             </div>
         </div>
@@ -446,6 +441,25 @@
         // *display属性为none的时候echarts图表无法绘制，所以先画完图再统一设置display
         init_card_side_display();
     </script>
+
+    <!-- 弹出式窗口 -->
+    <div class="md-overlay"></div><!-- the overlay element -->
+
+    <!-- classie.js by @desandro: https://github.com/desandro/classie -->
+    <script src="js/classie.js"></script>
+    <script src="js/modalEffects.js"></script>
+
+    <!-- for the blur effect -->
+    <!-- by @derSchepp https://github.com/Schepp/CSS-Filters-Polyfill -->
+    <script>
+        // this is important for IEs
+        var polyfilter_scriptpath = '/js/';
+    </script>
+    <script src="js/cssParser.js"></script>
+    <script src="js/css-filters-polyfill.js"></script>
+
+    
+
 </body>
 </html>
 
