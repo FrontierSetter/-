@@ -32,6 +32,9 @@ var ModalEffects = (function() {
 			}
 
 			el.addEventListener( 'click', function( ev ) {
+				// 原本想让所有弹出按钮复用同一个框，
+				// 但是存在问题：1）按钮->具体信息的对应关系记录；2）处理完成后按钮的销毁
+				// console.log($('#warning_detail_head').html(el.innerHTML));
 				classie.add( modal, 'md-show' );
 				overlay.removeEventListener( 'click', removeModalHandler );
 				overlay.addEventListener( 'click', removeModalHandler );
@@ -55,3 +58,51 @@ var ModalEffects = (function() {
 	init();
 
 })();
+
+function re_init_pop_window() {
+
+	var overlay = document.querySelector( '.md-overlay' );
+
+	[].slice.call( document.querySelectorAll( '.md-trigger' ) ).forEach( function( el, i ) {
+
+		var modal = document.querySelector( '#' + el.getAttribute( 'data-modal' ) ),
+			close = modal.querySelector( '.md-close' );
+
+		function removeModal( hasPerspective ) {
+			classie.remove( modal, 'md-show' );
+
+			if( hasPerspective ) {
+				classie.remove( document.documentElement, 'md-perspective' );
+			}
+		}
+
+		function removeModalHandler() {
+			removeModal( classie.has( el, 'md-setperspective' ) ); 
+		}
+
+		el.addEventListener( 'click', function( ev ) {
+			classie.add( modal, 'md-show' );
+			overlay.removeEventListener( 'click', removeModalHandler );
+			overlay.addEventListener( 'click', removeModalHandler );
+
+			if( classie.has( el, 'md-setperspective' ) ) {
+				setTimeout( function() {
+					classie.add( document.documentElement, 'md-perspective' );
+				}, 25 );
+			}
+		});
+
+		close.addEventListener( 'click', function( ev ) {
+			ev.stopPropagation();
+			removeModalHandler();
+		});
+
+	} );
+}
+
+function removeButton(but_id){
+	console.log(but_id)
+	$("#"+but_id).remove();
+	// 模拟一次背景板的点击，让窗口自动关闭
+	document.querySelector( '.md-overlay' ).click()
+}

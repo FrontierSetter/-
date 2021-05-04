@@ -108,7 +108,8 @@ perspective effects (not including the modals and the overlay).
 }
 
 .md-content button {
-	display: block;
+	/* 多个按钮不分行 */
+	/* display: block; */
 	margin: 0 auto;
 	font-size: 0.8em;
 }

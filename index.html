@@ -72,11 +72,11 @@
     <script src="js/mine.js"></script>
 
 </head>
-<body class="ksh">
+<body class="ksh" id='main_body'>
     <!-- 告警信息必须放置在body的头部，并且不能包含在div中 -->
     <div class="md-modal md-effect-1" id="modal-1">
         <div class="md-content">
-            <h3>告警详情1</h3>
+            <h3 id='warning_detail_head'>告警详情1</h3>
             <div>
                 <p>车辆告警详情:</p>
                 <ul>
@@ -84,7 +84,8 @@
                     <li><strong>位置:</strong> xxxx, xxxx.</li>
                     <li><strong>详情:</strong> xxxxxx.</li>
                 </ul>
-                <button class="md-close">Close me!</button>
+                <button class="md-close">关闭</button>
+                <button onclick="removeButton('warning_button_1')">处理完成</button>
             </div>
         </div>
     </div>
@@ -164,23 +165,11 @@
                 </div>
                 <div class="visual_chart" >
                     <!-- 把宽度设大一点，藏住右边的滚动条 -->
-                    <div style="width: 105%; height: 100%; overflow: auto;">
-                        <button class="md-trigger" data-modal="modal-1">告警信息1</button>
-                        <button class="md-trigger" data-modal="modal-2">告警信息2</button>
-                        <button class="md-trigger" data-modal="modal-2">短</button>
-                        <button class="md-trigger" data-modal="modal-2">很长很长的告警信息</button>
-                        <button class="md-trigger" data-modal="modal-2">告警信息2</button>
-                        <button class="md-trigger" data-modal="modal-2">告警信息2</button>
-                        <button class="md-trigger" data-modal="modal-2">告警信息2</button>
-                        <button class="md-trigger" data-modal="modal-2">告警信息2</button>
-                        <button class="md-trigger" data-modal="modal-2">告警信息2</button>
-                        <button class="md-trigger" data-modal="modal-2">告警信息2</button>
-                        <button class="md-trigger" data-modal="modal-2">告警信息2</button>
-                        <button class="md-trigger" data-modal="modal-2">告警信息2</button>
-                        <button class="md-trigger" data-modal="modal-2">告警信息2</button>
-                        <button class="md-trigger" data-modal="modal-2">告警信息2</button>
-                        <button class="md-trigger" data-modal="modal-2">告警信息2</button>
-                        <button class="md-trigger" data-modal="modal-2">告警信息2</button>
+                    <div id="warning_button" style="width: 105%; height: 100%; overflow: auto;">
+                        <button id="warning_button_1" class="md-trigger" data-modal="modal-1">告警信息1</button>
+                        <button class="md-trigger" data-modal="modal-1">告警信息2</button>
+                        <button class="md-trigger" data-modal="modal-1">短</button>
+                        <button class="md-trigger" data-modal="modal-1">很长很长的告警信息</button>
                     </div>
                 </div>
             </div>
@@ -502,4 +491,17 @@
     setTimeout(function(){
         backgroundRequest();
     }, 1000);
+</script>
+
+<script>
+    function add_warning(){
+        $('#warning_button').prepend('<button id="warning_button_3" class="md-trigger" data-modal="modal-3">插入告警信息测试</button>')
+        $('#main_body').prepend('<div class="md-modal md-effect-1" id="modal-3"><div class="md-content"><h3>插入告警信息测试</h3><div><p>车辆告警详情:</p><ul><li><strong>危险程度:</strong> 危险.</li><li><strong>位置:</strong> xxxx, xxxx.</li><li><strong>详情:</strong> xxxxxx.</li></ul><button class="md-close">关闭</button><button onclick="removeButton(\'warning_button_3\')">处理完成</button></div></div></div>')
+        // 新插入的弹出式窗口需要重新初始化
+        re_init_pop_window()
+    }
+
+    setTimeout(function(){
+        add_warning();
+    }, 5000);
 </script>
