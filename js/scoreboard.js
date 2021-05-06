@@ -19,7 +19,7 @@ function getAverageSpeedState(speed){
 function requestAverageSpeed(){
     $.ajax({
         // 3
-        url: 'http://202.120.60.31:7199/api/avg_speed', //请求的url
+        url: server_ip+'api/avg_speed', //请求的url
         type: 'get', //请求的方式
         error: function (data) {
             console.log('requestAverageSpeed请求失败');

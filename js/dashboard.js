@@ -4,7 +4,7 @@ var totalCarNum = 0
 function requestTotalCarNum(){
     $.ajax({
         // 3
-        url: 'http://202.120.60.31:7199/api/car_num', //请求的url
+        url: server_ip+'api/car_num', //请求的url
         type: 'get', //请求的方式
         error: function (data) {
             console.log('requestTotalCarNum请求失败');
@@ -38,7 +38,7 @@ var onCarNum = 0
 function requestOnCarNum(){
     $.ajax({
         // 3
-        url: 'http://202.120.60.31:7199/api/on_cars_num', //请求的url
+        url: server_ip+'api/on_cars_num', //请求的url
         type: 'get', //请求的方式
         error: function (data) {
             console.log('requestOnCarNum请求失败');

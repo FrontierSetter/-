@@ -19,6 +19,9 @@
     <link rel="stylesheet" type="text/css" href="css/component.css" />
     <script src="js/modernizr.custom.js"></script>
 
+    <!-- 服务器配置 -->
+    <script src="js/server.js"></script>
+
     <!--echarts JS-->
     <!-- <script src="js/echarts.min.js"></script> -->
     <script src="https://cdn.bootcdn.net/ajax/libs/echarts/5.0.2/echarts.js"></script>
@@ -26,6 +29,7 @@
     <!-- 轮播swiper文件 -->
     <link rel="stylesheet" type="text/css" href="css/swiper.min.css">
     <script src="js/swiper.min.js"></script>
+
     <!--界面样式-->
     <script src="js/visual.js"></script>
     <script src="js/china.js"></script>
@@ -312,7 +316,7 @@
             </div>
             <div class="visual_box">
                 <div class="visual_title">
-                    <span>危险场景演示<a id="liveButton" href="javascript:void(0)" onclick="switchToLive()" style="color: white;" class="title_link"><i class="external square alternate icon"></i></a></span>
+                    <span>车内摄像头直播<a id="liveButton" href="javascript:void(0)" onclick="switchToLive()" style="color: white;" class="title_link"><i class="external square alternate icon"></i></a></span>
                     <img src="images/ksh33.png">
                 </div>
                 <!-- <div class="swiper-container visual_swiper2 visual_chart">
@@ -467,7 +471,8 @@
 <script>
     function getVinList(){
         $.ajax({
-            url: 'http://202.120.60.31:7199/api/current_vin', //请求的url
+            
+            url: server_ip+'api/current_vin', //请求的url
             type: 'get', //请求的方式
             error: function (data) {
                 console.log('getVinList请求失败');
@@ -514,7 +519,7 @@
 <script>
     function add_warning(){
         $('#warning_button').prepend('<button id="warning_button_3" class="md-trigger" data-modal="modal-3">插入告警信息测试</button>')
-        $('#main_body').prepend('<div class="md-modal md-effect-1" id="modal-3"><div class="md-content"><h3>插入告警信息测试</h3><div><p>车辆告警详情:</p><ul><li><strong>危险程度:</strong> 危险.</li><li><strong>位置:</strong> xxxx, xxxx.</li><li><strong>详情:</strong> xxxxxx.</li></ul><button class="md-close">关闭</button><button onclick="removeButton(\'warning_button_3\')">处理完成</button></div></div></div>')
+        $('#main_body').prepend('<div class="md-modal md-effect-1" id="modal-3"><div class="md-content"><h3>插入告警信息测试</h3><div><p>车辆告警详情:</p><ul><li><strong>危险程度:</strong> 危险.</li><li><strong>位置:</strong> xxxx, xxxx.</li><li><strong>详情:</strong> xxxxxx.</li></ul><button class="md-close">关闭</button> <button onclick="removeButton(\'warning_button_3\')">处理完成</button></div></div></div>')
         // 新插入的弹出式窗口需要重新初始化
         re_init_pop_window()
     }

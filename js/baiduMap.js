@@ -110,12 +110,12 @@ menuGlobal();
 // var gcj02tobd09 = coordtransform.gcj02tobd09(116.404, 39.915);
 
 // *地图车辆贴图
-var iconOnline = new BMapGL.Icon("http://202.120.60.31:7199/circle-blue.png", new BMapGL.Size(25, 25));
-var iconOffline = new BMapGL.Icon("http://202.120.60.31:7199/circle-green.png", new BMapGL.Size(25, 25));
-var iconCharging = new BMapGL.Icon("http://202.120.60.31:7199/icon-blue-small.gif", new BMapGL.Size(25, 25));
-var iconInitmode = new BMapGL.Icon("http://202.120.60.31:7199/icon-purple-small.gif", new BMapGL.Size(25, 25));
-var iconPoweron = new BMapGL.Icon("http://202.120.60.31:7199/icon-yellow-small.gif", new BMapGL.Size(25, 25));
-var iconUnknown = new BMapGL.Icon("http://202.120.60.31:7199/circle-yellow.png", new BMapGL.Size(25, 25));
+var iconOnline = new BMapGL.Icon(server_ip+"circle-blue.png", new BMapGL.Size(25, 25));
+var iconOffline = new BMapGL.Icon(server_ip+"circle-green.png", new BMapGL.Size(25, 25));
+var iconCharging = new BMapGL.Icon(server_ip+"icon-blue-small.gif", new BMapGL.Size(25, 25));
+var iconInitmode = new BMapGL.Icon(server_ip+"icon-purple-small.gif", new BMapGL.Size(25, 25));
+var iconPoweron = new BMapGL.Icon(server_ip+"icon-yellow-small.gif", new BMapGL.Size(25, 25));
+var iconUnknown = new BMapGL.Icon(server_ip+"circle-yellow.png", new BMapGL.Size(25, 25));
 
 var iconStart = new BMapGL.Icon("start.png", new BMapGL.Size(25, 25));
 var iconEnd = new BMapGL.Icon("final.png", new BMapGL.Size(25, 25));
@@ -146,7 +146,7 @@ function backgroundRequest(){
     }else{
         $.ajax({
             // [{"Vin":"LL3ABCJ22KA011491","Longitude":118.0033,"Latitude":24.5253},{"Vin":"LL3ACCJ22JA011664","Longitude":118.0034,"Latitude":24.5251},{"Vin":"LL3ACCJ27JA011515","Longitude":118.0044,"Latitude":24.5253}]
-            url: 'http://202.120.60.31:7199/api/cars_location', //请求的url
+            url: server_ip+'api/cars_location', //请求的url
             type: 'get', //请求的方式
             error: function (data) {
                 console.log('backgroundRequest请求失败');
