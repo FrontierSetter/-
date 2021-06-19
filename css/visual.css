@@ -53,7 +53,7 @@ html, body, form{overflow-y:auto;height:100%;}
 
 }
 .head_top span{
-	text-align: center; height: 100%; display: flex; justify-content: center; align-items: center; font-size: 40px; 
+	text-align: center; height: 100%; display: flex; justify-content: center; align-items: center; font-size: 30px; 
 	background: linear-gradient( 0deg,#0095d6, #46daff);
     background-size: cover;
     -webkit-background-clip: text;
