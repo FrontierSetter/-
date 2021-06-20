@@ -1,0 +1,156 @@
+﻿<!DOCTYPE html>
+
+<html>
+	<head>
+		<meta charset="utf-8" />
+	    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
+		<meta http-equiv="Page-Enter" content="revealTrans(Duration=2.0,Transition=12)" />
+		<title>课题三：自动驾驶电动汽车大数据云雾融合平台研究</title>
+		<link rel="stylesheet" href="css/blue_2/app.css" />
+		<link rel="stylesheet" href="css/blue_2/mine.css" />
+		<link rel="stylesheet" href="css/blue_2/style.css" />
+
+
+		<!-- JQuery -->
+		<script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+		<script type="text/javascript" src="js/jquery_params.js"></script>
+	
+		
+		<!-- echarts -->
+		<!-- <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts@5/dist/echarts.min.js"></script> -->
+		<script src="https://cdn.bootcdn.net/ajax/libs/echarts/5.0.1/echarts.js"></script>
+
+		
+		<!-- semantic UI -->
+		<link href="https://cdn.bootcdn.net/ajax/libs/semantic-ui/2.4.1/components/icon.css" rel="stylesheet">
+		<link href="https://cdn.bootcdn.net/ajax/libs/semantic-ui/2.4.1/components/button.css" rel="stylesheet">
+		<link href="https://cdn.bootcdn.net/ajax/libs/semantic-ui/2.4.1/components/table.css" rel="stylesheet">
+		<link href="https://cdn.bootcdn.net/ajax/libs/semantic-ui/2.4.1/components/menu.css" rel="stylesheet">
+		<link href="https://cdn.bootcdn.net/ajax/libs/semantic-ui/2.4.1/components/sidebar.css" rel="stylesheet">
+		<script src="https://cdn.bootcdn.net/ajax/libs/semantic-ui/2.4.1/components/sidebar.js"></script>
+		<link href="https://cdn.bootcdn.net/ajax/libs/semantic-ui/2.4.1/components/accordion.css" rel="stylesheet">
+		<script src="https://cdn.bootcdn.net/ajax/libs/semantic-ui/2.4.1/components/accordion.js"></script>
+
+		<!-- <script src="json/data.json"></script> -->
+		<!-- <script type="text/javascript" src="js/global_config.js"></script> -->
+	</head>
+
+	
+	
+	<body>
+		<div id="mySidebar" class="ui left sidebar inverted vertical accordion menu">
+
+			<div class="item">
+				<a class="title">
+					<span class="sidebar_item" onclick="changeSrc('./index.html')">监控页面</span> 
+				</a>
+			</div>
+			<div class="item">
+				<a class="title">
+					<span class="sidebar_item" onclick="changeSrc('./live_index.html')">直播页面</span> 
+				</a>
+			</div>
+			<div class="item">
+				<a class="title">
+					<span class="sidebar_item" onclick="changeSrc('./obj_detection_index.html')">物体识别</span> 
+				</a>
+			</div>
+			<div class="item">
+				<a class="title">
+					<span class="sidebar_item" onclick="changeSrc('./decision_index.html')">远程决策</span> 
+				</a>
+			</div>
+			<div class="item">
+				<a class="title">
+					<span class="sidebar_item" onclick="changeSrc('./3d_map_index.html')">时空一张图</span> 
+				</a>
+			</div>
+			<div class="item">
+				<a class="title">
+					<span class="sidebar_item" onclick="changeSrc('./system_index.html')">系统页面</span> 
+				</a>
+			</div>
+			
+		</div>
+		<div class="pusher" style="height: 100%; margin: 0">
+			<iframe id="myframe" src="./system_index.html" style="width: 100%; height: 100%; overflow: scroll;" frameborder="no" scrolling="no" allowtransparency="yes"></iframe>
+		</div>
+	</body>
+</html>
+
+
+<script>
+	// $('<i id="back-to-top" style="z-index: 999;" onclick="history.back()"></i>').appendTo($('.pusher'));
+	// //$('<i id="back-to-top" onclick="location=\'./index_1.html\'"></i>').appendTo($('body'));
+	// $('#back-to-top').fadeIn();	
+
+	$('<i id="pop-sidebar" style="z-index: 999;" onclick="$(\'.ui.sidebar\').sidebar(\'toggle\');"></i>').appendTo($('.pusher'));
+	//$('<i id="back-to-top" onclick="location=\'./index_1.html\'"></i>').appendTo($('body'));
+	$('#pop-sidebar').fadeIn();	
+	// $('.ui.sidebar').sidebar('setting', 'transition', 'overlay');
+
+	
+
+	$("#next").show();
+
+	$('.ui.accordion').accordion();
+</script>
+
+<script>
+	var currentFrame = './system_index.html';
+	var lastFrame = currentFrame;
+
+	function changeIframe(desSrc){
+		lastFrame = currentFrame;
+		currentFrame = desSrc;
+
+		document.getElementById("myframe").src=desSrc;
+	}
+
+	function changeWeblink(desSrc){
+		window.location.href="./total_frame.html?noticeId="+desSrc;
+	}
+
+	function changeSrc(desSrc){
+		changeIframe(desSrc)
+	}
+
+	function refreshIframe(){
+		// document.getElementById("myframe").src=currentFrame;
+		$('#myframe').attr('src', $('#myframe').attr('src'));
+	}
+
+	function initIframe(){
+		document.getElementById("myframe").src=currentFrame;
+	}
+
+	initIframe();
+
+</script>
+
+<script type="text/javascript">  
+	$(function(){
+		getData1();
+	});
+
+	function getData1(){
+		var noticeId = $.query.get("noticeId");
+    	if(noticeId != ''){
+			console.log(noticeId)
+			changeIframe(noticeId)
+		}
+	}
+</script>  
+
+<script>
+	function link_to_heatmap(){
+		console.log("go")
+		var _parent = window.parent;
+		if(_parent){
+			_parent.location.href="./pj4_4_map/index.html";
+		}else{
+			window.location.href="./pj4_4_map/index.html";
+		}
+	}
+</script>
