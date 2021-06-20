@@ -1,0 +1,713 @@
+﻿<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>课题三：自动驾驶电动汽车大数据云雾融合平台研究</title>
+    <!--设置是否为缩放模式 -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- 新 Bootstrap 核心 CSS 文件 -->
+    <link rel="stylesheet" type="text/css" href="bootstrap/3.3.4/css/bootstrap.css">
+    <!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
+    <!-- <script src="js/jquery.min.js"></script> -->
+    <!-- <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.0/jquery.js"></script> -->
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+    <script src="js/bootstrap.min.js"></script>
+
+    <!-- 弹出式窗口 -->
+    <link rel="stylesheet" type="text/css" href="css/default.css" />
+    <link rel="stylesheet" type="text/css" href="css/component.css" />
+    <script src="js/modernizr.custom.js"></script>
+
+    <!-- 服务器配置 -->
+    <script src="js/server.js"></script>
+
+    <!--echarts JS-->
+    <!-- <script src="js/echarts.min.js"></script> -->
+    <script src="https://cdn.bootcdn.net/ajax/libs/echarts/5.0.2/echarts.js"></script>
+
+    <!-- 轮播swiper文件 -->
+    <link rel="stylesheet" type="text/css" href="css/swiper.min.css">
+    <script src="js/swiper.min.js"></script>
+
+    <!--界面样式-->
+    <script src="js/visual.js"></script>
+    <script src="js/china.js"></script>
+    <!-- <script src="js/xiamen.js"></script> -->
+    <script src="js/chartMap.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/visual.css">
+
+    <!-- semantic UI -->
+    <link href="https://cdn.bootcdn.net/ajax/libs/semantic-ui/2.4.1/components/icon.css" rel="stylesheet">
+    <!-- <link href="https://cdn.bootcss.com/semantic-ui/2.4.1/components/icon.css" rel="stylesheet"> -->
+    <link href="https://cdn.bootcdn.net/ajax/libs/semantic-ui/2.4.1/components/button.css" rel="stylesheet">
+    <script src="https://cdn.bootcdn.net/ajax/libs/semantic-ui/2.4.1/components/transition.js"></script>
+    <link href="https://cdn.bootcdn.net/ajax/libs/semantic-ui/2.4.1/components/transition.css" rel="stylesheet">
+    <link href="https://cdn.bootcdn.net/ajax/libs/semantic-ui/2.4.1/components/button.css" rel="stylesheet">
+    <link href="https://cdn.bootcss.com/semantic-ui/2.4.1/components/icon.css" rel="stylesheet">
+    <script src="https://cdn.bootcdn.net/ajax/libs/semantic-ui/2.4.1/components/dropdown.js"></script>
+    <link href="https://cdn.bootcdn.net/ajax/libs/semantic-ui/2.4.1/components/dropdown.css" rel="stylesheet">
+    <link href="https://cdn.bootcdn.net/ajax/libs/semantic-ui/2.4.1/components/statistic.css" rel="stylesheet">
+    <link href="https://cdn.bootcdn.net/ajax/libs/semantic-ui/2.4.1/components/table.css" rel="stylesheet">
+
+
+    <!-- semantic的下拉菜单不能反色，用formantic -->
+    <!-- <script src="https://cdn.bootcdn.net/ajax/libs/fomantic-ui/2.8.7/components/dropdown.js"></script>
+    <link href="https://cdn.bootcdn.net/ajax/libs/fomantic-ui/2.8.7/components/dropdown.css" rel="stylesheet"> -->
+
+
+    <!-- 百度地图 -->
+    <script type="text/javascript" src="http://api.map.baidu.com/api?v=3.0&ak=NjvQlGFSxuq5B7ld8vdIWwuGfdy2sTsq"></script>
+    <script type="text/javascript" src="http://api.map.baidu.com/api?v=1.0&type=webgl&ak=NjvQlGFSxuq5B7ld8vdIWwuGfdy2sTsq"></script>
+        <!-- 百度地图绘图需要的css，存在跨域问题，所以手动复制下来作为静态资源提供 -->
+    <link rel="stylesheet" type="text/css" href="css/bmap.css">
+
+    <!-- 容器反转 -->
+    <link rel="stylesheet" type="text/css" href="css/flip.css">
+    <script src="js/flip.js"></script>
+
+    <!-- echarts 绘图脚本 -->
+    <script src="js/charts.js"></script>
+
+    <!-- 数据请求脚本 -->
+    <script src="js/dashboard.js"></script>
+    <script src="js/scoreboard.js"></script>
+
+    <!-- 时钟 -->
+    <!-- <link rel="stylesheet" href="css/clock.css"> -->
+
+    <!-- 坐标转换 -->
+    <script src="js/coordtransform.js"></script>
+
+    <!-- 其他css -->
+    <link rel="stylesheet" type="text/css" href="css/mine.css">
+    <script src="js/mine.js"></script>
+
+    <style type="text/css">
+        svg {
+            width: 100%;
+            height: 100%;
+            margin: 20px;
+            display: inline-block;
+        }
+        @keyframes scale{
+                    0%{transform:scale(1)}
+                    50%,75%{transform:scale(3)}
+                    78%,100%{opacity:0}
+                }
+                .item1 {
+                position: absolute;
+                width: 14px;
+                height: 14px;
+                background-color: #FFFF00;
+                border-radius: 50%;
+                margin: 100px  100px 50px 200px;
+                }
+                .item1:before {
+                content: '';
+                display:block;
+                width: 14px;
+                height: 14px;
+                border-radius: 50%;
+                opacity: .7;
+                background-color: #FFFF00;
+                animation: scale 2s infinite cubic-bezier(0,0,.49,1.02);
+                animation-delay: 200ms;
+                }
+                .item2 {
+                position: absolute;
+                width: 14px;
+                height: 14px;
+                border-radius: 50%;
+                background-color: #5BFF4A;
+                margin: 100px  100px 50px 300px;
+                }
+                
+                .item2:before {
+                content: '';
+                display:block;
+                width: 14px;
+                height: 14px;
+                border-radius: 50%;
+                background-color: #5BFF4A;
+                opacity: .7;
+                animation: scale 2s infinite cubic-bezier(0,0,.49,1.02);
+                animation-delay: 100ms;
+                }
+                .item3 {
+                position: absolute;
+                width: 14px;
+                height: 14px;
+                border-radius: 50%;
+                background-color: #FF66CC;
+                margin: 180px  100px 50px 200px;
+                }
+                
+                .item3:before {
+                content: '';
+                display:block;
+                width: 14px;
+                height: 14px;
+                border-radius: 50%;
+                background-color: #FF66CC;
+                opacity: .7;
+                animation: scale 2s infinite cubic-bezier(0,0,.49,1.02);
+                animation-delay: 400ms;
+                }
+                .item4 {
+                position: absolute;
+                width: 14px;
+                height: 14px;
+                border-radius: 50%;
+                background-color: #FF0033;
+                margin: 180px  100px 50px 300px;
+                }
+                
+                .item4:before {
+                content: '';
+                display:block;
+                width: 14px;
+                height: 14px;
+                border-radius: 50%;
+                background-color: #FF0033;
+                opacity: .7;
+                animation: scale 2s infinite cubic-bezier(0,0,.49,1.02);
+                animation-delay: 300ms;
+                }
+    </style>
+
+</head>
+<body class="ksh" id='main_body'>
+    <!-- 告警信息必须放置在body的头部，并且不能包含在div中 -->
+       
+    <div id="load">
+        <div class="load_img">
+            <!-- 加载动画 -->
+            <img class="jzxz1" src="images/jzxz1.png">
+            <img class="jzxz2" src="images/jzxz2.png">
+        </div>
+    </div>
+    <div class="head_top"><span>课题三：自动驾驶电动汽车大数据云雾融合平台研究</span></div>
+    <div class="visual" style="padding-left: 2%;">
+        <div class="visual_left" style="width: 33%; height: 70%; float: left;">
+            <div style="width: 100%; position: absolute;">
+                <div class="visual_conBot" style="width: 30vw;height: 30vw;">
+                    <img class="visual_conBot_l" src="images/ksh42.png">
+                    <img class="visual_conBot_2" src="images/ksh43.png">
+                    <img class="visual_conBot_3" src="images/ksh44.png">
+                    <img class="visual_conBot_4" src="images/ksh45.png">
+                    <div class="visual_chart_text">
+                        <h1>各类型数据占比</h1>
+                    </div>
+                    <div class="visual_chart" id='type_pie' style="margin: 1%; height: 98%; width: 98%; margin-top: 5%;">
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="visual_right" style="width: 33%; height: 70%; float: left;">
+            <div style="width: 100%; position: absolute;">
+                <div class="visual_conBot" style="width: 30vw;height: 30vw;">
+                    <img class="visual_conBot_l" src="images/ksh42.png">
+                    <img class="visual_conBot_2" src="images/ksh43.png">
+                    <img class="visual_conBot_3" src="images/ksh44.png">
+                    <img class="visual_conBot_4" src="images/ksh45.png">
+                    <div class="visual_chart_text">
+                        <h1>数据明细</h1>
+                    </div>
+                    <div class="visual_chart" style="margin: 1%; height: 98%; width: 98%; margin-top: 25%;">
+                        <div style="width: 50%; display: flex; float: left; margin-bottom: 5%;">
+                            <div class="ui large blue inverted statistic" style="margin: auto;">
+                                <div class="value">
+                                    12 GB
+                                </div>
+                                <div class="label" style="font-size: 30px;">
+                                    表单数据
+                                </div>
+                            </div>
+                        </div>
+                        <div style="width: 50%; display: flex; float: left; margin-bottom: 5%;">
+                            <div class="ui large blue inverted statistic" style="margin: auto;">
+                                <div class="value">
+                                    120 GB
+                                </div>
+                                <div class="label" style="font-size: 30px;">
+                                    视频数据
+                                </div>
+                            </div>
+                        </div>
+                        <div style="width: 50%; display: flex; float: left;">
+                            <div class="ui large blue inverted statistic" style="margin: auto;">
+                                <div class="value">
+                                    21 GB
+                                </div>
+                                <div class="label" style="font-size: 30px;">
+                                    激光雷达点云数据
+                                </div>
+                            </div>
+                        </div>
+                        <div style="width: 50%; display: flex; float: left;">
+                            <div class="ui large blue inverted statistic" style="margin: auto;">
+                                <div class="value">
+                                    1 GB
+                                </div>
+                                <div class="label" style="font-size: 30px;">
+                                    其他数据
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- <table class="ui inverted table">
+                            <thead>
+                                <tr>
+                                    <th class="four wide">数据类型</th>
+                                    <th class="six wide">数据总量</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>表单数据</td>
+                                    <td>XX GB</td>
+                                </tr>
+                                <tr>
+                                    <td>视频数据</td>
+                                    <td>XX GB</td>
+                                </tr>
+                                <tr>
+                                    <td>激光雷达点云数据</td>
+                                    <td>XX GB</td>
+                                </tr>
+                                <tr>
+                                    <td>其他数据</td>
+                                    <td>XX GB</td>
+                                </tr>
+                            </tbody>
+                        </table> -->
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="visual_right" style="width: 33%; height: 70%; float: left;">
+            <div style="width: 100%; position: absolute;">
+                <div class="visual_conBot" style="width: 30vw;height: 30vw;">
+                    <img class="visual_conBot_l" src="images/ksh42.png">
+                    <img class="visual_conBot_2" src="images/ksh43.png">
+                    <img class="visual_conBot_3" src="images/ksh44.png">
+                    <img class="visual_conBot_4" src="images/ksh45.png">
+                    <div class="visual_chart_text">
+                        <h1>系统延时</h1>
+                    </div>
+                    <div class="visual_chart" style="margin: 1%; height: 98%; width: 98%; margin-top: 25%;">
+                        
+                        <div style="width: 100%; display: flex;">
+                            <div class="ui huge red inverted statistic" style="margin: auto;">
+                                <div id='car_cloud_latency' class="value">
+                                    1200 ms
+                                </div>
+                                <div class="label" style="font-size: 30px;">
+                                    系统车云通信延时
+                                </div>
+                            </div>
+                        </div>
+                        <br />
+                        <div style="display: flex;">
+                            <div class="ui huge green inverted statistic" style="margin: auto;">
+                                <div id='decision_latency' class="value">
+                                    12 ms
+                                </div>
+                                <div class="label" style="font-size: 30px;">
+                                    远程决策支持系统延时
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div style="width: 99%; height: 30%; float: left;">
+            <div class="visual_conBot" style="width: 98%;height: 98%;">
+                <img class="visual_conBot_l" src="images/ksh42.png">
+                <img class="visual_conBot_2" src="images/ksh43.png">
+                <img class="visual_conBot_3" src="images/ksh44.png">
+                <img class="visual_conBot_4" src="images/ksh45.png">
+                <div class="visual_chart_text">
+                    <h1>通信链路</h1>
+                </div>
+                <div class="visual_chart" style="margin: 1%; height: 98%; width: 98%; margin-top: 6ex;">
+                    <div style="width: 10%; height: 100%; float: left; ">
+                        <div style="width: 100%; height: 70%; float: left; display: flex">
+                            <img src="images/computer_icon.png" height="50%" style="margin: auto;">
+                        </div>
+                        <div style="width: 100%; height: 5%; float: left; display: flex; margin-top: -5px;">
+                                <div class="item2" style="height: 100%; width: auto; margin: auto; position: relative;"></div>
+                        </div>
+                    </div>
+
+                    <div style="width: 20%; height: 100%; float: left;">
+                        <div style="width: 100%; height: 70%; float: left; display: flex">
+                            <svg version="1.1" id="L4" style="margin: auto;" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px"
+                                    y="0px" viewBox="0 0 100 100" enable-background="new 0 0 0 0" xml:space="preserve">
+                                    <circle fill="#fff" stroke="none" cx="6" cy="50" r="6">
+                                        <animate attributeName="opacity" dur="2s" values="0;1;0;0;0;0" repeatCount="indefinite" begin="0.1"  />
+                                    </circle>
+                                    <circle fill="#fff" stroke="none" cx="26" cy="50" r="6">
+                                        <animate attributeName="opacity" dur="2s" values="0;1;0;0;0;0" repeatCount="indefinite" begin="0.2" />
+                                    </circle>
+                                    <circle fill="#fff" stroke="none" cx="46" cy="50" r="6">
+                                        <animate attributeName="opacity" dur="2s" values="0;1;0;0;0;0" repeatCount="indefinite" begin="0.3" />
+                                    </circle>
+                                    <circle fill="#fff" stroke="none" cx="66" cy="50" r="6">
+                                        <animate attributeName="opacity" dur="2s" values="0;1;0;0;0;0" repeatCount="indefinite" begin="0.4" />
+                                    </circle>
+                                    <circle fill="#fff" stroke="none" cx="86" cy="50" r="6">
+                                        <animate attributeName="opacity" dur="2s" values="0;1;0;0;0;0" repeatCount="indefinite" begin="0.5" />
+                                    </circle>
+                                    <circle fill="#fff" stroke="none" cx="106" cy="50" r="6">
+                                        <animate attributeName="opacity" dur="2s" values="0;1;0;0;0;0" repeatCount="indefinite" begin="0.6" />
+                                    </circle>
+
+                                    <circle fill="#fff" stroke="none" cx="6" cy="50" r="6">
+                                        <animate attributeName="opacity" dur="2s" values="0;1;0;0;0;0" repeatCount="indefinite" begin="1.6"  />
+                                    </circle>
+                                    <circle fill="#fff" stroke="none" cx="26" cy="50" r="6">
+                                        <animate attributeName="opacity" dur="2s" values="0;1;0;0;0;0" repeatCount="indefinite" begin="1.5" />
+                                    </circle>
+                                    <circle fill="#fff" stroke="none" cx="46" cy="50" r="6">
+                                        <animate attributeName="opacity" dur="2s" values="0;1;0;0;0;0" repeatCount="indefinite" begin="1.4" />
+                                    </circle>
+                                    <circle fill="#fff" stroke="none" cx="66" cy="50" r="6">
+                                        <animate attributeName="opacity" dur="2s" values="0;1;0;0;0;0" repeatCount="indefinite" begin="1.3" />
+                                    </circle>
+                                    <circle fill="#fff" stroke="none" cx="86" cy="50" r="6">
+                                        <animate attributeName="opacity" dur="2s" values="0;1;0;0;0;0" repeatCount="indefinite" begin="1.2" />
+                                    </circle>
+                                    <circle fill="#fff" stroke="none" cx="106" cy="50" r="6">
+                                        <animate attributeName="opacity" dur="2s" values="0;1;0;0;0;0" repeatCount="indefinite" begin="1.1" />
+                                    </circle>
+                                </svg>
+                        </div>
+                    </div>
+                    
+                    <div style="width: 10%; height: 100%; float: left; ">
+                        <div style="width: 100%; height: 70%; float: left; display: flex">
+                            <img src="images/server_icon.png" height="50%" style="margin: auto;">
+                        </div>
+                        <div style="width: 100%; height: 5%; float: left; display: flex; margin-top: -5px;">
+                            <div class="item2" style="height: 100%; width: auto; margin: auto; position: relative;"></div>
+                        </div>
+                    </div>
+                    
+                    <div style="width: 20%; height: 100%; float: left;">
+                        <div style="width: 100%; height: 70%; float: left; display: flex">
+                            <svg version="1.1" id="L4" style="margin: auto;" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px"
+                                    y="0px" viewBox="0 0 100 100" enable-background="new 0 0 0 0" xml:space="preserve">
+                                    <circle fill="#fff" stroke="none" cx="6" cy="50" r="6">
+                                        <animate attributeName="opacity" dur="2s" values="0;1;0;0;0;0" repeatCount="indefinite" begin="0.1"  />
+                                    </circle>
+                                    <circle fill="#fff" stroke="none" cx="26" cy="50" r="6">
+                                        <animate attributeName="opacity" dur="2s" values="0;1;0;0;0;0" repeatCount="indefinite" begin="0.2" />
+                                    </circle>
+                                    <circle fill="#fff" stroke="none" cx="46" cy="50" r="6">
+                                        <animate attributeName="opacity" dur="2s" values="0;1;0;0;0;0" repeatCount="indefinite" begin="0.3" />
+                                    </circle>
+                                    <circle fill="#fff" stroke="none" cx="66" cy="50" r="6">
+                                        <animate attributeName="opacity" dur="2s" values="0;1;0;0;0;0" repeatCount="indefinite" begin="0.4" />
+                                    </circle>
+                                    <circle fill="#fff" stroke="none" cx="86" cy="50" r="6">
+                                        <animate attributeName="opacity" dur="2s" values="0;1;0;0;0;0" repeatCount="indefinite" begin="0.5" />
+                                    </circle>
+                                    <circle fill="#fff" stroke="none" cx="106" cy="50" r="6">
+                                        <animate attributeName="opacity" dur="2s" values="0;1;0;0;0;0" repeatCount="indefinite" begin="0.6" />
+                                    </circle>
+
+                                    <circle fill="#fff" stroke="none" cx="6" cy="50" r="6">
+                                        <animate attributeName="opacity" dur="2s" values="0;1;0;0;0;0" repeatCount="indefinite" begin="1.6"  />
+                                    </circle>
+                                    <circle fill="#fff" stroke="none" cx="26" cy="50" r="6">
+                                        <animate attributeName="opacity" dur="2s" values="0;1;0;0;0;0" repeatCount="indefinite" begin="1.5" />
+                                    </circle>
+                                    <circle fill="#fff" stroke="none" cx="46" cy="50" r="6">
+                                        <animate attributeName="opacity" dur="2s" values="0;1;0;0;0;0" repeatCount="indefinite" begin="1.4" />
+                                    </circle>
+                                    <circle fill="#fff" stroke="none" cx="66" cy="50" r="6">
+                                        <animate attributeName="opacity" dur="2s" values="0;1;0;0;0;0" repeatCount="indefinite" begin="1.3" />
+                                    </circle>
+                                    <circle fill="#fff" stroke="none" cx="86" cy="50" r="6">
+                                        <animate attributeName="opacity" dur="2s" values="0;1;0;0;0;0" repeatCount="indefinite" begin="1.2" />
+                                    </circle>
+                                    <circle fill="#fff" stroke="none" cx="106" cy="50" r="6">
+                                        <animate attributeName="opacity" dur="2s" values="0;1;0;0;0;0" repeatCount="indefinite" begin="1.1" />
+                                    </circle>
+                                </svg>
+                        </div>
+                    </div>
+
+                    <div style="width: 10%; height: 100%; float: left; ">
+                        <div style="width: 100%; height: 70%; float: left; display: flex">
+                            <img src="images/db_icon.png" height="60%" style="margin: auto;">
+                        </div>
+                        <div style="width: 100%; height: 5%; float: left; display: flex; margin-top: -5px;">
+                            <div class="item2" style="height: 100%; width: auto; margin: auto; position: relative;"></div>
+                        </div>
+                    </div>
+
+                    <div style="width: 20%; height: 100%; float: left;">
+                        <div style="width: 100%; height: 70%; float: left; display: flex">
+                            <svg version="1.1" id="L4" style="margin: auto;" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px"
+                                    y="0px" viewBox="0 0 100 100" enable-background="new 0 0 0 0" xml:space="preserve">
+                                    <circle fill="red" stroke="none" cx="6" cy="50" r="6">
+                                        <animate attributeName="opacity" dur="2s" values="0;1;0;0;0;0" repeatCount="indefinite" begin="0.1"  />
+                                    </circle>
+                                    <circle fill="red" stroke="none" cx="26" cy="50" r="6">
+                                        <animate attributeName="opacity" dur="2s" values="0;1;0;0;0;0" repeatCount="indefinite" begin="0.2" />
+                                    </circle>
+                                    <circle fill="red" stroke="none" cx="46" cy="50" r="6">
+                                        <animate attributeName="opacity" dur="2s" values="0;1;0;0;0;0" repeatCount="indefinite" begin="0.3" />
+                                    </circle>
+                                    <circle fill="red" stroke="none" cx="66" cy="50" r="6">
+                                        <animate attributeName="opacity" dur="2s" values="0;1;0;0;0;0" repeatCount="indefinite" begin="0.4" />
+                                    </circle>
+                                    <circle fill="red" stroke="none" cx="86" cy="50" r="6">
+                                        <animate attributeName="opacity" dur="2s" values="0;1;0;0;0;0" repeatCount="indefinite" begin="0.5" />
+                                    </circle>
+                                    <circle fill="red" stroke="none" cx="106" cy="50" r="6">
+                                        <animate attributeName="opacity" dur="2s" values="0;1;0;0;0;0" repeatCount="indefinite" begin="0.6" />
+                                    </circle>
+
+                                    <circle fill="red" stroke="none" cx="6" cy="50" r="6">
+                                        <animate attributeName="opacity" dur="2s" values="0;1;0;0;0;0" repeatCount="indefinite" begin="1.6"  />
+                                    </circle>
+                                    <circle fill="red" stroke="none" cx="26" cy="50" r="6">
+                                        <animate attributeName="opacity" dur="2s" values="0;1;0;0;0;0" repeatCount="indefinite" begin="1.5" />
+                                    </circle>
+                                    <circle fill="red" stroke="none" cx="46" cy="50" r="6">
+                                        <animate attributeName="opacity" dur="2s" values="0;1;0;0;0;0" repeatCount="indefinite" begin="1.4" />
+                                    </circle>
+                                    <circle fill="red" stroke="none" cx="66" cy="50" r="6">
+                                        <animate attributeName="opacity" dur="2s" values="0;1;0;0;0;0" repeatCount="indefinite" begin="1.3" />
+                                    </circle>
+                                    <circle fill="red" stroke="none" cx="86" cy="50" r="6">
+                                        <animate attributeName="opacity" dur="2s" values="0;1;0;0;0;0" repeatCount="indefinite" begin="1.2" />
+                                    </circle>
+                                    <circle fill="red" stroke="none" cx="106" cy="50" r="6">
+                                        <animate attributeName="opacity" dur="2s" values="0;1;0;0;0;0" repeatCount="indefinite" begin="1.1" />
+                                    </circle>
+                                </svg>
+                        </div>
+                    </div>
+
+                    <!-- <div style="width: 20%; height: 100%; float: left;">
+                        <div style="width: 100%; height: 70%; margin-top: 5%; float: left;">
+                            <div style="width:100%; height: 50%; margin-bottom: -20px; float: left; display: flex">
+                                <svg version="1.1" id="L4" style="margin: auto;" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px"
+                                    y="0px" viewBox="0 0 100 100" enable-background="new 0 0 0 0" xml:space="preserve">
+                                    <circle fill="#fff" stroke="none" cx="6" cy="50" r="6">
+                                        <animate attributeName="opacity" dur="2s" values="0;1;0" repeatCount="indefinite" begin="0.1" />
+                                    </circle>
+                                    <circle fill="#fff" stroke="none" cx="26" cy="50" r="6">
+                                        <animate attributeName="opacity" dur="2s" values="0;1;0" repeatCount="indefinite" begin="0.2" />
+                                    </circle>
+                                    <circle fill="#fff" stroke="none" cx="46" cy="50" r="6">
+                                        <animate attributeName="opacity" dur="2s" values="0;1;0" repeatCount="indefinite" begin="0.3" />
+                                    </circle>
+                                    <circle fill="#fff" stroke="none" cx="66" cy="50" r="6">
+                                        <animate attributeName="opacity" dur="2s" values="0;1;0" repeatCount="indefinite" begin="0.4" />
+                                    </circle>
+                                    <circle fill="#fff" stroke="none" cx="86" cy="50" r="6">
+                                        <animate attributeName="opacity" dur="2s" values="0;1;0" repeatCount="indefinite" begin="0.5" />
+                                    </circle>
+                                    <circle fill="#fff" stroke="none" cx="106" cy="50" r="6">
+                                        <animate attributeName="opacity" dur="2s" values="0;1;0" repeatCount="indefinite" begin="0.6" />
+                                    </circle>
+                                </svg>
+                            </div>
+                            <div style="width:100%; height: 50%; margin-top: -20px; float: left; display: flex">
+                                <svg version="1.1" id="L4" style="margin: auto;" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px"
+                                    y="0px" viewBox="0 0 100 100" enable-background="new 0 0 0 0" xml:space="preserve">
+                                    <circle fill="#fff" stroke="none" cx="6" cy="50" r="6">
+                                        <animate attributeName="opacity" dur="2s" values="0;1;0;0;0;0" repeatCount="indefinite" begin="0.1"  />
+                                    </circle>
+                                    <circle fill="#fff" stroke="none" cx="26" cy="50" r="6">
+                                        <animate attributeName="opacity" dur="2s" values="0;1;0;0;0;0" repeatCount="indefinite" begin="0.2" />
+                                    </circle>
+                                    <circle fill="#fff" stroke="none" cx="46" cy="50" r="6">
+                                        <animate attributeName="opacity" dur="2s" values="0;1;0;0;0;0" repeatCount="indefinite" begin="0.3" />
+                                    </circle>
+                                    <circle fill="#fff" stroke="none" cx="66" cy="50" r="6">
+                                        <animate attributeName="opacity" dur="2s" values="0;1;0;0;0;0" repeatCount="indefinite" begin="0.4" />
+                                    </circle>
+                                    <circle fill="#fff" stroke="none" cx="86" cy="50" r="6">
+                                        <animate attributeName="opacity" dur="2s" values="0;1;0;0;0;0" repeatCount="indefinite" begin="0.5" />
+                                    </circle>
+                                    <circle fill="#fff" stroke="none" cx="106" cy="50" r="6">
+                                        <animate attributeName="opacity" dur="2s" values="0;1;0;0;0;0" repeatCount="indefinite" begin="0.6" />
+                                    </circle>
+
+                                    <circle fill="#fff" stroke="none" cx="6" cy="50" r="6">
+                                        <animate attributeName="opacity" dur="2s" values="0;1;0;0;0;0" repeatCount="indefinite" begin="1.6"  />
+                                    </circle>
+                                    <circle fill="#fff" stroke="none" cx="26" cy="50" r="6">
+                                        <animate attributeName="opacity" dur="2s" values="0;1;0;0;0;0" repeatCount="indefinite" begin="1.5" />
+                                    </circle>
+                                    <circle fill="#fff" stroke="none" cx="46" cy="50" r="6">
+                                        <animate attributeName="opacity" dur="2s" values="0;1;0;0;0;0" repeatCount="indefinite" begin="1.4" />
+                                    </circle>
+                                    <circle fill="#fff" stroke="none" cx="66" cy="50" r="6">
+                                        <animate attributeName="opacity" dur="2s" values="0;1;0;0;0;0" repeatCount="indefinite" begin="1.3" />
+                                    </circle>
+                                    <circle fill="#fff" stroke="none" cx="86" cy="50" r="6">
+                                        <animate attributeName="opacity" dur="2s" values="0;1;0;0;0;0" repeatCount="indefinite" begin="1.2" />
+                                    </circle>
+                                    <circle fill="#fff" stroke="none" cx="106" cy="50" r="6">
+                                        <animate attributeName="opacity" dur="2s" values="0;1;0;0;0;0" repeatCount="indefinite" begin="1.1" />
+                                    </circle>
+                                </svg>
+                            </div>
+                        </div>
+                    </div> -->
+
+                    <div style="width: 10%; height: 100%; float: left; ">
+                        <div style="width: 100%; height: 70%; float: left; display: flex">
+                            <img src="images/car_icon.png" height="60%" style="margin: auto;">
+                        </div>
+                        <div style="width: 100%; height: 5%; float: left; display: flex; margin-top: -5px;">
+                            <div class="item4" style="height: 100%; width: auto; margin: auto; position: relative;"></div>
+                        </div>
+                    </div>
+
+                    
+                </div>
+            </div>
+        </div>
+        <div class="clear"></div>
+    </div>
+
+
+    <script type="text/javascript">
+        $(function () {
+            var a = $('.visualSssf_left a')
+            for (var i = 0; i < a.length; i++) {
+                a[i].index = i;
+                a[i].onclick = function () {
+                    for (var i = 0; i < a.length; i++) {
+                        a[i].className = ''
+                    }
+                    this.className = 'active'
+                }
+            }
+
+            var sfzcllH = $('.sfzcll_box').height()
+            var sfzcllHtwo = sfzcllH - 2
+            $('.sfzcll_box').css('line-height', sfzcllH + 'px')
+            $('.sfzcll_smallBk>div').css('line-height', sfzcllHtwo + 'px')
+
+            //删除加载动画
+            $('#load').fadeOut(1000)
+            setTimeout(function () {
+                $('#load').remove()
+            }
+    		, 1100);
+        })
+    </script>
+
+    <!-- for the blur effect -->
+    <!-- by @derSchepp https://github.com/Schepp/CSS-Filters-Polyfill -->
+    <script>
+        // this is important for IEs
+        var polyfilter_scriptpath = '/js/';
+    </script>
+    <script src="js/cssParser.js"></script>
+    <script src="js/css-filters-polyfill.js"></script>
+
+</body>
+</html>
+
+
+<script>
+    var pieDom = document.getElementById('type_pie');
+    var pieChart = echarts.init(pieDom, 'dark');
+    var optionPie;
+
+    optionPie = {
+        backgroundColor:'',
+        tooltip: {
+            trigger: 'item'
+        },
+        legend: {
+            top: '5%',
+            left: 'center',
+            textStyle:{
+                fontSize:'20',
+            }
+        },
+        series: [
+            {
+                name: '访问来源',
+                type: 'pie',
+                radius: ['40%', '70%'],
+                avoidLabelOverlap: false,
+                
+                label: {
+                    show: false,
+                    position: 'center',
+                    formatter: '{b}: {c} GB\n占比: {d}%'
+                },
+                emphasis: {
+                    label: {
+                        show: true,
+                        fontSize: '40',
+                        fontWeight: 'bold'
+                    },
+                    itemStyle: {
+                        borderRadius: 10,
+                        borderColor: '#fff',
+                        borderWidth: 2
+                    },
+                },
+                labelLine: {
+                    show: false
+                },
+                data: [
+                    { value: 1048, name: '视频数据' },
+                    { value: 735, name: '点云数据' },
+                    { value: 580, name: '表单数据' },
+                    { value: 484, name: '其他数据' },
+                ]
+            }
+        ]
+    };
+
+pieChart.setOption(optionPie);
+</script>
+
+<script>
+    var base1 = 10
+
+    function set_car_cloud_latency(curLatency){
+        // console.log(curLatency)
+        if(curLatency <= 10){
+            $('#car_cloud_latency').parent().removeClass('red');
+            $('#car_cloud_latency').parent().addClass('green');
+        }else{
+            $('#car_cloud_latency').parent().removeClass('green');
+            $('#car_cloud_latency').parent().addClass('red');
+        }
+        $('#car_cloud_latency').text(curLatency+' s')
+    }
+
+    setInterval(function () {
+        set_car_cloud_latency(parseInt(base1+Math.random()*12-6))
+    }, 1000);
+
+    var base2 = 6
+
+    function set_decision_latency(curLatency){
+        // console.log(curLatency)
+        $('#decision_latency').text(curLatency+' ms')
+    }
+
+    setInterval(function () {
+        set_decision_latency(parseInt(base2+Math.random()*10-5))
+    }, 1000);
+</script>
