@@ -195,12 +195,38 @@
             </div>
         </div>
         <div class="visual_con">
-            <video class="v1" id="video1" >
+            <video class="v1" id="video1" controls>
                 <!-- <source src="mp4/0001.mp4" type="video/mp4"> -->
                 <source src="mp4/0001.mp4" type="video/mp4">
                  <!-- <source src="mov_bbb.ogg" type="video/ogg"> -->
                 </source>
              </video>
+        </div>
+
+        <div class="visual_right">
+            <div id="div1">
+                <video class="v2" id="video2" controls>
+                    <source src="mp4/0001.mp4" type="video/mp4">
+                </video>
+            </div>
+            
+            <div id="div2">
+                <video class="v2" id="video3" controls>
+                    <source src="mp4/0002.mp4" type="video/mp4">
+                </video>
+            </div>
+
+            <div id="div3">
+                <video class="v2" id="video4" controls>
+                    <source src="mp4/0003.mp4" type="video/mp4">
+                </video>
+            </div>
+
+            <div id="div1">
+                <video class="v2" id="video5" controls>
+                    <source src="mp4/0004.mp4" type="video/mp4">
+                </video>
+            </div>
         </div>
     </div>    
        
@@ -214,9 +240,14 @@
     }
 
     video.v1{
-        width: 800px;
+        width: 600px;
         /* object-fit: none; */
-        object-position: 0px 0px;     
+        object-position: 40px 50%;     
+    }
+    video.v2{
+        width: 300px;
+        /* object-fit: none; */
+        object-position: 20px 10px;     
     }
 
     .main_box{
@@ -237,11 +268,79 @@
 
 <script>
 
+var video1=document.getElementById("video2");
+
+video1.addEventListener('play',function(){
+    console.log("helloworld");
+    var myVideo=document.getElementById("video1"); 
+    var sources = myVideo.getElementsByTagName('source');
+    var sources2 = video1.getElementsByTagName('source');   
+    sources[0].src=sources2[0].src;
+    video1.pause(); 
+
+    myVideo.load();
+    
+});
+
+var video2=document.getElementById("video3");
+
+video2.addEventListener('play',function(){
+    console.log("helloworld");
+    var myVideo=document.getElementById("video1"); 
+    var sources = myVideo.getElementsByTagName('source');
+    var sources2 = video2.getElementsByTagName('source');   
+    sources[0].src=sources2[0].src;
+    video2.pause(); 
+
+    myVideo.load();
+    
+});
+
+var video3=document.getElementById("video4");
+
+video3.addEventListener('play',function(){
+    console.log("helloworld");
+    var myVideo=document.getElementById("video1"); 
+    var sources = myVideo.getElementsByTagName('source');
+    var sources2 = video3.getElementsByTagName('source');   
+    sources[0].src=sources2[0].src;
+    video3.pause(); 
+
+    myVideo.load();
+    
+});
+
+var video4=document.getElementById("video5");
+
+video4.addEventListener('play',function(){
+    console.log("helloworld");
+    var myVideo=document.getElementById("video1"); 
+    var sources = myVideo.getElementsByTagName('source');
+    var sources2 = video4.getElementsByTagName('source');   
+    sources[0].src=sources2[0].src;
+    video4.pause(); 
+
+    myVideo.load();
+    
+});
+
 
 function sousuo()
 {
     var myVideo=document.getElementById("video1"); 
-    var sources = myVideo.getElementsByTagName('source');
+    var source = myVideo.getElementsByTagName('source');
+
+    var myVideo2=document.getElementById("video2"); 
+    var source2 = myVideo2.getElementsByTagName('source');
+
+    var myVideo3=document.getElementById("video3"); 
+    var sources3= myVideo3.getElementsByTagName('source');
+
+    var myVideo4=document.getElementById("video4"); 
+    var sources4 = myVideo4.getElementsByTagName('source');
+
+    var myVideo5=document.getElementById("video5"); 
+    var sources5 = myVideo5.getElementsByTagName('source');
 
     //time
     var time = document.getElementById("time");
@@ -327,7 +426,11 @@ function sousuo()
         data: json,
         success: function(data) {
             console.log(data)
-            sources[0].src = "mp4/000"+data[0]+".mp4";
+            sources[0].src = "mp4/00"+data[0]+".mp4";
+            sources1[0].src = "mp4/00"+data[0]+".mp4";
+            sources2[0].src = "mp4/00"+data[1]+".mp4";
+            sources3[0].src = "mp4/00"+data[2]+".mp4";
+            sources4[0].src = "mp4/00"+data[3]+".mp4";
         },
         error: function(error) {
             console.log(error);
