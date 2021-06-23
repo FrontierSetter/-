@@ -180,7 +180,7 @@
             </div>
     
             <div class="dropdown">
-                <select id="dlbzx">
+                <select id="map">
                     <option value="0">地图</option>
                     <option value="1">城镇</option>
                     <option value="2">乡村</option>
@@ -243,14 +243,98 @@ function sousuo()
     var myVideo=document.getElementById("video1"); 
     var sources = myVideo.getElementsByTagName('source');
 
+    //time
     var time = document.getElementById("time");
-    var timeindex = time.selectedIndex;
-    console.log(timeindex);
-    var mytime = time.options[timeindex].value;
+    var time_index = time.selectedIndex;
+    console.log(time_index);
+    var mytime = time.options[time_index].value;
     console.log(mytime)
 
+    //weather
+    var weather = document.getElementById("weather");
+    var weather_index = weather.selectedIndex;
+    console.log(weather_index);
+    var myweather = weather.options[weather_index].value;
+    console.log(myweather)
+
+    //xsclxw
+    var xsclxw = document.getElementById("xsclxw");
+    var xsclxw_index = xsclxw.selectedIndex;
+    console.log(xsclxw_index);
+    var myxsclxw = xsclxw.options[xsclxw_index].value;
+    console.log(myxsclxw)
+
+    //wxdxxw
+    var wxdxxw = document.getElementById("wxdxxw");
+    var wxdxxw_index = wxdxxw.selectedIndex;
+    console.log(wxdxxw_index);
+    var mywxdxxw = wxdxxw.options[wxdxxw_index].value;
+    console.log(mywxdxxw)
+
+    //wxdxsx
+    var wxdxsx = document.getElementById("wxdxsx");
+    var wxdxsx_index = wxdxsx.selectedIndex;
+    console.log(wxdxsx_index);
+    var mywxdxsx = wxdxsx.options[wxdxsx_index].value;
+    console.log(mywxdxsx)
+
+    //lklx
+    var lklx = document.getElementById("lklx");
+    var lklx_index = lklx.selectedIndex;
+    console.log(lklx_index);
+    var mylklx = lklx.options[lklx_index].value;
+    console.log(mylklx)
+
+    //lmzt
+    var lmzt = document.getElementById("lmzt");
+    var lmzt_index =lmzt.selectedIndex;
+    console.log(lmzt_index);
+    var mylmzt = lmzt.options[lmzt_index].value;
+    console.log(mylmzt)
+
+    //dlbzx
+    var dlbzx = document.getElementById("dlbzx");
+    var dlbzx_index = dlbzx.selectedIndex;
+    console.log(dlbzx_index);
+    var mydlbzx = dlbzx.options[dlbzx_index].value;
+    console.log(mydlbzx)
+
+    //map
+    var map = document.getElementById("map");
+    var map_index = map.selectedIndex;
+    console.log(map_index);
+    var mymap = map.options[map_index].value;
+    console.log(mymap)
+
+    var param = {};
+
+    param["time"] = time_index;
+    param["weather"] = weather_index;
+    param["xsclxw"] = xsclxw_index;
+    param["wxdxxw"] = wxdxxw_index;
+    param["wxdxsx"] = wxdxsx_index;
+    param["lklx"] = lklx_index;
+    param["lmzt"] = lmzt_index;
+    param["dlbzx"] = dlbzx_index;
+    param["map"] = map_index;
+
+    var json = JSON.stringify(param);
+
+    $.ajax({
+        type: 'get',
+        url: server_ip+'api/wxym_num',
+        dataType: 'json',
+        data: json,
+        success: function(data) {
+            console.log(data)
+            sources[0].src = "mp4/000"+data[0]+".mp4";
+        },
+        error: function(error) {
+            console.log(error);
+        }
+    })
+
     // sources[0].src = "mp4/000"+mytime+".mp4";
-    sources[0].src = "mp4/000"+mytime+".mp4";
     
     myVideo.load();
 }
