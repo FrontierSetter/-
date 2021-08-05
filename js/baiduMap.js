@@ -146,7 +146,7 @@ function backgroundRequest(){
     }else{
         $.ajax({
             // [{"Vin":"LL3ABCJ22KA011491","Longitude":118.0033,"Latitude":24.5253},{"Vin":"LL3ACCJ22JA011664","Longitude":118.0034,"Latitude":24.5251},{"Vin":"LL3ACCJ27JA011515","Longitude":118.0044,"Latitude":24.5253}]
-            url: server_ip+'api/cars_location', //请求的url
+            url: server_ip+'api/car_location_and_status', //请求的url
             type: 'get', //请求的方式
             error: function (data) {
                 console.log('backgroundRequest请求失败');
@@ -167,6 +167,14 @@ function backgroundRequest(){
                 for(var i = 0; i < filteredData.length; ++i){
                     // var curType = getMode(filteredData[i]['collectTime'], curTime);
                     var curType = 0; // 默认为启动状态
+
+                    if(filteredData[i]['Status'] == 'on'){
+                        curType = 0;
+                    }else if(filteredData[i]['Status'] == 'off'){
+                        curType = 1;
+                    }else{
+                        curType = 5;
+                    }
 
                     var curPoint = wgs84tobdpoint(filteredData[i]['Longitude'], filteredData[i]['Latitude']);
 

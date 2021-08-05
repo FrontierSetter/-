@@ -209,20 +209,20 @@
                 <div class="visual_conTop_box visual_conTop1">
                     <div>
                         <h3>注册车辆数(辆)</h3>
-                        <p>99</p>
+                        <p id='register_car_num'>99</p>
                         <div class="conTop_smil">
-                            <a class="sz">日环比:<span>+3%</span><i class="fa fa-long-arrow-up"></i></a>
-                            <a class="xd">周环比:<span>-2%</span><i class="fa fa-long-arrow-down"></i></a>
+                            <!-- <a class="sz">日环比:<span>+3%</span><i class="fa fa-long-arrow-up"></i></a>
+                            <a class="xd">周环比:<span>-2%</span><i class="fa fa-long-arrow-down"></i></a> -->
                         </div>
                     </div>
                 </div>
                 <div class="visual_conTop_box visual_conTop2">
                     <div>
                         <h3>累计安全行驶里程(KM)</h3>
-                        <p>7421</p>
+                        <p id="total_mileage">7421</p>
                         <div class="conTop_smil">
                             <a class="null">null</a>
-                            <a class="xd">月环比:<span>-2%</span><i class="fa fa-long-arrow-down"></i></a>
+                            <!-- <a class="xd">月环比:<span>-2%</span><i class="fa fa-long-arrow-down"></i></a> -->
                         </div>
                     </div>
                 </div>
@@ -395,7 +395,7 @@
 
         //第一列第二行，状态分布折线图
         var myChart2_1 = echarts.init(document.getElementById('main2_1'));
-        myChart2_1.setOption(option2);
+        myChart2_1.setOption(option_car_status);
 
         init_subfig_2_2();
 
@@ -510,9 +510,15 @@
     setTimeout(function(){
         requestOnCarNum();
     }, 100);
+    requestSystemTotalMileage();
 
     // scoreboard
     requestAverageSpeed();
+    requestRegisterCarNum();
+
+    // chart.js
+    requestGlobalMileage();
+    requestCarStatus();
 
 </script>
 
@@ -524,7 +530,16 @@
         re_init_pop_window()
     }
 
-    setTimeout(function(){
-        add_warning();
-    }, 5000);
+    function add_warning_withpara(id, butStr, titleStr, mainStr){
+        $('#warning_button').prepend('<button id="warning_button_'+id+'" class="md-trigger" data-modal="modal-'+id+'">'+butStr+'</button>')
+        $('#main_body').prepend('<div class="md-modal md-effect-1" id="modal-'+id+'"><div class="md-content"><h3>'+titleStr+'</h3><div>'+mainStr+'<button class="md-close">关闭</button> <button onclick="removeButton(\'warning_button_'+id+'\')">处理完成</button></div></div></div>')
+        // 新插入的弹出式窗口需要重新初始化
+        re_init_pop_window()
+    }
+
+    // setTimeout(function(){
+    //     add_warning();
+    // }, 5000);
+
+    requestWarning();
 </script>

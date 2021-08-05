@@ -4,7 +4,7 @@ var totalCarNum = 0
 function requestTotalCarNum(){
     $.ajax({
         // 3
-        url: server_ip+'api/car_num', //请求的url
+        url: server_ip+'api/total_car_num', //请求的url
         type: 'get', //请求的方式
         error: function (data) {
             console.log('requestTotalCarNum请求失败');

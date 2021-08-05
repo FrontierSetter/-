@@ -16,6 +16,7 @@ function getAverageSpeedState(speed){
     }
 }
 
+// ======== 平均车速 ===========
 function requestAverageSpeed(){
     $.ajax({
         // 3
@@ -36,6 +37,46 @@ function requestAverageSpeed(){
             setTimeout(function(){
                 requestAverageSpeed();
             }, 3000);
+        }
+    });
+}
+
+
+// ======== 注册车辆数 ===========
+function requestRegisterCarNum(){
+    $.ajax({
+        // 3
+        url: server_ip+'api/car_num', //请求的url
+        type: 'get', //请求的方式
+        error: function (data) {
+            console.log('requestRegisterCarNum请求失败');
+        },
+        success: function (data) {
+
+            curRegisterCar = data.toFixed(0);
+            $("#register_car_num").html(curRegisterCar.toString())
+
+            setTimeout(function(){
+                requestAverageSpeed();
+            }, 3000);
+        }
+    });
+}
+
+// ======== 累计安全行驶里程 ===========
+function requestSystemTotalMileage(){
+    $.ajax({
+        // 3
+        url: server_ip+'api/total_car_mileage', //请求的url
+        type: 'get', //请求的方式
+        error: function (data) {
+            console.log('requestSystemTotalMileage请求失败');
+        },
+        success: function (data) {
+
+            curRegisterCar = data.toFixed(1);
+            $("#total_mileage").html('&nbsp;'+curRegisterCar.toString())
+
         }
     });
 }
