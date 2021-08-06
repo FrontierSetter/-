@@ -1225,10 +1225,54 @@
             }
         });
     }
+
+    var last_timestamp = '2017-07-27 14:26:00'
+
+    function requestSingleCarPath(){
+        $.ajax({
+            url: server_ip+'api/car_history_loc', //请求的url
+            type: 'get', //请求的方式
+            // TODO: 轨迹区间需要动态修改
+            data: "vin=LL3ACCJ22JA011664&st=2017-07-27+14:26:00&et=2021-08-05+14:26:00",
+            error: function (data) {
+                console.log('requestSingleCarPath请求失败');
+            },
+            success: function (data) {
+                var new_path = []
+                var polylineNaive;
+
+                for(var i = 0; i < data.length; ++i){
+                    if(data[i]['T'] < last_timestamp){
+                        continue;
+                    }
+                    new_path.push(wgs84tobdpoint(data[i]['Longitude']/1000000, data[i]['Latitude']/1000000));
+
+                    // TODO: 可优化，减少赋值次数
+                    last_timestamp = data[i]['T'];
+                }
+
+                if(new_path.length > 1){
+                    polylineNaive = new BMapGL.Polyline(new_path, { strokeColor: "#5470C6", strokeWeight: 5, strokeOpacity: 0.8 });
+                    map.addOverlay(polylineNaive);
+
+                    var view = map.getViewport(new_path);
+                    var mapZoom = view.zoom; 
+                    var centerPoint = view.center; 
+                    map.centerAndZoom(centerPoint,mapZoom);
+                }
+
+                // TODO: 动态查询新数据
+                // setTimeout(function(){
+                //     requestSingleCarPath();
+                // }, 3000);
+            }
+        });
+    }
 </script>
 
 <!-- 启动功能 -->
 <script>
     requestSingleCarDetail();
+    requestSingleCarPath();
 
 </script>

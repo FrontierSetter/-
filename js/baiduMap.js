@@ -127,14 +127,14 @@ iconArr.push(iconOnline,iconOffline, iconCharging, iconInitmode, iconPoweron, ic
 var shouldMapGlobal = true; //用来获取整个网页属于全局/单车粒度
 var needUpdateMap = true; //用来控制鼠标悬停弹出信息窗口时，不更新地图
 
-function wgs84tobdpoint(long, lati){
-    var curGcjCoord = coordtransform.wgs84togcj02(long, lati);
-    var curBaiduCoord = coordtransform.gcj02tobd09(curGcjCoord[0], curGcjCoord[1]);
+// function wgs84tobdpoint(long, lati){
+//     var curGcjCoord = coordtransform.wgs84togcj02(long, lati);
+//     var curBaiduCoord = coordtransform.gcj02tobd09(curGcjCoord[0], curGcjCoord[1]);
     
-    var curPoint = new BMapGL.Point(curBaiduCoord[0], curBaiduCoord[1]);
+//     var curPoint = new BMapGL.Point(curBaiduCoord[0], curBaiduCoord[1]);
 
-    return curPoint;
-}
+//     return curPoint;
+// }
 
 // *全局查询
 var backgroundCarOverlayOld = new Array();
