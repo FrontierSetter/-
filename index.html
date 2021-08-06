@@ -189,10 +189,10 @@
                 <div class="visual_conTop_box visual_conTop1">
                     <div>
                         <h3>今日告警数(起)</h3>
-                        <p>67</p>
+                        <p id="today_alarm">67</p>
                         <div class="conTop_smil">
-                            <a class="sz">日环比:<span>+3%</span><i class="fa fa-long-arrow-up"></i></a>
-                            <a class="xd">周环比:<span>-2%</span><i class="fa fa-long-arrow-down"></i></a>
+                            <a id="over_day_alarm_color" class="sz">日环比:<span id="over_day_alarm_num">+3%</span><i id="over_day_alarm_arrow" class="fa fa-long-arrow-up"></i></a>
+                            <a id="over_week_alarm_color" class="xd">周环比:<span id="over_week_alarm_num">-2%</span><i id="over_week_alarm_arrow" class="fa fa-long-arrow-down"></i></a>
                         </div>
                     </div>
                 </div>
@@ -506,6 +506,7 @@
     }, 1000);
 
     // dashboard
+    requestSystemAlarm();
     requestTotalCarNum();
     setTimeout(function(){
         requestOnCarNum();

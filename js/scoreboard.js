@@ -16,6 +16,55 @@ function getAverageSpeedState(speed){
     }
 }
 
+// ======== 今日告警数 ===========
+function changeColor(curElement, curValue){
+    if(curValue >= 0){
+        curElement.addClass("sz");
+        curElement.removeClass("xd");
+    }else{
+        curElement.addClass("xs");
+        curElement.removeClass("sz");
+    }
+}
+
+function createIncrementStr(number){
+    var result = ''
+    if(number > 0){
+        result += ('+'+number.toString());
+    }else if(number < 0){
+        result += ('-'+(-number).toString());
+    }else{
+        result += number.toString();
+    }
+
+    result += '%';
+
+    return result;
+}
+
+function requestSystemAlarm(){
+    $.ajax({
+        // 3
+        url: server_ip+'api/today_alarm_num', //请求的url
+        type: 'get', //请求的方式
+        error: function (data) {
+            console.log('requestSystemAlarm请求失败');
+        },
+        success: function (data) {
+            var cur_alarm = data['AlarmNumToday'];
+            var cur_alarm_overday = data['IncrementOverDay'];
+            var cur_alarm_overweek = data['IncrementOverWeek'];
+
+            $("#today_alarm").html(cur_alarm.toString());
+            $("#over_day_alarm_num").html(createIncrementStr(cur_alarm_overday));
+            $("#over_week_alarm_num").html(createIncrementStr(cur_alarm_overweek));
+
+            changeColor($("#over_day_alarm_color"), cur_alarm_overday);
+            changeColor($("#over_week_alarm_color"), cur_alarm_overweek);
+        }
+    });
+}
+
 // ======== 平均车速 ===========
 function requestAverageSpeed(){
     $.ajax({
