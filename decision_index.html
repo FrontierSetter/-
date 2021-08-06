@@ -881,31 +881,31 @@
 
 <!-- 速度历史线 -->
 <script>
-    function randomData() {
-        now = new Date(+now + oneDay);
-        value = value + Math.random() * 10 - 5;
-        if(value > 50){
-            value = 50;
-        }
-        if(value < 0){
-            value = 0;
-        }
-        return {
-            name: now.toString(),
-            value: [
-                [now.getFullYear(), now.getMonth() + 1, now.getDate()].join('/'),
-                Math.round(value)
-            ]
-        };
-    }
+    // function randomData() {
+    //     now = new Date(+now + oneDay);
+    //     value = value + Math.random() * 10 - 5;
+    //     if(value > 50){
+    //         value = 50;
+    //     }
+    //     if(value < 0){
+    //         value = 0;
+    //     }
+    //     return {
+    //         name: now.toString(),
+    //         value: [
+    //             [now.getFullYear(), now.getMonth() + 1, now.getDate()].join('/'),
+    //             Math.round(value)
+    //         ]
+    //     };
+    // }
 
-    var data = [];
-    var now = +new Date(1997, 9, 3);
-    var oneDay = 24 * 3600 * 1000;
-    var value = 30;
-    for (var i = 0; i < 1000; i++) {
-        data.push(randomData());
-    }
+    // var data = [];
+    // var now = +new Date(1997, 9, 3);
+    // var oneDay = 24 * 3600 * 1000;
+    // var value = 30;
+    // for (var i = 0; i < 1000; i++) {
+    //     data.push(randomData());
+    // }
 
     var chartSpeed = echarts.init(document.getElementById('history_speed'));
     var optionSpeed;
@@ -1008,7 +1008,7 @@
                     color: 'rgb(137,189,27)'
                 }
             },
-            data: data
+            data: []
         }]
     };
 
@@ -1016,18 +1016,18 @@
 
     chartSpeed.setOption(optionSpeed);
 
-    setInterval(function () {
-        for (var i = 0; i < 5; i++) {
-            data.shift();
-            data.push(randomData());
-        }
+    // setInterval(function () {
+    //     for (var i = 0; i < 5; i++) {
+    //         data.shift();
+    //         data.push(randomData());
+    //     }
 
-        chartSpeed.setOption({
-            series: [{
-                data: data
-            }]
-        });
-    }, 1000);
+    //     chartSpeed.setOption({
+    //         series: [{
+    //             data: data
+    //         }]
+    //     });
+    // }, 1000);
 </script>
 
 <!-- 电量历史线 -->
@@ -1226,7 +1226,7 @@
         });
     }
 
-    var last_timestamp = '2017-07-27 14:26:00'
+    var last_path_timestamp = '2017-07-27 14:26:00'
 
     function requestSingleCarPath(){
         $.ajax({
@@ -1242,13 +1242,13 @@
                 var polylineNaive;
 
                 for(var i = 0; i < data.length; ++i){
-                    if(data[i]['T'] < last_timestamp){
+                    if(data[i]['T'] < last_path_timestamp){
                         continue;
                     }
                     new_path.push(wgs84tobdpoint(data[i]['Longitude']/1000000, data[i]['Latitude']/1000000));
 
                     // TODO: 可优化，减少赋值次数
-                    last_timestamp = data[i]['T'];
+                    last_path_timestamp = data[i]['T'];
                 }
 
                 if(new_path.length > 1){
@@ -1268,11 +1268,52 @@
             }
         });
     }
+
+    var last_speed_timestamp = '2017-07-27 14:26:00'
+
+    function requestSingleCarSpeed(){
+        $.ajax({
+            url: server_ip+'api/car_history_speed', //请求的url
+            type: 'get', //请求的方式
+            // TODO: 轨迹区间需要动态修改
+            data: "vin=LL3ACCJ22JA011664&st=2017-07-27+14:26:00&et=2021-08-05+14:26:00",
+            error: function (data) {
+                console.log('requestSingleCarSpeed请求失败');
+            },
+            success: function (data) {
+
+                var ori_data = optionSpeed['series'][0]['data'];
+
+                for(var i = 0; i < data.length; ++i){
+                    if(data[i]['T'] < last_path_timestamp){
+                        continue;
+                    }
+                    ori_data.push({
+                        name: data[i]['T'],
+                        value: [
+                            data[i]['T'],
+                            data[i]['Speed']
+                        ]
+                    });
+
+                    // TODO: 可优化，减少赋值次数
+                    last_speed_timestamp = data[i]['T'];
+                }
+
+                chartSpeed.setOption({
+                    series: [{
+                        data: ori_data
+                    }]
+                });
+            }
+        });
+    }
 </script>
 
 <!-- 启动功能 -->
 <script>
     requestSingleCarDetail();
     requestSingleCarPath();
+    requestSingleCarSpeed();
 
 </script>
