@@ -153,27 +153,31 @@
                                                 <tbody>
                                                     <tr>
                                                         <td>Vin</td>
-                                                        <td>AIFNI239874798</td>
+                                                        <td id="table_vin">AIFNI239874798</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>状态</td>
+                                                        <td id="table_status">unknown</td>
                                                     </tr>
                                                     <tr>
                                                         <td>速度</td>
-                                                        <td>32 KM/H</td>
+                                                        <td id="table_speed">32 KM/H</td>
                                                     </tr>
                                                     <tr>
                                                         <td>电量</td>
-                                                        <td>10 %</td>
+                                                        <td id="table_power">10 %</td>
                                                     </tr>
                                                     <tr>
                                                         <td>位置</td>
-                                                        <td>116°E，40°N</td>
+                                                        <td id="table_position">116°E，40°N</td>
                                                     </tr>
                                                     <tr>
                                                         <td>车辆运行时间</td>
-                                                        <td>1H</td>
+                                                        <td id="table_time">1H</td>
                                                     </tr>
                                                     <tr>
                                                         <td>车辆温度</td>
-                                                        <td>35°C</td>
+                                                        <td id="table_temprature">35°C</td>
                                                     </tr>
                                                 </tbody>
                                             </table>
@@ -595,8 +599,8 @@
                 name: '速度',
                 type: 'gauge',
                 min: 0,
-                max: 220,
-                splitNumber: 11,
+                max: 120,
+                splitNumber: 6,
                 radius: '80%',
                 axisLine: {            // 坐标轴线
                     lineStyle: {       // 属性lineStyle控制线条样式
@@ -729,12 +733,12 @@
                 data: [{ value: 1.5, name: 'x1000 r/min' }]
             },
             {
-                name: '油表',
+                name: '电表',
                 type: 'gauge',
                 center: ['75%', '50%'],    // 默认全局居中
                 radius: '50%',
                 min: 0,
-                max: 2,
+                max: 100,
                 startAngle: 135,
                 endAngle: 45,
                 splitNumber: 2,
@@ -762,8 +766,8 @@
                     formatter: function (v) {
                         switch (v + '') {
                             case '0': return 'E';
-                            case '1': return 'Gas';
-                            case '2': return 'F';
+                            case '50': return '电量';
+                            case '100': return 'F';
                         }
                     }
                 },
@@ -787,15 +791,15 @@
                 detail: {
                     show: false
                 },
-                data: [{ value: 0.5, name: 'gas' }]
+                data: [{ value: 0.5, name: '%' }]
             },
             {
-                name: '水表',
+                name: '温度',
                 type: 'gauge',
                 center: ['75%', '50%'],    // 默认全局居中
                 radius: '50%',
                 min: 0,
-                max: 2,
+                max: 80,
                 startAngle: 315,
                 endAngle: 225,
                 splitNumber: 2,
@@ -817,9 +821,9 @@
                     shadowBlur: 10,
                     formatter: function (v) {
                         switch (v + '') {
-                            case '0': return 'H';
-                            case '1': return 'Water';
-                            case '2': return 'C';
+                            case '0': return 'L';
+                            case '40': return '°C';
+                            case '80': return 'H';
                         }
                     }
                 },
@@ -843,18 +847,18 @@
                 detail: {
                     show: false
                 },
-                data: [{ value: 0.5, name: 'gas' }]
+                data: [{ value: 0.5, name: '°C' }]
             }
         ]
     };
 
-    setInterval(function () {
-        optionGuage.series[0].data[0].value = (Math.random() * 100).toFixed(2) - 0;
-        optionGuage.series[1].data[0].value = (Math.random() * 7).toFixed(2) - 0;
-        optionGuage.series[2].data[0].value = (Math.random() * 2).toFixed(2) - 0;
-        optionGuage.series[3].data[0].value = (Math.random() * 2).toFixed(2) - 0;
-        chartGuage.setOption(optionGuage);
-    }, 2000);
+    // setInterval(function () {
+    //     optionGuage.series[0].data[0].value = (Math.random() * 100).toFixed(2) - 0;
+    //     optionGuage.series[1].data[0].value = (Math.random() * 7).toFixed(2) - 0;
+    //     optionGuage.series[2].data[0].value = (Math.random() * 2).toFixed(2) - 0;
+    //     optionGuage.series[3].data[0].value = (Math.random() * 2).toFixed(2) - 0;
+    //     chartGuage.setOption(optionGuage);
+    // }, 2000);
 </script>
 
 <!-- 百度地图 -->
@@ -1026,7 +1030,7 @@
     }, 1000);
 </script>
 
-<!-- 速度历史线 -->
+<!-- 电量历史线 -->
 <script>
     function randomData2() {
         now2 = new Date(+now2 + oneDay2);
@@ -1175,4 +1179,56 @@
             }]
         });
     }, 1000);
+</script>
+
+
+<script>
+    function requestSingleCarDetail(){
+        $.ajax({
+            // 3
+            url: server_ip+'api/car_current_info', //请求的url
+            type: 'get', //请求的方式
+            data: "vin=LL3ACCJ22JA011664",
+            error: function (data) {
+                console.log('requestSingleCarDetail请求失败');
+            },
+            success: function (data) {
+                var cur_vin = data['Vin'];
+                var cur_status = data['Status'];
+                var cur_speed = data['Speed'];
+                var cur_power = data['Soc'];
+                var cur_lati = data['Latitude'];
+                var cur_long = data['Longitude'];
+                var cur_temp = data['Temperature'];
+
+                var cur_position = (cur_long/1000000.0).toFixed(5).toString() + '°E，' + (cur_lati/1000000.0).toFixed(5).toString() + '°N'
+
+                // 设置表格
+                $("#table_vin").html(cur_vin);
+                $("#table_status").html(cur_status);
+                $("#table_speed").html(cur_speed);
+                $("#table_power").html(cur_power);
+                $("#table_position").html(cur_position);
+                $("#table_temprature").html(cur_temp.toString()+'°C');
+
+                // 设置仪表盘
+                optionGuage['series'][0]['data'][0]['value'] = cur_speed;
+                optionGuage['series'][1]['data'][0]['value'] = 0;
+                optionGuage['series'][2]['data'][0]['value'] = parseFloat(cur_power);
+                optionGuage['series'][3]['data'][0]['value'] = cur_temp;
+
+                chartGuage.setOption(optionGuage);
+
+                setTimeout(function(){
+                    requestSingleCarDetail();
+                }, 3000);
+            }
+        });
+    }
+</script>
+
+<!-- 启动功能 -->
+<script>
+    requestSingleCarDetail();
+
 </script>
