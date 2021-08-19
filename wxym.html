@@ -100,111 +100,140 @@
     
     <div class="head_top"><span>课题三：自动驾驶电动汽车大数据云雾融合平台研究</span></div>
     <div class="visual">
-        <div class="visual_left">
-            <div class="dropdown">
-                <select id="time">
-                    <option value="0">时间</option>
-                    <option value="1">白天</option>
-                    <option value="2">晚上</option>
-                </select>
-            </div>
-    
-            <div class="dropdown">
-                <select id="weather">
-                    <option value="0">天气</option>
-                    <option value="1">晴天</option>
-                    <option value="2">雨天</option>
-                </select>
-            </div>
-    
-            <div class="dropdown">
-                <select id="xsclxw">
-                    <option value="0">行驶车辆行为</option>
-                    <option value="1">右转弯</option>
-                    <option value="2">左转弯</option>
-                    <option value="3">直行前进</option>
-                    <option value="4">变道</option>
-                    <option value="5">超车</option>
-                    <option value="6">倒车</option>
-                </select>
-            </div>
-    
-            <div class="dropdown">
-                <select id="wxdxxw">
-                    <option value="0">危险对象行为</option>
-                    <option value="1">右转弯</option>
-                    <option value="2">左转弯</option>
-                    <option value="3">急停</option>
-                    <option value="4">直行前进</option>
-                    <option value="5">变道</option>
-                    <option value="6">超车</option>
-                    <option value="7">掉头</option>
-                    <option value="8">倒车</option>
-                </select>
-            </div>
-    
-            <div class="dropdown">
-                <select id="wxdxsx">
-                    <option value="0">危险对象属性</option>
-                    <option value="1">摩托车</option>
-                    <option value="2">自行车</option>
-                    <option value="3">小型车</option>
-                    <option value="4">行人</option>
-                </select>
-            </div>
-    
-            <div class="dropdown">
-                <select id="lklx">
-                    <option value="0">路口类型</option>
-                    <option value="1">掉头路口</option>
-                    <option value="2">合流路口</option>
-                    <option value="3">非路口</option>
-                    <option value="4">丁字路口</option>
-                    <option value="5">十字路口</option>
-                </select>
-            </div>
-    
-            <div class="dropdown">
-                <select id="lmzt">
-                    <option value="0">路面状态</option>
-                    <option value="1">湿滑</option>
-                    <option value="2">干燥</option>
-                </select>
-            </div>
-    
-            <div class="dropdown">
-                <select id="dlbzx">
-                    <option value="0">道路标志线</option>
-                    <option value="1">无</option>
-                    <option value="2">有</option>
-                </select>
-            </div>
-    
-            <div class="dropdown">
-                <select id="map">
-                    <option value="0">地图</option>
-                    <option value="1">城镇</option>
-                    <option value="2">乡村</option>
-                </select>
-            </div>
-            
-            <div>
-                <div >
-                    <button onclick="sousuo()" class="b1">搜索</button>
-                    <button onclick="playPause()" class="b1">播放</button>
+        <div id="left_container">
+            <div id="left_up">
+                <div class="visual_conBot" style="width: 100%; height: 100%;">
+                    <img class="visual_conBot_l" src="images/ksh42.png">
+                    <img class="visual_conBot_2" src="images/ksh43.png">
+                    <img class="visual_conBot_3" src="images/ksh44.png">
+                    <img class="visual_conBot_4" src="images/ksh45.png">
+                    <div style="margin: 1%; height: 70px; width: 98%;">
+                        <div class="drop">
+                            <div class="dropdown" >
+                                <select id="time">
+                                    <option value="0">时间</option>
+                                    <option value="1">白天</option>
+                                    <option value="2">晚上</option>
+                                </select>
+                            </div>
+                        </div>
+                
+                        <div class="drop">
+                            <div class="dropdown">
+                                <select id="weather">
+                                    <option value="0">天气</option>
+                                    <option value="1">晴天</option>
+                                    <option value="2">雨天</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <div class="drop">
+                            <div class="dropdown">
+                                <select id="xsclxw">
+                                    <option value="0">行驶车辆行为</option>
+                                    <option value="1">右转弯</option>
+                                    <option value="2">左转弯</option>
+                                    <option value="3">直行前进</option>
+                                    <option value="4">变道</option>
+                                    <option value="5">超车</option>
+                                    <option value="6">倒车</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <div class="drop">
+                            <div class="dropdown">
+                                <select id="wxdxxw">
+                                    <option value="0">危险对象行为</option>
+                                    <option value="1">右转弯</option>
+                                    <option value="2">左转弯</option>
+                                    <option value="3">急停</option>
+                                    <option value="4">直行前进</option>
+                                    <option value="5">变道</option>
+                                    <option value="6">超车</option>
+                                    <option value="7">掉头</option>
+                                    <option value="8">倒车</option>
+                                </select>
+                            </div>
+                        </div>
+                
+                        <div class="drop">
+                            <div class="dropdown">
+                                <select id="wxdxsx">
+                                    <option value="0">危险对象属性</option>
+                                    <option value="1">摩托车</option>
+                                    <option value="2">自行车</option>
+                                    <option value="3">小型车</option>
+                                    <option value="4">行人</option>
+                                </select>
+                            </div>
+                        </div>
+        
+                        <div class="drop">
+                            <div class="dropdown">
+                                <select id="lklx">
+                                    <option value="0">路口类型</option>
+                                    <option value="1">掉头路口</option>
+                                    <option value="2">合流路口</option>
+                                    <option value="3">非路口</option>
+                                    <option value="4">丁字路口</option>
+                                    <option value="5">十字路口</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <div class="drop">
+                            <div class="dropdown">
+                                <select id="lmzt">
+                                    <option value="0">路面状态</option>
+                                    <option value="1">湿滑</option>
+                                    <option value="2">干燥</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <div class="drop">
+                            <div class="dropdown">
+                                <select id="dlbzx">
+                                    <option value="0">道路标志线</option>
+                                    <option value="1">无</option>
+                                    <option value="2">有</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <div class="drop">
+                            <div class="dropdown">
+                                <select id="map">
+                                    <option value="0">地图</option>
+                                    <option value="1">城镇</option>
+                                    <option value="2">乡村</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <div class="drop" style="padding: 10px;">
+                                <button onclick="sousuo()" class="b1">搜索</button>
+                                <button onclick="playPause()" class="b1">播放</button>
+                        </div>        
+                    </div>    
+                       
                 </div>
+                
+
+            </div>
+            <div id="left_down">
+                <video class="v1" id="video1" controls>
+                    <!-- <source src="mp4/0001.mp4" type="video/mp4"> -->
+                    <source src="mp4/0001.mp4" type="video/mp4">
+                     <!-- <source src="mov_bbb.ogg" type="video/ogg"> -->
+                    </source>
+                 </video>
+
             </div>
         </div>
-        <div class="visual_con">
-            <video class="v1" id="video1" controls>
-                <!-- <source src="mp4/0001.mp4" type="video/mp4"> -->
-                <source src="mp4/0001.mp4" type="video/mp4">
-                 <!-- <source src="mov_bbb.ogg" type="video/ogg"> -->
-                </source>
-             </video>
-        </div>
-
-        <div class="visual_right">
+        <div id="right_container">
             <div id="div1">
                 <video class="v2" id="video2" controls>
                     <source src="mp4/0001.mp4" type="video/mp4">
@@ -228,7 +257,10 @@
                     <source src="mp4/0004.mp4" type="video/mp4">
                 </video>
             </div>
+
         </div>
+        
+
     </div>    
        
 
@@ -236,6 +268,28 @@
 </html>
 
 <style>
+    #left_container,#right_container{
+        float:left;
+    }
+    .drop{
+        padding: 1px;
+        float:left;
+        align-items: center;
+    }
+    #left_container{
+        width: 75%;
+    }
+    #right_container{
+        width:25%;
+    }
+    #left_up{
+        width:100%;
+        height: 30%;
+    }
+    #left_down{
+        width: 100%;
+        height: 70%;
+    }
     button.b1{
         background-color:rgba(84, 85, 177, 0.568);
     }
@@ -262,6 +316,9 @@
     }
     .main_box.right_box{
         width:75%;height:100%;float:left; position:relative;
+    }
+    .dropdown{
+        padding-top: 21px;
     }
 
 
