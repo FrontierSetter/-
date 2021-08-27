@@ -1,0 +1,60 @@
+img.center{display: block;position: absolute;width: 512px;height: 512px;left: 50%;top: 50%;margin-left: -256px;margin-top: -256px;}
+img.left{display: block;position: absolute;width: 256px;height: 256px;left: 50px;top: 50px; }
+img.left_down{display: block;position: absolute;width: 256px;height: 256px;left: 50px;top: 300px; }
+.z_index{z-index: 5;}
+
+/* 注意区分物理上的正反，和状态上的正反  */
+
+/* 旋转到（状态上的）背面或正面 */
+.turn_to_front_first{animation:front_first 1s linear 1;}
+.turn_to_back_first{animation:back_first 1s linear 1;}
+
+.turn_front_middle{transform: rotateX(90deg); display: inline;}
+.turn_back_middle{transform: rotateX(90deg); display: none;}
+
+.turn_to_front_second{animation:front_second 1s linear 1;}
+.turn_to_back_second{animation:back_second 1s linear 1;}
+
+.turn_front_finish{transform: rotateX(0deg); display: inline;}
+.turn_back_finish{transform: rotateX(180deg); display: none;}
+
+/* 当前（物理上的）面出于（状态上的）什么面 */
+/* 被finish属性完全包含，没有必要了 */
+/* .current_in_back{display: none;}
+.current_in_front{display: block;} */
+
+/* （物理上的）面，用于类搜索 */
+.flip_card_front_side{z-index :20; backface-visibility: hidden;}
+.flip_card_back_side{z-index :15; backface-visibility: hidden;}
+
+@keyframes front_first{
+    0%{transform: rotateX(180deg);}
+    100%{transform: rotateX(90deg);}
+}
+
+@keyframes front_second{
+    0%{transform: rotateX(90deg);}
+    100%{transform: rotateX(0deg);}
+}
+
+@keyframes back_first{
+    0%{transform: rotateX(0deg);}
+    100%{transform: rotateX(90deg);}
+}
+
+@keyframes back_second{
+    0%{transform: rotateX(90deg);}
+    100%{transform: rotateX(180deg);}
+}
+
+.flip_card_side{
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+}
+
+.flip_card{
+    position: relative;
+}
