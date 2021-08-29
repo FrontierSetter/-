@@ -975,7 +975,7 @@ setInterval(function () {
 //今日实时收费
 
 var shadowColor = '#374b86';
-var value = 80;
+var value = 100;
 option5 = {
 
     title: {
@@ -1159,12 +1159,12 @@ option6 = {
 }
 
 var shadowColor = '#374b86';
-var value = 46;
+var value = 0;
 option7 = {
 
     title: {
         //text: `${value}万辆`,
-        text: `今日报警`,
+        text: '今日告警\n0起',
         subtext: '',
         left: 'center',
         top: 'center', //top待调整

@@ -49,6 +49,12 @@ function requestSystemAlarm(){
         type: 'get', //请求的方式
         error: function (data) {
             console.log('requestSystemAlarm请求失败');
+            $("#today_alarm").html("0");
+            $("#over_day_alarm_num").html("0%");
+            $("#over_week_alarm_num").html("0%");
+
+            changeColor($("#over_day_alarm_color"), 0);
+            changeColor($("#over_week_alarm_color"), 0);
         },
         success: function (data) {
             var cur_alarm = data['AlarmNumToday'];

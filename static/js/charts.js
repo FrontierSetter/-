@@ -44,6 +44,7 @@ option_global_mile_time = {
         containLabel: true
     },
     legend: {
+        show: false,
         top: 0,
         textStyle: {
             color: "#fff",
@@ -62,7 +63,7 @@ option_global_mile_time = {
         type: 'category',
         data: ["车1", "车2", "车3", "车4", "车5", "车6"],
         axisTick: { //---坐标轴 刻度
-            show: true, //---是否显示
+            show: false, //---是否显示
         },
         axisLine: { //---坐标轴 轴线
             show: true, //---是否显示
@@ -73,6 +74,7 @@ option_global_mile_time = {
             },
         },
         axisLabel: { //X轴文字
+            show:false,
             textStyle: {
                 fontSize: 12,
                 color: '#fff'
@@ -109,24 +111,12 @@ option_global_mile_time = {
         name: '累计行驶里程',
         type: 'bar',
         data: [13, 27, 34, 19, 32, 35],
-        barWidth: 15,
-        barGap: 0.5, //柱子之间间距 //柱图宽度      两种情况都要设置，设置series 中对应数据柱形的itemStyle属性下的emphasis和normal的barBorderRadius属性初始化时候圆角  鼠标移上去圆角
+        // barWidth: 15,
+        // barGap: 0.5, //柱子之间间距 //柱图宽度      两种情况都要设置，设置series 中对应数据柱形的itemStyle属性下的emphasis和normal的barBorderRadius属性初始化时候圆角  鼠标移上去圆角
         itemStyle: {
             normal: {
                 barBorderRadius: 50,
                 color: "#446ACF",
-            }
-        },
-    }, {
-        name: '累计行驶时长',
-        type: 'bar',
-        data: [26, 12, 35, 52, 35, 16],
-        barWidth: 15, //柱图宽度
-        barGap: 0.5,
-        itemStyle: {
-            normal: { //设置颜色的渐变
-                barBorderRadius: 50,
-                color: "#4fb69d",
             }
         },
     }]
@@ -144,15 +134,25 @@ function requestGlobalMileage(){
             console.log('requestGlobalMileage请求失败');
         },
         success: function (data) {
+
+            data.sort(function(a,b){
+                // js的sort是根据正负判断的，所以不能返回true/false
+                return (b['Mileage'] - a['Mileage']);
+            })
+
             for(var i = 0; i < data.length; ++i){
+                if(data[i]['Mileage'] > 100000000 || data[i]['Vin'] == ''){
+                    continue;
+                }
+
                 curVin.push(data[i]['Vin'])
                 curMileage.push(data[i]['Mileage'])
                 // 因为现在没有时长信息，所以留空
-                curTime.push()
+                // curTime.push()
             }
 
             option_global_mile_time['series'][0]['data'] = curMileage
-            option_global_mile_time['series'][1]['data'] = curTime
+            // option_global_mile_time['series'][1]['data'] = curTime
             option_global_mile_time['xAxis']['data'] = curVin
 
             myChart1_1.setOption(option_global_mile_time, true);

@@ -176,7 +176,7 @@
                 <div class="visual_chart" >
                     <!-- 把宽度设大一点，藏住右边的滚动条 -->
                     <div id="warning_button" style="width: 105%; height: 100%; overflow: auto;">
-                        <button id="warning_button_1" class="md-trigger" data-modal="modal-1">告警信息1</button>
+                        <button id="warning_button_1" class="md-trigger" data-modal="modal-1">无告警信息</button>
                         <!-- <button class="md-trigger" data-modal="modal-1">告警信息2</button>
                         <button class="md-trigger" data-modal="modal-1">短</button>
                         <button class="md-trigger" data-modal="modal-1">很长很长的告警信息</button> -->
@@ -286,7 +286,7 @@
             <div class="visual_box flip_card">
                 <div class="flip_card_side flip_card_front_side">
                     <div class="visual_title">
-                        <span>近30天告警信息分布</span>
+                        <span>测试车辆分布旭日图</span>
                         <img src="images/ksh33.png">
                     </div>
                     <div class="visual_chart" id="main7_1">
@@ -307,7 +307,7 @@
 
             <div class="visual_box visualSfzsfl">
                 <div class="visual_title">
-                    <span>低电量行驶区域指数</span>
+                    <span>频繁刹车区域指数</span>
                     <img src="images/ksh33.png">
                 </div>
                 <div class="visual_chart" id="main8">
@@ -388,20 +388,20 @@
 
         //第一列第一行，行驶里程/时长
         var myChart1_1 = echarts.init(document.getElementById('main1_1'));
-        myChart1_1.setOption(option_global_mile_time);
+        // myChart1_1.setOption(option_global_mile_time);
         // var myChart1_2 = init_echarts(document.getElementById('main1_2'), option1);
         var myChart1_2 = echarts.init(document.getElementById('main1_2'));
-        myChart1_2.setOption(option_single_mile_time);
+        // myChart1_2.setOption(option_single_mile_time);
 
         //第一列第二行，状态分布折线图
         var myChart2_1 = echarts.init(document.getElementById('main2_1'));
-        myChart2_1.setOption(option_car_status);
+        // myChart2_1.setOption(option_car_status);
 
         init_subfig_2_2();
 
         //第三列第一行，本月发生事件
         var myChart7_1 = echarts.init(document.getElementById('main7_1'));
-        myChart7_1.setOption(option_car_position);
+        // myChart7_1.setOption(option_car_position);
         var myChart7_2 = echarts.init(document.getElementById('main7_2'));
         myChart7_2.setOption(option31);
         // var mySwiper1 = new Swiper('.visual_swiper1', {
@@ -478,10 +478,6 @@
                 console.log('getVinList请求失败');
             },
             success: function (data) {
-
-                console.log('getVinList请求成功');
-                console.log(data);
-
                 var obj = document.getElementById("vin_menu");
 
                 for(var i = 0; i < data.length; ++i){
