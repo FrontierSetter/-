@@ -44,6 +44,13 @@ function wgs84tobdpoint(long, lati){
     return curPoint;
 }
 
+function wgs84tobdcoord(long, lati){
+    var curGcjCoord = coordtransform.wgs84togcj02(long, lati);
+    var curBaiduCoord = coordtransform.gcj02tobd09(curGcjCoord[0], curGcjCoord[1]);
+    
+    return curBaiduCoord;
+}
+
 function switchToLive(){
     console.log("switchToLive")
     parent.slideLeft();

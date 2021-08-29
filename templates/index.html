@@ -311,7 +311,7 @@
                     <img src="images/ksh33.png">
                 </div>
                 <div class="visual_chart" id="main8">
-
+                    <iframe id="heatmap" src="heatmap_brake.html" style="width: 100%; height: 98%; "  frameborder="no" border="0" marginwidth="0" marginheight="0" scrolling="no" allowtransparency="yes"></iframe>
                 </div>
             </div>
             <div class="visual_box">
@@ -435,8 +435,8 @@
         // myChart5.setOption(option8);
 
         //低电量行驶区域指数
-        var myChart8 = echarts.init(document.getElementById('main8'));
-        myChart8.setOption(option9);
+        // var myChart8 = echarts.init(document.getElementById('main8'));
+        // myChart8.setOption(option9);
 
         // *display属性为none的时候echarts图表无法绘制，所以先画完图再统一设置display
         init_card_side_display();
