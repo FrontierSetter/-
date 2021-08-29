@@ -168,12 +168,16 @@ function backgroundRequest(){
                     // var curType = getMode(filteredData[i]['collectTime'], curTime);
                     var curType = 0; // 默认为启动状态
 
-                    if(filteredData[i]['Status'] == 'on'){
+                    if(filteredData[i]['Status'] == 'ready'){
                         curType = 0;
-                    }else if(filteredData[i]['Status'] == 'off'){
+                    }else if(filteredData[i]['Status'] == 'keyoff'){
                         curType = 1;
                     }else{
                         curType = 5;
+                    }
+
+                    if(!rawPointValid(filteredData[i]['Longitude'], filteredData[i]['Latitude'])){
+                        continue;
                     }
 
                     var curPoint = wgs84tobdpoint(filteredData[i]['Longitude'], filteredData[i]['Latitude']);
@@ -424,7 +428,7 @@ function rawPointValid(lon, lat){
     if (lon == null || lat == null) {
         return false;
     }
-    if (lon > 124 || lon < 118 || lat > 35 || lat < 27) {
+    if (lon > 136 || lon < 70 || lat > 60 || lat < 10) {
         return false;
     }
     return true;

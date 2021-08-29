@@ -100,6 +100,11 @@ option_global_mile_time = {
             show: false, //---是否显示
         },
     },
+    dataZoom: [
+        {
+            type: 'inside',
+        },
+    ],
     series: [{
         name: '累计行驶里程',
         type: 'bar',
@@ -270,7 +275,7 @@ option_car_status = {
         itemWidth: 14,
         itemHeight: 5,
         itemGap: 13,
-        data: ['on', 'off'],
+        data: ['off', 'on'],
         right: '10px',
         top: '0px',
         textStyle: {
@@ -326,37 +331,15 @@ option_car_status = {
             }
         }
     }],
+    dataZoom: [
+        {
+            type: 'inside',
+        },
+    ],
     series: [{
-        name: 'on',
-        type: 'line',
-        smooth: true,
-        lineStyle: {
-            normal: {
-                width: 2
-            }
-        },
-        areaStyle: {
-            normal: {
-                color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
-                    offset: 0,
-                    color: 'rgba(137, 189, 27, 0.3)'
-                }, {
-                    offset: 0.8,
-                    color: 'rgba(137, 189, 27, 0)'
-                }], false),
-                shadowColor: 'rgba(0, 0, 0, 0.1)',
-                shadowBlur: 10
-            }
-        },
-        itemStyle: {
-            normal: {
-                color: 'rgb(137,189,27)'
-            }
-        },
-        data: [20, 35, 34, 45, 52, 41, 49, 64, 24, 52.4, 24, 33]
-    }, {
         name: 'off',
         type: 'line',
+        stack:'总量',
         smooth: true,
         lineStyle: {
             normal: {
@@ -376,11 +359,41 @@ option_car_status = {
                 shadowBlur: 10
             }
         },
-        itemStyle: {
+        // itemStyle: {
+        //     normal: {
+        //         color: 'rgb(137,189,27)'
+        //     }
+        // },
+        data: [20, 35, 34, 45, 52, 41, 49, 64, 24, 52.4, 24, 33]
+    }, {
+        name: 'on',
+        type: 'line',
+        stack:'总量',
+        smooth: true,
+        lineStyle: {
             normal: {
-                color: 'rgb(0,136,212)'
+                width: 2
             }
         },
+        areaStyle: {
+            normal: {
+                color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+                    offset: 0,
+                    color: 'rgba(137, 189, 27, 0.3)'
+                }, {
+                    offset: 0.8,
+                    color: 'rgba(137, 189, 27, 0)'
+                }], false),
+                shadowColor: 'rgba(0, 0, 0, 0.1)',
+                shadowBlur: 10
+            }
+        },
+        
+        // itemStyle: {
+        //     normal: {
+        //         color: 'rgb(0,136,212)'
+        //     }
+        // },
         data: [97.3, 99.2, 99.3, 100.0, 99.6, 90.6, 80.0, 91.5, 69.8, 67.5, 90.4, 84.9]
     }, 
     // {
@@ -423,7 +436,7 @@ function requestCarStatus(){
         // 3
         url: server_ip+'api/global_car_status_history', //请求的url
         type: 'get', //请求的方式
-        data: "st="+getTimeHour(31)+"&et="+getTimeHour(0),
+        data: "st="+getTimeHour(7)+"&et="+getTimeHour(0),
         error: function (data) {
             console.log('requestCarStatus请求失败');
         },
@@ -440,8 +453,8 @@ function requestCarStatus(){
             // console.log(curTime)
 
 
-            option_car_status['series'][0]['data'] = curOn
-            option_car_status['series'][1]['data'] = curOff
+            option_car_status['series'][1]['data'] = curOn
+            option_car_status['series'][0]['data'] = curOff
             option_car_status['xAxis'][0]['data'] = curTime
 
             myChart2_1.setOption(option_car_status);
@@ -496,3 +509,166 @@ function requestWarning(){
         }
     });
 }
+
+// =========== 车辆位置分布 =======================
+
+option_car_position = {
+    series: {
+        type: 'sunburst',
+        emphasis: {
+            focus: 'ancestor'
+        },
+        radius: [0, '90%'],
+        label: {
+            rotate: 'radial'
+        },
+        data: [{
+            name: 'Grandpa',
+            children: [{
+                name: 'Uncle Leo',
+                children: [{
+                    name: 'Cousin Jack',
+                    value: 2
+                }, {
+                    name: 'Cousin Mary',
+                    children: [{
+                        name: 'Jackson',
+                        value: 3
+                    }]
+                }, {
+                    name: 'Cousin Ben',
+                    value: 4
+                }]
+            }, {
+                name: 'Father',
+                value: 10,
+                children: [{
+                    name: 'Me',
+                    value: 5
+                }, {
+                    name: 'Brother Peter',
+                    value: 1
+                }]
+            }]
+        }, {
+            name: 'Nancy',
+            children: [{
+                name: 'Uncle Nike',
+                children: [{
+                    name: 'Cousin Betty',
+                    value: 1
+                }, {
+                    name: 'Cousin Jenny',
+                    value: 2
+                }]
+            }]
+        }]
+    }
+};
+
+var car_point_arr = new Array();
+var car_position = {};
+var index = 0;
+var myGeo = new BMapGL.Geocoder();
+var echartCircleData = new Array();
+
+function carPositionRequest(){
+    $.ajax({
+        url: server_ip+'api/car_location_and_status', //请求的url
+        type: 'get', //请求的方式
+        error: function (data) {
+            console.log('carPositionRequest请求失败');
+        },
+        success: function (data) {
+            filteredData = data;
+
+            for(var i = 0; i < filteredData.length; ++i){
+                if(!rawPointValid(filteredData[i]['Longitude'], filteredData[i]['Latitude'])){
+                    continue;
+                }
+
+                var curPoint = wgs84tobdpoint(filteredData[i]['Longitude'], filteredData[i]['Latitude']);
+
+                car_point_arr.push(curPoint);
+            }
+
+            index = 0;
+            bdGEO();
+        }
+    });
+}
+
+function bdGEO(){	
+    if(index >= car_point_arr.length){
+        // console.log(car_position);
+        createCircleData();
+        return;
+    }
+    var pt = car_point_arr[index];
+    geocodeSearch(pt);
+    index++;
+
+}
+
+function geocodeSearch(pt){
+    myGeo.getLocation(pt, function(rs){
+        var addComp = rs.addressComponents;
+        curProvince = addComp.province;
+        curCity = addComp.city;
+        curDistrict = addComp.district;
+
+        if(!(curProvince in car_position)){
+            car_position[curProvince] = {}
+        }
+        if(!(curCity in car_position[curProvince])){
+            car_position[curProvince][curCity] = {}
+        }
+        if(!(curDistrict in car_position[curProvince][curCity])){
+            car_position[curProvince][curCity][curDistrict] = 0;
+        }
+
+        car_position[curProvince][curCity][curDistrict] += 1;
+
+        // console.log("结构化数据(" + addComp.province + ", " + addComp.city + ", " + addComp.district + ", " + addComp.street + ", " + addComp.streetNumber + ")")
+        
+        bdGEO();
+    });
+}
+
+function createCircleData(){
+    var i = -1, j = -1;
+    for(curProvince in car_position){
+        // console.log(curProvince)
+        echartCircleData.push({
+            'name': curProvince,
+            'children': []
+        })
+        ++i;
+        j=-1;
+        // console.log(echartCircleData)
+        for(curCity in car_position[curProvince]){
+            // console.log(curCity)
+            echartCircleData[i]['children'].push({
+                'name': curCity,
+                'children': []
+            })
+            ++j
+            // console.log(echartCircleData)
+            for(curDistrict in car_position[curProvince][curCity]){
+                // console.log(curDistrict)
+                echartCircleData[i]['children'][j]['children'].push({
+                    'name': curDistrict,
+                    'value': car_position[curProvince][curCity][curDistrict]
+                })
+            }
+        }
+    }
+
+    // console.log(echartCircleData)
+
+    option_car_position['series']['data'] = echartCircleData;
+
+    myChart7_1.setOption(option_car_position, true);
+}
+
+carPositionRequest();
