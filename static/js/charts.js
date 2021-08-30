@@ -474,59 +474,32 @@ function requestWarning(){
     });
 }
 
-// =========== 车辆位置分布 =======================
+// =========== 车辆位置分布旭日图 =======================
 
 option_car_position = {
     series: {
         type: 'sunburst',
+        label: {
+            rotate: 'radial',
+            minAngle: 20
+        },
+        // 圆角不好看
+        // itemStyle: {
+        //     borderRadius: 7,
+        //     borderWidth: 3,
+        //     borderColor: 'rgba(6,20,54, 1)'
+        // },
         emphasis: {
+            label: {
+                formatter: '{b}\n{c}',
+            },
+            // labelLine:{
+            //     show: true,
+            // },
             focus: 'ancestor'
         },
-        radius: [0, '90%'],
-        label: {
-            rotate: 'radial'
-        },
-        data: [{
-            name: 'Grandpa',
-            children: [{
-                name: 'Uncle Leo',
-                children: [{
-                    name: 'Cousin Jack',
-                    value: 2
-                }, {
-                    name: 'Cousin Mary',
-                    children: [{
-                        name: 'Jackson',
-                        value: 3
-                    }]
-                }, {
-                    name: 'Cousin Ben',
-                    value: 4
-                }]
-            }, {
-                name: 'Father',
-                value: 10,
-                children: [{
-                    name: 'Me',
-                    value: 5
-                }, {
-                    name: 'Brother Peter',
-                    value: 1
-                }]
-            }]
-        }, {
-            name: 'Nancy',
-            children: [{
-                name: 'Uncle Nike',
-                children: [{
-                    name: 'Cousin Betty',
-                    value: 1
-                }, {
-                    name: 'Cousin Jenny',
-                    value: 2
-                }]
-            }]
-        }]
+        radius: [0, '100%'],
+        data: []
     }
 };
 
