@@ -980,6 +980,9 @@
                 }
             }
         }],
+        dataZoom: [{
+            type: 'inside',
+        }],
         series: [{
             name: '速度',
             type: 'line',
@@ -1201,7 +1204,7 @@
                 var cur_long = data['Longitude'];
                 var cur_temp = data['Temperature'];
 
-                var cur_position = (cur_long/1000000.0).toFixed(5).toString() + '°E，' + (cur_lati/1000000.0).toFixed(5).toString() + '°N'
+                var cur_position = (cur_long).toString() + '°E，' + (cur_lati).toString() + '°N'
 
                 // 设置表格
                 $("#table_vin").html(cur_vin);
@@ -1233,7 +1236,7 @@
             url: server_ip+'api/car_history_loc', //请求的url
             type: 'get', //请求的方式
             // TODO: 轨迹区间需要动态修改
-            data: "vin=LL3ACCJ22JA011664&st=2017-07-27+14:26:00&et=2021-08-05+14:26:00",
+            data: "vin=LL3ACCJ22JA011664&st="+getTimeSecond(7)+"&et="+getTimeSecond(0),
             error: function (data) {
                 console.log('requestSingleCarPath请求失败');
             },
@@ -1242,10 +1245,10 @@
                 var polylineNaive;
 
                 for(var i = 0; i < data.length; ++i){
-                    if(data[i]['T'] < last_path_timestamp){
+                    if(data[i]['T'] < last_path_timestamp || !rawPointValid(data[i]['Longitude'], data[i]['Latitude'])){
                         continue;
                     }
-                    new_path.push(wgs84tobdpoint(data[i]['Longitude']/1000000, data[i]['Latitude']/1000000));
+                    new_path.push(wgs84tobdpoint(data[i]['Longitude'], data[i]['Latitude']));
 
                     // TODO: 可优化，减少赋值次数
                     last_path_timestamp = data[i]['T'];
@@ -1275,8 +1278,7 @@
         $.ajax({
             url: server_ip+'api/car_history_speed', //请求的url
             type: 'get', //请求的方式
-            // TODO: 轨迹区间需要动态修改
-            data: "vin=LL3ACCJ22JA011664&st=2017-07-27+14:26:00&et=2021-08-05+14:26:00",
+            data: "vin=LL3ACCJ22JA011664&st="+getTimeSecond(7)+"&et="+getTimeSecond(0),
             error: function (data) {
                 console.log('requestSingleCarSpeed请求失败');
             },
@@ -1285,7 +1287,7 @@
                 var ori_data = optionSpeed['series'][0]['data'];
 
                 for(var i = 0; i < data.length; ++i){
-                    if(data[i]['T'] < last_path_timestamp){
+                    if(data[i]['T'] < last_speed_timestamp){
                         continue;
                     }
                     ori_data.push({

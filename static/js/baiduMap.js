@@ -422,14 +422,3 @@ function filterTrace(data){
     }
     console.log('过滤完的历史轨迹长度: '+singleCarFilteredPoints.length);
 }
-
-// TODO:厦门坐标筛选
-function rawPointValid(lon, lat){
-    if (lon == null || lat == null) {
-        return false;
-    }
-    if (lon > 136 || lon < 70 || lat > 60 || lat < 10) {
-        return false;
-    }
-    return true;
-}
