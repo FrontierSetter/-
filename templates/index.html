@@ -64,9 +64,6 @@
     <link rel="stylesheet" type="text/css" href="css/flip.css">
     <script src="js/flip.js"></script>
 
-    <!-- echarts 绘图脚本 -->
-    <script src="js/charts.js"></script>
-
     <!-- 数据请求脚本 -->
     <script src="js/dashboard.js"></script>
     <script src="js/scoreboard.js"></script>
@@ -80,6 +77,9 @@
     <!-- 其他css -->
     <link rel="stylesheet" type="text/css" href="css/mine.css">
     <script src="js/mine.js"></script>
+
+    <!-- echarts 绘图脚本 （依赖mine.js） -->
+    <script src="js/charts.js"></script>
 
 </head>
 <body class="ksh" id='main_body'>
@@ -170,17 +170,11 @@
 
             <div class="visual_box">
                 <div class="visual_title">
-                    <span>告警信息</span>
+                    <span>车辆充电/行驶时长</span>
                     <img src="images/ksh33.png">
                 </div>
-                <div class="visual_chart" >
-                    <!-- 把宽度设大一点，藏住右边的滚动条 -->
-                    <div id="warning_button" style="width: 105%; height: 100%; overflow: auto;">
-                        <button id="warning_button_1" class="md-trigger" data-modal="modal-1">无告警信息</button>
-                        <!-- <button class="md-trigger" data-modal="modal-1">告警信息2</button>
-                        <button class="md-trigger" data-modal="modal-1">短</button>
-                        <button class="md-trigger" data-modal="modal-1">很长很长的告警信息</button> -->
-                    </div>
+                <div class="visual_chart" id="main3">
+
                 </div>
             </div>
         </div>
@@ -398,6 +392,10 @@
         // myChart2_1.setOption(option_car_status);
 
         init_subfig_2_2();
+
+        // 第一列第三行，行驶时间、充电时间、行驶里程散点图
+        var myChart3 = echarts.init(document.getElementById('main3'));
+
 
         //第三列第一行，本月发生事件
         var myChart7_1 = echarts.init(document.getElementById('main7_1'));

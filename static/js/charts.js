@@ -609,3 +609,141 @@ function createCircleData(){
 }
 
 carPositionRequest();
+
+// =========== 车辆充电行驶散点图 =======================
+
+var option_car_time = {
+    grid: {
+        left: '0',
+        top: '30',
+        right: '5%',
+        bottom: '25',
+        containLabel: true
+    },
+    tooltip: { //鼠标指上时的标线
+        trigger: 'item',
+        formatter: function (param) {
+            return param.data[3]+"：<br />充电"+(param.data[0]/3600).toFixed(2)+"小时，行驶"+(param.data[1]/3600).toFixed(2)+"小时，<br />行驶"+param.data[2]+"千米";
+        },
+    },
+    dataZoom: [{
+        type: 'inside'
+    },  {
+        type: 'inside',
+        orient: 'vertical'
+    }],
+    xAxis: {
+        name:'\n充电时长（秒）',
+        nameLocation:'middle',
+        nameTextStyle:{
+            fontSize: 12,
+            color: '#fff'
+        },
+        splitLine: {
+            lineStyle: {
+                color: 'rgba(255,255,255,.1)',
+                width: 1,
+                type: 'dashed'
+            }
+        },
+        axisLine: { //---坐标轴 轴线
+            show: true, //---是否显示
+            lineStyle: {
+                color: 'rgba(255,255,255,.1)',
+                width: 1,
+                type: 'dotted',
+            },
+        },
+        axisLabel: { //X轴文字
+            show:true,
+            textStyle: {
+                fontSize: 12,
+                color: '#fff'
+            },
+        },
+    },
+    yAxis: {
+        name:'行驶时长（秒）',
+        nameTextStyle:{
+            fontSize: 12,
+            color: '#fff'
+        },
+        splitLine: {
+            lineStyle: {
+                color: 'rgba(255,255,255,.1)',
+                width: 1,
+                type: 'dashed'
+            }
+        },
+        axisLine: { //---坐标轴 轴线
+            show: true, //---是否显示
+            lineStyle: {
+                color: 'rgba(255,255,255,.1)',
+                width: 1,
+                type: 'dotted',
+            },
+        },
+        axisLabel: { //X轴文字
+            show:true,
+            textStyle: {
+                fontSize: 12,
+                color: '#fff'
+            },
+        },
+        scale: true,
+    },
+    series: [{
+        name: 'last 30 days',
+        data: [],
+        type: 'scatter',
+        symbolSize: function (data) {
+            return Math.sqrt(data[2])/10;
+        },
+        emphasis: {
+            focus: 'self',
+        },
+        itemStyle: {
+            shadowBlur: 10,
+            // 深色底的情况下，原本的阴影不管用了
+            shadowColor: 'rgba(25, 100, 150, 0.5)',
+            shadowOffsetY: 5,
+            color: new echarts.graphic.RadialGradient(0.4, 0.3, 1, [{
+                offset: 0,
+                color: 'rgba(0, 136, 212, 0.3)'
+            }, {
+                offset: 1,
+                color: 'rgba(0, 136, 212, 1)'
+            }])
+        }
+    }]
+};
+
+function carTimeScatterRequest(){
+    $.ajax({
+        url: server_ip+'api/charge_time', //请求的url
+        type: 'get', //请求的方式
+        data: "st="+getTimeSecond(7)+"&et="+getTimeSecond(0),
+        error: function (data) {
+            console.log('carTimeScatterRequest请求失败');
+        },
+        success: function (data) {
+            result_data = new Array();
+
+            for(var i = 0; i < data.length; ++i){
+                if(data[i]['Mileage'] <= 0){
+                    continue;
+                }
+
+                result_data.push([data[i]['ChargeTime'], data[i]['DriveTime'], data[i]['Mileage'], data[i]['Vin']])
+            }
+
+            option_car_time['series'][0]['data'] = result_data;
+            // console.log(result_data);
+
+            myChart3.setOption(option_car_time, true);
+
+        }
+    });
+}
+
+carTimeScatterRequest()
