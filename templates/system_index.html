@@ -217,7 +217,7 @@
                     </div>
                     <div class="visual_chart" style="margin: 1%; height: 98%; width: 98%; margin-top: 25%;">
                         <div style="width: 50%; display: flex; float: left; margin-bottom: 5%;">
-                            <div class="ui large blue inverted statistic" style="margin: auto;">
+                            <div class="ui blue inverted statistic" style="margin: auto;">
                                 <div id="db_size" class="value">
                                     12 GB
                                 </div>
@@ -227,7 +227,7 @@
                             </div>
                         </div>
                         <div style="width: 50%; display: flex; float: left; margin-bottom: 5%;">
-                            <div class="ui large blue inverted statistic" style="margin: auto;">
+                            <div class="ui blue inverted statistic" style="margin: auto;">
                                 <div id='video_size' class="value">
                                     120 GB
                                 </div>
@@ -237,7 +237,7 @@
                             </div>
                         </div>
                         <div style="width: 50%; display: flex; float: left;">
-                            <div class="ui large blue inverted statistic" style="margin: auto;">
+                            <div class="ui blue inverted statistic" style="margin: auto;">
                                 <div id='radar_size' class="value">
                                     21 GB
                                 </div>
@@ -247,7 +247,7 @@
                             </div>
                         </div>
                         <div style="width: 50%; display: flex; float: left;">
-                            <div class="ui large blue inverted statistic" style="margin: auto;">
+                            <div class="ui blue inverted statistic" style="margin: auto;">
                                 <div id='other_size' class="value">
                                     1 GB
                                 </div>
@@ -562,6 +562,7 @@
     optionPie = {
         backgroundColor:'',
         tooltip: {
+            show: false,
             trigger: 'item'
         },
         legend: {
@@ -573,7 +574,7 @@
         },
         series: [
             {
-                name: '访问来源',
+                name: '数据类别',
                 type: 'pie',
                 radius: ['40%', '70%'],
                 avoidLabelOverlap: false,
@@ -654,6 +655,24 @@ pieChart.setOption(optionPie);
         }
     }
 
+    function get_proper_number(ori_size){
+        var unit_arr = ['KB', 'MB', 'GB', 'TB', 'PB'];
+        var cur_unit_idx = 2;
+        var cur_size = ori_size;
+
+        while(cur_size < 1 && cur_unit_idx > 0){
+            cur_unit_idx -= 1;
+            cur_size *= 1024.0;
+        }
+
+        while(cur_size > 100 && cur_unit_idx < unit_arr.length-1){
+            cur_unit_idx += 1;
+            cur_size /= 1024.0;
+        }
+
+        return cur_size.toFixed(2)+' '+unit_arr[cur_unit_idx];
+    }
+
 
     function requestSystemStatus(){
         $.ajax({
@@ -678,10 +697,10 @@ pieChart.setOption(optionPie);
                 set_decision_latency(data['RemoteDecisionLatency']);
 
                 // 设置数据信息
-                $('#db_size').text(data['DataBaseSize']+' GB');
-                $('#video_size').text(data['VideoDataSize']+' GB');
-                $('#radar_size').text(data['RadarDataSize']+' GB');
-                $('#other_size').text(data['OtherDataSize']+' GB');
+                $('#db_size').text(get_proper_number(data['DataBaseSize']));
+                $('#video_size').text(get_proper_number(data['VideoDataSize']));
+                $('#radar_size').text(get_proper_number(data['RadarDataSize']));
+                $('#other_size').text(get_proper_number(data['OtherDataSize']));
 
                 // 设置数据占比饼图
                 optionPie['series'][0]['data'][0]['value'] = data['DataBaseSize'];
