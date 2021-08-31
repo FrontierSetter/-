@@ -127,18 +127,11 @@ iconArr.push(iconOnline,iconOffline, iconCharging, iconInitmode, iconPoweron, ic
 var shouldMapGlobal = true; //用来获取整个网页属于全局/单车粒度
 var needUpdateMap = true; //用来控制鼠标悬停弹出信息窗口时，不更新地图
 
-// function wgs84tobdpoint(long, lati){
-//     var curGcjCoord = coordtransform.wgs84togcj02(long, lati);
-//     var curBaiduCoord = coordtransform.gcj02tobd09(curGcjCoord[0], curGcjCoord[1]);
-    
-//     var curPoint = new BMapGL.Point(curBaiduCoord[0], curBaiduCoord[1]);
-
-//     return curPoint;
-// }
-
 // *全局查询
 var backgroundCarOverlayOld = new Array();
 var backgroundCarOverlayNew = new Array();
+
+var vin_to_bdpoint = {}; // 维护vin到坐标的映射，用于数据联动
 
 function backgroundRequest(){
     if(!shouldMapGlobal){
@@ -181,6 +174,7 @@ function backgroundRequest(){
                     }
 
                     var curPoint = wgs84tobdpoint(filteredData[i]['Longitude'], filteredData[i]['Latitude']);
+                    vin_to_bdpoint[filteredData[i]['Vin']] = curPoint;
 
                     var marker = new BMapGL.Marker(curPoint);
                     marker.setIcon(iconArr[curType]);
@@ -189,6 +183,8 @@ function backgroundRequest(){
 
                     backgroundCarOverlayNew.push(marker);
                 }
+
+                // console.log(vin_to_bdpoint);
 
                 if(shouldMapGlobal && needUpdateMap){
                     drawOverlay();

@@ -518,8 +518,9 @@ var position_index = 0;
 var myGeo = new BMapGL.Geocoder();
 var echartCircleData = new Array();
 
-var car_vin_to_district = {}    // 用来记录vin到区的映射，用于之后的数据联动
-var position_to_car_vin = {}    // 用来记录行政区域到vin的映射，省、市、区放在一个词典里，便于使用
+var car_vin_to_district = {};    // 用来记录vin到区的映射，用于之后的数据联动
+var position_to_car_vin = {'All':[]};    // 用来记录行政区域到vin的映射，省、市、区放在一个词典里，便于使用
+var position_parent = {};
 
 function carPositionRequest(){
     $.ajax({
@@ -537,6 +538,8 @@ function carPositionRequest(){
                 }
 
                 var curPoint = wgs84tobdpoint(filteredData[i]['Longitude'], filteredData[i]['Latitude']);
+
+                // var curPoint = new BMapGL.Point(filteredData[i]['Longitude'], filteredData[i]['Latitude']);
 
                 car_point_arr.push(curPoint);
                 car_position_vin_arr.push(filteredData[i]['Vin']);
@@ -556,16 +559,18 @@ function bdGEO(){
     }
     var pt = car_point_arr[position_index];
     geocodeSearch(pt);
-    position_index++;
-
 }
 
 function geocodeSearch(pt){
     myGeo.getLocation(pt, function(rs){
         var addComp = rs.addressComponents;
-        curProvince = addComp.province;
+        curProvince = addComp.province;    // 防止直辖市混淆
         curCity = addComp.city;
         curDistrict = addComp.district;
+
+        if(curProvince.indexOf('市') != -1){
+            curProvince += '（省）'
+        }
 
         if(!(curProvince in car_position)){
             car_position[curProvince] = {}
@@ -587,10 +592,17 @@ function geocodeSearch(pt){
 
         position_to_car_vin[curDistrict].push(cur_vin);
         position_to_car_vin[curCity].push(cur_vin);
-        position_to_car_vin[curProvince].push(cur_vin);
+        // 防止直辖市导致的重复
+        if(position_to_car_vin[curProvince][position_to_car_vin[curProvince].length-1] != cur_vin){
+            position_to_car_vin[curProvince].push(cur_vin);
+        }
+        position_to_car_vin['All'].push(cur_vin);
 
-        // console.log("结构化数据(" + addComp.province + ", " + addComp.city + ", " + addComp.district + ", " + addComp.street + ", " + addComp.streetNumber + ")")
+        position_parent[curDistrict] = curCity;
+        position_parent[curCity] = curProvince;
+        position_parent[curProvince] = 'All';
         
+        position_index++;
         bdGEO();
     });
 }
@@ -797,6 +809,12 @@ myChart3.on('mouseout', {seriesIndex: 0}, function (params) {
     downplay_vin(params.data[3]);
 });
 
+myChart3.on('click', {seriesIndex: 0}, function (params) {
+    console.log(params.data[3]+' click myChart3');
+    // console.log(params);
+    focus_on_multiple_vin([params.data[3]], map);
+});
+
 myChart1_1.on('mouseover', {seriesIndex: 0}, function (params) {
     console.log(option_global_mile_time['xAxis']['data'][params.dataIndex]+' mouseover myChart1_1');
     highlight_vin(option_global_mile_time['xAxis']['data'][params.dataIndex], true);
@@ -807,6 +825,12 @@ myChart1_1.on('mouseout', {seriesIndex: 0}, function (params) {
     downplay_vin(option_global_mile_time['xAxis']['data'][params.dataIndex]);
 });
 
+myChart1_1.on('click', {seriesIndex: 0}, function (params) {
+    console.log(params.name+' click myChart1_1');
+    // console.log(params);
+    focus_on_multiple_vin([params.name], map);
+});
+
 myChart7_1.on('mouseover', function (params) {
     console.log(params.name+' mouseout myChart7_1');
     highlight_multiple_vin(position_to_car_vin[params.name]);
@@ -815,6 +839,20 @@ myChart7_1.on('mouseover', function (params) {
 myChart7_1.on('mouseout', function (params) {
     console.log(params.name+' mouseout myChart7_1');
     downplay_multiple_vin(position_to_car_vin[params.name]);
+});
+
+var cur_area = 'All'
+myChart7_1.on('click', function (params) {
+    // console.log(params);
+    var target_area = params.name;
+    if(target_area == ''){  //点了返回键
+        target_area = position_parent[cur_area];
+    }
+
+    cur_area = target_area;
+
+    console.log(target_area+' click myChart7_1');
+    focus_on_multiple_vin(position_to_car_vin[target_area], map);
 });
 
 function highlight_vin(cur_vin, show_tip){
@@ -941,6 +979,29 @@ function downplay_vin(cur_vin){
     }
 }
 
+function focus_on_multiple_vin(vin_arr, cur_map){
+    console.log(vin_arr);
+    console.log(cur_map);
+
+    var cur_bPoints = [];
+    for(var i = 0; i < vin_arr.length; ++i){
+        if(vin_to_bdpoint[vin_arr[i]] != undefined){
+            cur_bPoints.push(vin_to_bdpoint[vin_arr[i]]);
+        }
+    }
+
+    console.log(cur_bPoints);
+
+    var view = cur_map.getViewport(cur_bPoints);
+    var mapZoom = view.zoom;
+    var centerPoint = view.center;
+    if(mapZoom > 19){
+        mapZoom = 19;
+    }
+    cur_map.flyTo(centerPoint, mapZoom);
+    cur_map.centerAndZoom(centerPoint, mapZoom);
+}
+
 function highlight_multiple_vin(vin_arr){
     // 旭日图中心返回按钮
     if(vin_arr == undefined){
@@ -955,7 +1016,6 @@ function highlight_multiple_vin(vin_arr){
             bar_idx_arr.push(i);
         }
     }
-    console.log(bar_idx_arr);
     myChart1_1.dispatchAction({
         type: 'highlight',
         seriesIndex: 0,
