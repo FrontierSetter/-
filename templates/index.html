@@ -78,8 +78,7 @@
     <link rel="stylesheet" type="text/css" href="css/mine.css">
     <script src="js/mine.js"></script>
 
-    <!-- echarts 绘图脚本 （依赖mine.js） -->
-    <script src="js/charts.js"></script>
+
 
 </head>
 <body class="ksh" id='main_body'>
@@ -395,6 +394,7 @@
 
         // 第一列第三行，行驶时间、充电时间、行驶里程散点图
         var myChart3 = echarts.init(document.getElementById('main3'));
+        // myChart3.showLoading();
 
 
         //第三列第一行，本月发生事件
@@ -465,6 +465,9 @@
 <script type="text/javascript">
     $('.ui.dropdown').dropdown();
 </script>
+
+<!-- echarts 绘图脚本 （依赖mine.js） -->
+<script src="js/charts.js"></script>
 
 <script>
     function getVinList(){

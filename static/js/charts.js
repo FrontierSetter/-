@@ -21,7 +21,8 @@ option_global_mile_time = {
         trigger: 'axis',
         axisPointer: { // 坐标轴指示器，坐标轴触发有效
             type: 'shadow' // 默认为直线，可选为：'line' | 'shadow'
-        }
+        },
+        confine: true,
     },
     xAxis: {
         type: 'category',
@@ -81,6 +82,11 @@ option_global_mile_time = {
             normal: {
                 barBorderRadius: 50,
                 color: "#446ACF",
+            }
+        },
+        emphasis: {
+            itemStyle: {
+                color: 'rgba(137, 189, 27, 1)'
             }
         },
     }]
@@ -477,6 +483,10 @@ function requestWarning(){
 // =========== 车辆位置分布旭日图 =======================
 
 option_car_position = {
+    tooltip: {
+        trigger: 'item',
+        confine: true,
+    },
     series: {
         type: 'sunburst',
         label: {
@@ -490,11 +500,9 @@ option_car_position = {
         //     borderColor: 'rgba(6,20,54, 1)'
         // },
         emphasis: {
-            label: {
-                formatter: '{b}\n{c}',
-            },
-            // labelLine:{
-            //     show: true,
+            // 用了tooltip，就不用label了
+            // label: {
+            //     formatter: '{b}\n{c}',
             // },
             focus: 'ancestor'
         },
@@ -504,10 +512,14 @@ option_car_position = {
 };
 
 var car_point_arr = new Array();
+var car_position_vin_arr = new Array();  // 用来记录车辆Vin
 var car_position = {};
-var index = 0;
+var position_index = 0;
 var myGeo = new BMapGL.Geocoder();
 var echartCircleData = new Array();
+
+var car_vin_to_district = {}    // 用来记录vin到区的映射，用于之后的数据联动
+var position_to_car_vin = {}    // 用来记录行政区域到vin的映射，省、市、区放在一个词典里，便于使用
 
 function carPositionRequest(){
     $.ajax({
@@ -527,23 +539,24 @@ function carPositionRequest(){
                 var curPoint = wgs84tobdpoint(filteredData[i]['Longitude'], filteredData[i]['Latitude']);
 
                 car_point_arr.push(curPoint);
+                car_position_vin_arr.push(filteredData[i]['Vin']);
             }
 
-            index = 0;
+            position_index = 0;
             bdGEO();
         }
     });
 }
 
 function bdGEO(){	
-    if(index >= car_point_arr.length){
+    if(position_index >= car_point_arr.length){
         // console.log(car_position);
         createCircleData();
         return;
     }
-    var pt = car_point_arr[index];
+    var pt = car_point_arr[position_index];
     geocodeSearch(pt);
-    index++;
+    position_index++;
 
 }
 
@@ -556,15 +569,25 @@ function geocodeSearch(pt){
 
         if(!(curProvince in car_position)){
             car_position[curProvince] = {}
+            position_to_car_vin[curProvince] = new Array();
         }
         if(!(curCity in car_position[curProvince])){
             car_position[curProvince][curCity] = {}
+            position_to_car_vin[curCity] = new Array();
         }
         if(!(curDistrict in car_position[curProvince][curCity])){
             car_position[curProvince][curCity][curDistrict] = 0;
+            position_to_car_vin[curDistrict] = new Array();
         }
 
         car_position[curProvince][curCity][curDistrict] += 1;
+
+        var cur_vin = car_position_vin_arr[position_index]
+        car_vin_to_district[cur_vin] = curDistrict;
+
+        position_to_car_vin[curDistrict].push(cur_vin);
+        position_to_car_vin[curCity].push(cur_vin);
+        position_to_car_vin[curProvince].push(cur_vin);
 
         // console.log("结构化数据(" + addComp.province + ", " + addComp.city + ", " + addComp.district + ", " + addComp.street + ", " + addComp.streetNumber + ")")
         
@@ -625,6 +648,7 @@ var option_car_time = {
         formatter: function (param) {
             return param.data[3]+"：<br />充电"+(param.data[0]/3600).toFixed(2)+"小时，行驶"+(param.data[1]/3600).toFixed(2)+"小时，<br />行驶"+param.data[2]+"千米";
         },
+        confine: true,
     },
     dataZoom: [{
         type: 'inside'
@@ -701,6 +725,19 @@ var option_car_time = {
         },
         emphasis: {
             focus: 'self',
+            itemStyle: {
+                shadowBlur: 10,
+                // 深色底的情况下，原本的阴影不管用了
+                shadowColor: 'rgba(25, 100, 150, 0.5)',
+                shadowOffsetY: 5,
+                color: new echarts.graphic.RadialGradient(0.4, 0.3, 1, [{
+                    offset: 0,
+                    color: 'rgba(137, 189, 27, 0.3)'
+                }, {
+                    offset: 1,
+                    color: 'rgba(137, 189, 27, 1)'
+                }])
+            }
         },
         itemStyle: {
             shadowBlur: 10,
@@ -740,6 +777,7 @@ function carTimeScatterRequest(){
             option_car_time['series'][0]['data'] = result_data;
             // console.log(result_data);
 
+            myChart3.hideLoading();
             myChart3.setOption(option_car_time, true);
 
         }
@@ -747,3 +785,227 @@ function carTimeScatterRequest(){
 }
 
 carTimeScatterRequest()
+
+// =========== 数据联动 =======================
+myChart3.on('mouseover', {seriesIndex: 0}, function (params) {
+    console.log(params.data[3]+' mouseover myChart3');
+    highlight_vin(params.data[3], true);
+});
+
+myChart3.on('mouseout', {seriesIndex: 0}, function (params) {
+    console.log(params.data[3]+' mouseout myChart3');
+    downplay_vin(params.data[3]);
+});
+
+myChart1_1.on('mouseover', {seriesIndex: 0}, function (params) {
+    console.log(option_global_mile_time['xAxis']['data'][params.dataIndex]+' mouseover myChart1_1');
+    highlight_vin(option_global_mile_time['xAxis']['data'][params.dataIndex], true);
+});
+
+myChart1_1.on('mouseout', {seriesIndex: 0}, function (params) {
+    console.log(option_global_mile_time['xAxis']['data'][params.dataIndex]+' mouseout myChart1_1');
+    downplay_vin(option_global_mile_time['xAxis']['data'][params.dataIndex]);
+});
+
+myChart7_1.on('mouseover', function (params) {
+    console.log(params.name+' mouseout myChart7_1');
+    highlight_multiple_vin(position_to_car_vin[params.name]);
+});
+
+myChart7_1.on('mouseout', function (params) {
+    console.log(params.name+' mouseout myChart7_1');
+    downplay_multiple_vin(position_to_car_vin[params.name]);
+});
+
+function highlight_vin(cur_vin, show_tip){
+    // 高亮柱状图
+    var bar_idx = 0;
+    var bar_vin_arr = option_global_mile_time['xAxis']['data'];
+    for(bar_idx = 0; bar_idx < bar_vin_arr.length; ++bar_idx){
+        if(bar_vin_arr[bar_idx] == cur_vin){
+            break;
+        }
+    }
+    if(bar_idx < bar_vin_arr.length){
+        myChart1_1.dispatchAction({
+            type: 'highlight',
+            seriesIndex: 0,
+            dataIndex: bar_idx
+        });
+        if(show_tip){
+            myChart1_1.dispatchAction({
+                type: 'showTip',
+                seriesIndex: 0,
+                dataIndex: bar_idx
+            });
+        }
+    }
+
+    // 高亮散点图
+    var scatter_idx = 0;
+    var scatter_vin_arr = option_car_time['series'][0]['data'];
+    for(scatter_idx = 0; scatter_idx < scatter_vin_arr.length; ++scatter_idx){
+        if(scatter_vin_arr[scatter_idx][3] == cur_vin){
+            break;
+        }
+    }
+    if(scatter_idx < scatter_vin_arr.length){
+        myChart3.dispatchAction({
+            type: 'highlight',
+            seriesIndex: 0,
+            dataIndex: scatter_idx
+        });
+        if(show_tip){
+            myChart3.dispatchAction({
+                type: 'showTip',
+                seriesIndex: 0,
+                dataIndex: scatter_idx
+            });
+        }
+    }
+
+    // 高亮旭日图
+    var sunburst_name = car_vin_to_district[cur_vin];
+    if(sunburst_name != undefined){
+        myChart7_1.dispatchAction({
+            type: 'highlight',
+            seriesIndex: 0,
+            name: sunburst_name
+        });
+        if(show_tip){
+            myChart7_1.dispatchAction({
+                type: 'showTip',
+                seriesIndex: 0,
+                name: sunburst_name
+            });
+        }
+    }
+}
+
+function downplay_vin(cur_vin){
+    // 高亮柱状图
+    var bar_idx = 0;
+    var bar_vin_arr = option_global_mile_time['xAxis']['data'];
+    for(bar_idx = 0; bar_idx < bar_vin_arr.length; ++bar_idx){
+        if(bar_vin_arr[bar_idx] == cur_vin){
+            break;
+        }
+    }
+    if(bar_idx < bar_vin_arr.length){
+        myChart1_1.dispatchAction({
+            type: 'downplay',
+            seriesIndex: 0,
+            dataIndex: bar_idx
+        });
+        myChart1_1.dispatchAction({
+            type: 'hideTip',
+            seriesIndex: 0,
+            dataIndex: bar_idx
+        });
+    }
+
+    // 高亮散点图
+    var scatter_idx = 0;
+    var scatter_vin_arr = option_car_time['series'][0]['data'];
+    for(scatter_idx = 0; scatter_idx < scatter_vin_arr.length; ++scatter_idx){
+        if(scatter_vin_arr[scatter_idx][3] == cur_vin){
+            break;
+        }
+    }
+    if(scatter_idx < scatter_vin_arr.length){
+        myChart3.dispatchAction({
+            type: 'downplay',
+            seriesIndex: 0,
+            dataIndex: scatter_idx
+        });
+        myChart3.dispatchAction({
+            type: 'hideTip',
+            seriesIndex: 0,
+            dataIndex: scatter_idx
+        });
+    }
+
+    // 高亮旭日图
+    var sunburst_name = car_vin_to_district[cur_vin];
+    if(sunburst_name != undefined){
+        myChart7_1.dispatchAction({
+            type: 'downplay',
+            seriesIndex: 0,
+            name: sunburst_name
+        });
+        myChart7_1.dispatchAction({
+            type: 'hideTip',
+            seriesIndex: 0,
+            dataIndex: scatter_idx
+        });
+    }
+}
+
+function highlight_multiple_vin(vin_arr){
+    // 旭日图中心返回按钮
+    if(vin_arr == undefined){
+        return;
+    }
+
+    // 高亮柱状图
+    var bar_idx_arr = [];
+    var bar_vin_arr = option_global_mile_time['xAxis']['data'];
+    for(var i = 0; i < bar_vin_arr.length; ++i){
+        if(vin_arr.indexOf(bar_vin_arr[i]) != -1){
+            bar_idx_arr.push(i);
+        }
+    }
+    console.log(bar_idx_arr);
+    myChart1_1.dispatchAction({
+        type: 'highlight',
+        seriesIndex: 0,
+        dataIndex: bar_idx_arr
+    });
+
+    // 高亮散点图
+    var scatter_idx_arr = [];
+    var scatter_vin_arr = option_car_time['series'][0]['data'];
+    for(var i = 0; i < scatter_vin_arr.length; ++i){
+        if(vin_arr.indexOf(scatter_vin_arr[i][3]) != -1){
+            scatter_idx_arr.push(i);
+        }
+    }
+    myChart3.dispatchAction({
+        type: 'highlight',
+        seriesIndex: 0,
+        dataIndex: scatter_idx_arr
+    });
+}
+
+function downplay_multiple_vin(vin_arr){
+    // 旭日图中心返回按钮
+    if(vin_arr == undefined){
+        return;
+    }
+
+    var bar_idx_arr = [];
+    var bar_vin_arr = option_global_mile_time['xAxis']['data'];
+    for(var i = 0; i < bar_vin_arr.length; ++i){
+        if(vin_arr.indexOf(bar_vin_arr[i]) != -1){
+            bar_idx_arr.push(i);
+        }
+    }
+    myChart1_1.dispatchAction({
+        type: 'downplay',
+        seriesIndex: 0,
+        dataIndex: bar_idx_arr
+    });
+
+    var scatter_idx_arr = [];
+    var scatter_vin_arr = option_car_time['series'][0]['data'];
+    for(var i = 0; i < scatter_vin_arr.length; ++i){
+        if(vin_arr.indexOf(scatter_vin_arr[i][3]) != -1){
+            scatter_idx_arr.push(i);
+        }
+    }
+    myChart3.dispatchAction({
+        type: 'downplay',
+        seriesIndex: 0,
+        dataIndex: scatter_idx_arr
+    });
+}

@@ -184,7 +184,6 @@ function backgroundRequest(){
 
                     var marker = new BMapGL.Marker(curPoint);
                     marker.setIcon(iconArr[curType]);
-
                     var content = filteredData[i]['Vin'];
                     addMouseHandler(content, marker);
 
@@ -234,9 +233,11 @@ function addMouseHandler(content,marker){
         this.getPosition();
         needUpdateMap = false;
         openInfo(content, e);
+        highlight_vin(content, true);
     });
     marker.addEventListener("mouseout",function(e){
         needUpdateMap = true;
+        downplay_vin(content, true);
     });
 
 }
