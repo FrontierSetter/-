@@ -75,9 +75,6 @@
     <link rel="stylesheet" type="text/css" href="css/flip.css">
     <script src="js/flip.js"></script>
 
-    <!-- echarts 绘图脚本 -->
-    <script src="js/charts.js"></script>
-
     <!-- 数据请求脚本 -->
     <script src="js/dashboard.js"></script>
     <script src="js/scoreboard.js"></script>
@@ -162,6 +159,10 @@
                                                     <tr>
                                                         <td>速度</td>
                                                         <td id="table_speed">32 KM/H</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>转速</td>
+                                                        <td id="table_motor">32 KM/H</td>
                                                     </tr>
                                                     <tr>
                                                         <td>电量</td>
@@ -377,15 +378,13 @@
 
                         <button id='remove_ope_btn' class="ui inverted right floated button" onclick="remove_operation()">移除信息</button>
 
-                        <h4 class="ui horizontal inverted divider header">
+                        <!-- <h4 class="ui horizontal inverted divider header">
                             <i class="eye icon"></i>
                             自动决策系统
                         </h4>
 
                         <button id='auto_battery' class="ui inverted violet button" style="margin-top: 5px;" onclick="auto_battery_decide()">自动电量决策已关闭</button>
-                        <button id='auto_road' class="ui inverted violet button" style="margin-top: 5px;" onclick="auto_road_decide()">自动路况决策已关闭</button>
-                        <!-- <button class="ui violet button" style="margin-top: 5px;">自动电量决策已启动</button> -->
-                        <!-- <button id='auto_all' class="ui inverted button" style="margin-top: 5px;" onclick="auto_all_decide()">一键开启</button> -->
+                        <button id='auto_road' class="ui inverted violet button" style="margin-top: 5px;" onclick="auto_road_decide()">自动路况决策已关闭</button> -->
  
                         <h4 class="ui horizontal inverted divider header">
                             <i class="tag icon"></i>
@@ -732,6 +731,7 @@
                     }
                 },
                 detail: {
+                    show: false,
                     //backgroundColor: 'rgba(30,144,255,0.8)',
                     // borderWidth: 1,
                     borderColor: '#fff',
@@ -1217,7 +1217,8 @@
                 var cur_power = data['Soc'];
                 var cur_lati = data['Latitude'];
                 var cur_long = data['Longitude'];
-                var cur_temp = data['Temperature'];
+                var cur_temp = data['Temperature']-40;
+                var cur_motor = data['MoterSpeed']-20000;
 
                 var cur_position = (cur_long).toString() + '°E，' + (cur_lati).toString() + '°N'
 
@@ -1225,13 +1226,15 @@
                 $("#table_vin").html(cur_vin);
                 $("#table_status").html(cur_status);
                 $("#table_speed").html(cur_speed);
+                $("#table_motor").html(cur_motor);
                 $("#table_power").html(cur_power);
                 $("#table_position").html(cur_position);
                 $("#table_temprature").html(cur_temp.toString()+'°C');
+                
 
                 // 设置仪表盘
                 optionGuage['series'][0]['data'][0]['value'] = cur_speed;
-                optionGuage['series'][1]['data'][0]['value'] = 0;
+                optionGuage['series'][1]['data'][0]['value'] = cur_motor/1000;
                 optionGuage['series'][2]['data'][0]['value'] = parseFloat(cur_power);
                 optionGuage['series'][3]['data'][0]['value'] = cur_temp;
 
