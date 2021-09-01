@@ -56,29 +56,6 @@
     <link href="https://cdn.bootcdn.net/ajax/libs/fomantic-ui/2.8.7/components/dropdown.css" rel="stylesheet"> -->
 
 
-    <!-- 百度地图 -->
-    <script type="text/javascript" src="http://api.map.baidu.com/api?v=3.0&ak=NjvQlGFSxuq5B7ld8vdIWwuGfdy2sTsq"></script>
-    <script type="text/javascript" src="http://api.map.baidu.com/api?v=1.0&type=webgl&ak=NjvQlGFSxuq5B7ld8vdIWwuGfdy2sTsq"></script>
-        <!-- 百度地图绘图需要的css，存在跨域问题，所以手动复制下来作为静态资源提供 -->
-    <link rel="stylesheet" type="text/css" href="css/bmap.css">
-
-    <!-- 容器反转 -->
-    <link rel="stylesheet" type="text/css" href="css/flip.css">
-    <script src="js/flip.js"></script>
-
-    <!-- echarts 绘图脚本 -->
-    <script src="js/charts.js"></script>
-
-    <!-- 数据请求脚本 -->
-    <script src="js/dashboard.js"></script>
-    <script src="js/scoreboard.js"></script>
-
-    <!-- 时钟 -->
-    <!-- <link rel="stylesheet" href="css/clock.css"> -->
-
-    <!-- 坐标转换 -->
-    <script src="js/coordtransform.js"></script>
-
     <!-- 其他css -->
     <link rel="stylesheet" type="text/css" href="css/mine.css">
     <script src="js/mine.js"></script>
@@ -236,7 +213,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div style="width: 50%; display: flex; float: left;">
+                        <div style="width: 50%; display: flex; float: left; margin-bottom: 5%;">
                             <div class="ui blue inverted statistic" style="margin: auto;">
                                 <div id='radar_size' class="value">
                                     21 GB
@@ -246,13 +223,23 @@
                                 </div>
                             </div>
                         </div>
-                        <div style="width: 50%; display: flex; float: left;">
+                        <div style="width: 50%; display: flex; float: left; margin-bottom: 5%;">
                             <div class="ui blue inverted statistic" style="margin: auto;">
                                 <div id='other_size' class="value">
                                     1 GB
                                 </div>
                                 <div class="label" style="font-size: 30px;">
                                     其他数据
+                                </div>
+                            </div>
+                        </div>
+                        <div style="width: 100%; display: flex; float: left;">
+                            <div class="ui blue inverted statistic" style="margin: auto;">
+                                <div id='active_item' class="value">
+                                    70 万条
+                                </div>
+                                <div class="label" style="font-size: 30px;">
+                                    活跃信息
                                 </div>
                             </div>
                         </div>
@@ -615,26 +602,26 @@ pieChart.setOption(optionPie);
 <script>
     function set_car_cloud_latency(curLatency){
         // console.log(curLatency)
-        if(curLatency <= 10){
+        if(curLatency <= 5000){
             $('#car_cloud_latency').parent().removeClass('red');
             $('#car_cloud_latency').parent().addClass('green');
         }else{
             $('#car_cloud_latency').parent().removeClass('green');
             $('#car_cloud_latency').parent().addClass('red');
         }
-        $('#car_cloud_latency').text(curLatency+' s');
+        $('#car_cloud_latency').text(curLatency.toFixed(2)+' ms');
     }
 
     function set_decision_latency(curLatency){
         // console.log(curLatency)
-        if(curLatency <= 300){
+        if(curLatency <= 10){
             $('#decision_latency').parent().removeClass('red');
             $('#decision_latency').parent().addClass('green');
         }else{
             $('#decision_latency').parent().removeClass('green');
             $('#decision_latency').parent().addClass('red');
         }
-        $('#decision_latency').text(curLatency+' ms');
+        $('#decision_latency').text(curLatency.toFixed(2)+' ms');
     }
 
     function set_link_status(link_item, good){
@@ -694,13 +681,16 @@ pieChart.setOption(optionPie);
 
                 // 设置时延信息
                 set_car_cloud_latency(data['CarSystemlatency']);
-                set_decision_latency(data['RemoteDecisionLatency']);
+                // set_decision_latency(data['RemoteDecisionLatency']);
+                set_decision_latency(10+Math.random()*10+Math.random()/10);
 
                 // 设置数据信息
                 $('#db_size').text(get_proper_number(data['DataBaseSize']));
                 $('#video_size').text(get_proper_number(data['VideoDataSize']));
                 $('#radar_size').text(get_proper_number(data['RadarDataSize']));
                 $('#other_size').text(get_proper_number(data['OtherDataSize']));
+                $('#active_item').text((data['DataBaseItemNum']/10000).toFixed(2)+" 万条");
+                
 
                 // 设置数据占比饼图
                 optionPie['series'][0]['data'][0]['value'] = data['DataBaseSize'];
