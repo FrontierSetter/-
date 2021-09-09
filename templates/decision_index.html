@@ -31,8 +31,8 @@
     <script src="https://cdn.bootcdn.net/ajax/libs/echarts/5.0.2/echarts.js"></script>
 
     <!-- 轮播swiper文件 -->
-    <link rel="stylesheet" type="text/css" href="css/swiper.min.css">
-    <script src="js/swiper.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/swiper-3.4.2.min.css">
+    <script src="js/swiper-3.4.2.min.js"></script>
 
     <!--界面样式-->
     <script src="js/visual.js"></script>
@@ -215,7 +215,7 @@
                         </div>
                     </div>
 
-                    <div class="visual_conBot" style="margin: 0.5%; width: 48.5%; height: 49%; float: left;">
+                    <!-- <div class="visual_conBot" style="margin: 0.5%; width: 48.5%; height: 49%; float: left;">
                         <img class="visual_conBot_l" src="images/ksh42.png">
                         <img class="visual_conBot_2" src="images/ksh43.png">
                         <img class="visual_conBot_3" src="images/ksh44.png">
@@ -226,10 +226,10 @@
                         <div class="visual_chart" id="history_speed" style="margin: 1%; height: 98%; width: 98%;">
                             
                         </div>
-                    </div>
+                    </div> -->
 
                     <!-- 因为转速信息没有，同时swiper会影响echart zoom后的拖动，索性去掉 -->
-                    <!-- <div class="swiper-container visual_swiper1" style="margin: 0.5%; width: 48.5%; height: 49%; float: left;"> 
+                    <div class="swiper-container visual_swiper2" style="margin: 0.5%; width: 48.5%; height: 49%; float: left;"> 
                         <div class="swiper-wrapper">
                             <div class="swiper-slide">
                                 <div class="visual_conBot" style="width: 100%; height: 100%;">
@@ -252,15 +252,29 @@
                                     <img class="visual_conBot_3" src="images/ksh44.png">
                                     <img class="visual_conBot_4" src="images/ksh45.png">
                                     <div class="visual_chart_text">
-                                        <h2>历史电池信息</h2>
+                                        <h2>历史转速信息</h2>
                                     </div>
-                                    <div class="visual_chart" id="history_battery" style="margin: 1%; height: 98%; width: 98%;">
+                                    <div class="visual_chart" id="history_motor" style="margin: 1%; height: 98%; width: 98%;">
+                                        
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="swiper-slide">
+                                <div class="visual_conBot" style="width: 100%; height: 100%;">
+                                    <img class="visual_conBot_l" src="images/ksh42.png">
+                                    <img class="visual_conBot_2" src="images/ksh43.png">
+                                    <img class="visual_conBot_3" src="images/ksh44.png">
+                                    <img class="visual_conBot_4" src="images/ksh45.png">
+                                    <div class="visual_chart_text">
+                                        <h2>历史温度信息</h2>
+                                    </div>
+                                    <div class="visual_chart" id="history_temperature" style="margin: 1%; height: 98%; width: 98%;">
                                         
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div> -->
+                    </div>
 
                     <!-- <div style="width: 100%; height: 100%;">
                         <table class="ui inverted table">
@@ -552,11 +566,9 @@
     <script type="text/javascript">
     // TODO:不知道怎么关闭自动轮播，所以先把delay拉的很长
         var mySwiper1 = new Swiper('.visual_swiper1', {
-            autoplay: false,//可选选项，自动滑动
-            speed: 2000,//可选选项，滑动速度
-            autoplay: {
-                delay: 500000000,//1秒切换一次
-            },
+        })
+
+        var mySwiper2 = new Swiper('.visual_swiper2', {
         })
 
         $(function () {
@@ -1048,38 +1060,12 @@
     // }, 1000);
 </script>
 
-<!-- 电量历史线 -->
+<!-- 转速历史线 -->
 <script>
-    function randomData2() {
-        now2 = new Date(+now2 + oneDay2);
-        value2 = value2 + Math.random() * 10 - 5;
-        if(value2 > 100){
-            value2 = 100;
-        }
-        if(value2 < 0){
-            value2 = 0;
-        }
-        return {
-            name: now2.toString(),
-            value: [
-                [now2.getFullYear(), now2.getMonth() + 1, now2.getDate()].join('/'),
-                Math.round(value2)
-            ]
-        };
-    }
+    var chartMotor= echarts.init(document.getElementById('history_motor'));
+    var optionMotor;
 
-    var data2 = [];
-    var now2 = +new Date(1997, 9, 3);
-    var oneDay2 = 24 * 3600 * 1000;
-    var value2 = 30;
-    for (var i = 0; i < 1000; i++) {
-        data2.push(randomData2());
-    }
-
-    var chartBattery= echarts.init(document.getElementById('history_battery'));
-    var optionBattery;
-
-    optionBattery = {
+    optionMotor = {
         tooltip: { //鼠标指上时的标线
             trigger: 'axis',
             axisPointer: {
@@ -1093,7 +1079,7 @@
             itemWidth: 14,
             itemHeight: 5,
             itemGap: 13,
-            data: ['电量'],
+            data: ['转速'],
             right: '10px',
             top: '0px',
             textStyle: {
@@ -1149,8 +1135,11 @@
                 }
             }
         }],
+        dataZoom: [{
+            type: 'inside',
+        }],
         series: [{
-            name: '电量',
+            name: '转速',
             type: 'line',
             smooth: true,
             showSymbol: false,
@@ -1163,10 +1152,10 @@
                 normal: {
                     color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
                         offset: 0,
-                        color: 'rgba(0, 136, 212, 0.3)'
+                        color: 'rgba(137, 189, 27, 0.3)'
                     }, {
                         offset: 0.8,
-                        color: 'rgba(0, 136, 212, 0)'
+                        color: 'rgba(137, 189, 27, 0)'
                     }], false),
                     shadowColor: 'rgba(0, 0, 0, 0.1)',
                     shadowBlur: 10
@@ -1174,29 +1163,157 @@
             },
             itemStyle: {
                 normal: {
-                    color: 'rgb(0,136,212)'
+                    color: 'rgb(137,189,27)'
                 }
             },
-            data: data2
+            data: []
         }]
     };
 
     
 
-    chartBattery.setOption(optionBattery);
+    chartMotor.setOption(optionMotor);
 
-    setInterval(function () {
-        for (var i = 0; i < 5; i++) {
-            data2.shift();
-            data2.push(randomData2());
-        }
+    // setInterval(function () {
+    //     for (var i = 0; i < 5; i++) {
+    //         data2.shift();
+    //         data2.push(randomData2());
+    //     }
 
-        chartBattery.setOption({
-            series: [{
-                data: data2
-            }]
-        });
-    }, 1000);
+    //     chartMotor.setOption({
+    //         series: [{
+    //             data: data2
+    //         }]
+    //     });
+    // }, 1000);
+</script>
+
+<!-- 温度历史线 -->
+<script>
+    var chartTemp= echarts.init(document.getElementById('history_temperature'));
+    var optionTemp;
+
+    optionTemp = {
+        tooltip: { //鼠标指上时的标线
+            trigger: 'axis',
+            axisPointer: {
+                lineStyle: {
+                    color: '#fff'
+                }
+            }
+        },
+        legend: {
+            icon: 'rect',
+            itemWidth: 14,
+            itemHeight: 5,
+            itemGap: 13,
+            data: ['温度'],
+            right: '10px',
+            top: '0px',
+            textStyle: {
+                fontSize: 12,
+                color: '#fff'
+            }
+        },
+        grid: {
+            x: 35,
+            y: 60,
+            x2: 8,
+            y2: 25,
+        },
+        xAxis: [{
+            type: 'time',
+            boundaryGap: false,
+            axisLine: {
+                lineStyle: {
+                    color: '#57617B'
+                }
+            },
+            axisLabel: {
+                textStyle: {
+                    color: '#fff',
+                },
+            },
+            // data: ['1月', '2月', '3月', '4月', '5月', '6月', '7月', '8月', '9月', '10月', '11月', '12月']
+        }],
+        yAxis: [{
+            type: 'value',
+            axisTick: {
+                show: false
+            },
+            axisLine: {
+                lineStyle: {
+                    color: '#57617B',
+
+                }
+            },
+            axisLabel: {
+                margin: 10,
+                textStyle: {
+                    fontSize: 14
+                },
+                textStyle: {
+                    color: '#fff',
+                },
+            },
+            splitLine: {
+                lineStyle: {
+                    color: 'rgba(255,255,255,.2)',
+                    type: 'dotted',
+                }
+            }
+        }],
+        dataZoom: [{
+            type: 'inside',
+        }],
+        series: [{
+            name: '温度',
+            type: 'line',
+            smooth: true,
+            showSymbol: false,
+            lineStyle: {
+                normal: {
+                    width: 2
+                }
+            },
+            areaStyle: {
+                normal: {
+                    color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+                        offset: 0,
+                        color: 'rgba(137, 189, 27, 0.3)'
+                    }, {
+                        offset: 0.8,
+                        color: 'rgba(137, 189, 27, 0)'
+                    }], false),
+                    shadowColor: 'rgba(0, 0, 0, 0.1)',
+                    shadowBlur: 10
+                }
+            },
+            itemStyle: {
+                normal: {
+                    color: 'rgb(137,189,27)'
+                }
+            },
+            data: []
+        }]
+    };
+
+    
+
+    chartTemp.setOption(optionTemp);
+
+    // setInterval(function () {
+    //     for (var i = 0; i < 5; i++) {
+    //         data2.shift();
+    //         data2.push(randomData2());
+    //     }
+
+    //     chartMotor.setOption({
+    //         series: [{
+    //             data: data2
+    //         }]
+    //     });
+    // }, 1000);
 </script>
 
 
@@ -1254,7 +1371,7 @@
             url: server_ip+'api/car_history_loc', //请求的url
             type: 'get', //请求的方式
             // TODO: 轨迹区间需要动态修改
-            data: "vin=LL3ACCJ22JA011664&st="+getTimeSecond(7)+"&et="+getTimeSecond(0),
+            data: "vin=LL3ACCJ22JA011664&st="+getTimeSecond(21)+"&et="+getTimeSecond(0),
             error: function (data) {
                 console.log('requestSingleCarPath请求失败');
             },
@@ -1296,7 +1413,7 @@
         $.ajax({
             url: server_ip+'api/car_history_speed', //请求的url
             type: 'get', //请求的方式
-            data: "vin=LL3ACCJ22JA011664&st="+getTimeSecond(7)+"&et="+getTimeSecond(0),
+            data: "vin=LL3ACCJ22JA011664&st="+getTimeSecond(21)+"&et="+getTimeSecond(0),
             error: function (data) {
                 console.log('requestSingleCarSpeed请求失败');
             },
@@ -1328,6 +1445,82 @@
             }
         });
     }
+
+    var last_motor_timestamp = '2017-07-27 14:26:00'
+
+    function requestSingleCarMotor(){
+        $.ajax({
+            url: server_ip+'api/car_history_motorspeed', //请求的url
+            type: 'get', //请求的方式
+            data: "vin=LL3ACCJ22JA011664&st="+getTimeSecond(21)+"&et="+getTimeSecond(0),
+            error: function (data) {
+                console.log('requestSingleCarMotor请求失败');
+            },
+            success: function (data) {
+                var ori_data = optionMotor['series'][0]['data'];
+
+                for(var i = 0; i < data.length; ++i){
+                    if(data[i]['T'] < last_motor_timestamp || data[i]['Motorspeed'] < 20000){
+                        continue;
+                    }
+                    ori_data.push({
+                        name: data[i]['T'],
+                        value: [
+                            data[i]['T'],
+                            data[i]['Motorspeed']-20000
+                        ]
+                    });
+
+                    // TODO: 可优化，减少赋值次数
+                    last_motor_timestamp = data[i]['T'];
+                }
+
+                chartMotor.setOption({
+                    series: [{
+                        data: ori_data
+                    }]
+                });
+            }
+        });
+    }
+
+    var last_temperature_timestamp = '2017-07-27 14:26:00'
+
+    function requestSingleCarTemp(){
+        $.ajax({
+            url: server_ip+'api/car_history_temperature', //请求的url
+            type: 'get', //请求的方式
+            data: "vin=LL3ACCJ22JA011664&st="+getTimeSecond(21)+"&et="+getTimeSecond(0),
+            error: function (data) {
+                console.log('requestSingleCarTemp请求失败');
+            },
+            success: function (data) {
+                var ori_data = optionTemp['series'][0]['data'];
+
+                for(var i = 0; i < data.length; ++i){
+                    if(data[i]['T'] < last_temperature_timestamp || data[i]['Temperature'] < 40){
+                        continue;
+                    }
+                    ori_data.push({
+                        name: data[i]['T'],
+                        value: [
+                            data[i]['T'],
+                            data[i]['Temperature']-40
+                        ]
+                    });
+
+                    // TODO: 可优化，减少赋值次数
+                    last_temperature_timestamp = data[i]['T'];
+                }
+
+                chartTemp.setOption({
+                    series: [{
+                        data: ori_data
+                    }]
+                });
+            }
+        });
+    }
 </script>
 
 <!-- 启动功能 -->
@@ -1335,5 +1528,42 @@
     requestSingleCarDetail();
     requestSingleCarPath();
     requestSingleCarSpeed();
+    requestSingleCarMotor();
+    requestSingleCarTemp();
 
+    chartSpeed.on('dataZoom', {seriesIndex: 0}, function (params) {
+        var start = params['batch'][0]['start']
+        var end = params['batch'][0]['end']
+        // console.log('速度线zoom' + start + end);
+        if(start == 0 && end == 100){
+            // $(".slide_group_1").addClass('swiper-no-swiping')
+            mySwiper2.enableTouchControl()
+        }else{
+            mySwiper2.disableTouchControl()
+        }
+    });
+
+    chartMotor.on('dataZoom', {seriesIndex: 0}, function (params) {
+        var start = params['batch'][0]['start']
+        var end = params['batch'][0]['end']
+        // console.log('速度线zoom' + start + end);
+        if(start == 0 && end == 100){
+            // $(".slide_group_1").addClass('swiper-no-swiping')
+            mySwiper2.enableTouchControl()
+        }else{
+            mySwiper2.disableTouchControl()
+        }
+    });
+
+    chartTemp.on('dataZoom', {seriesIndex: 0}, function (params) {
+        var start = params['batch'][0]['start']
+        var end = params['batch'][0]['end']
+        // console.log('速度线zoom' + start + end);
+        if(start == 0 && end == 100){
+            // $(".slide_group_1").addClass('swiper-no-swiping')
+            mySwiper2.enableTouchControl()
+        }else{
+            mySwiper2.disableTouchControl()
+        }
+    });
 </script>
