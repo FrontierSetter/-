@@ -127,18 +127,11 @@ iconArr.push(iconOnline,iconOffline, iconCharging, iconInitmode, iconPoweron, ic
 var shouldMapGlobal = true; //用来获取整个网页属于全局/单车粒度
 var needUpdateMap = true; //用来控制鼠标悬停弹出信息窗口时，不更新地图
 
-// function wgs84tobdpoint(long, lati){
-//     var curGcjCoord = coordtransform.wgs84togcj02(long, lati);
-//     var curBaiduCoord = coordtransform.gcj02tobd09(curGcjCoord[0], curGcjCoord[1]);
-    
-//     var curPoint = new BMapGL.Point(curBaiduCoord[0], curBaiduCoord[1]);
-
-//     return curPoint;
-// }
-
 // *全局查询
 var backgroundCarOverlayOld = new Array();
 var backgroundCarOverlayNew = new Array();
+
+var vin_to_bdpoint = {}; // 维护vin到坐标的映射，用于数据联动
 
 function backgroundRequest(){
     if(!shouldMapGlobal){
@@ -168,24 +161,30 @@ function backgroundRequest(){
                     // var curType = getMode(filteredData[i]['collectTime'], curTime);
                     var curType = 0; // 默认为启动状态
 
-                    if(filteredData[i]['Status'] == 'on'){
+                    if(filteredData[i]['Status'] == 'ready'){
                         curType = 0;
-                    }else if(filteredData[i]['Status'] == 'off'){
+                    }else if(filteredData[i]['Status'] == 'keyoff'){
                         curType = 1;
                     }else{
                         curType = 5;
                     }
 
+                    if(!rawPointValid(filteredData[i]['Longitude'], filteredData[i]['Latitude'])){
+                        continue;
+                    }
+
                     var curPoint = wgs84tobdpoint(filteredData[i]['Longitude'], filteredData[i]['Latitude']);
+                    vin_to_bdpoint[filteredData[i]['Vin']] = curPoint;
 
                     var marker = new BMapGL.Marker(curPoint);
                     marker.setIcon(iconArr[curType]);
-
                     var content = filteredData[i]['Vin'];
                     addMouseHandler(content, marker);
 
                     backgroundCarOverlayNew.push(marker);
                 }
+
+                // console.log(vin_to_bdpoint);
 
                 if(shouldMapGlobal && needUpdateMap){
                     drawOverlay();
@@ -230,9 +229,11 @@ function addMouseHandler(content,marker){
         this.getPosition();
         needUpdateMap = false;
         openInfo(content, e);
+        highlight_vin(content, true);
     });
     marker.addEventListener("mouseout",function(e){
         needUpdateMap = true;
+        downplay_vin(content, true);
     });
 
 }
@@ -417,15 +418,4 @@ function filterTrace(data){
         }
     }
     console.log('过滤完的历史轨迹长度: '+singleCarFilteredPoints.length);
-}
-
-// TODO:厦门坐标筛选
-function rawPointValid(lon, lat){
-    if (lon == null || lat == null) {
-        return false;
-    }
-    if (lon > 124 || lon < 118 || lat > 35 || lat < 27) {
-        return false;
-    }
-    return true;
 }

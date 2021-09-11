@@ -26,11 +26,18 @@ function getTimeHour(dayLength){
     console.log(yesdatHour)
 
     return yesdatHour;
+}
 
-    // yesdatHour = yesday.getFullYear() 
-    // yesdatHour += "-" + (yesday.getMonth() >= 9 ? (yesday.getMonth() + 1) : "0" + (yesday.getMonth() + 1))
-    // yesdatHour += "-" + (yesday.getDate() > 9 ? (yesday.getDate()) : "0" + (yesday.getDate()));
-    // yesdatHour += "-" + (yesday.getHours() > 9 ? (yesday.getHours()) : "0" + (yesday.getHours()));
+// 有些接口需要的时间戳精确到秒
+function getTimeSecond(dayLength){
+    var curDate = new Date();
+    var time = curDate.getTime() - 24 * 60 * 60 * 1000 * dayLength;
+    var yesday = new Date(time); // 获取的是前几天日期
+    var yesdatHour = yesday.Format("yyyy-MM-dd+hh:mm:ss");
+
+    console.log(yesdatHour)
+
+    return yesdatHour;
 }
 
 // ======== 百度 坐标转换 =================
@@ -42,6 +49,26 @@ function wgs84tobdpoint(long, lati){
     var curPoint = new BMapGL.Point(curBaiduCoord[0], curBaiduCoord[1]);
 
     return curPoint;
+}
+
+// 直接返回坐标数组，因为有些时候不需要点对象（比如热力图）
+function wgs84tobdcoord(long, lati){
+    var curGcjCoord = coordtransform.wgs84togcj02(long, lati);
+    var curBaiduCoord = coordtransform.gcj02tobd09(curGcjCoord[0], curGcjCoord[1]);
+    
+    return curBaiduCoord;
+}
+
+// ======== 异常坐标删除 =================
+
+function rawPointValid(lon, lat){
+    if (lon == null || lat == null) {
+        return false;
+    }
+    if (lon > 136 || lon < 70 || lat > 60 || lat < 10) {
+        return false;
+    }
+    return true;
 }
 
 function switchToLive(){

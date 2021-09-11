@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+	<style type="text/css">
+	body, html,#allmap {width: 100%;height: 100%;overflow: hidden;margin:0;font-family:"微软雅黑";}
+	</style>
+    <script src="//api.map.baidu.com/api?v=1.0&type=webgl&ak=NjvQlGFSxuq5B7ld8vdIWwuGfdy2sTsq"></script>
+	<script src="https://unpkg.com/mapvgl/dist/mapvgl.min.js"></script>
+    <script src="https://unpkg.com/mapvgl/dist/mapvgl.threelayers.min.js"></script>
+
+    <script src="js/mine.js"></script>
+    <script src="js/coordtransform.js"></script>
+
+    <title>刹车热力图</title>
+</head>
+<body>
+	<div id="allmap"></div>
+</body>
+</html>
+<script type="text/javascript">
+    var bmapgl = new BMapGL.Map("allmap");    // 创建Map实例
+	bmapgl.centerAndZoom(new BMapGL.Point(118.14267,24.497789),15);  // 初始化地图,设置中心点坐标和地图级别
+	bmapgl.setTilt(40);
+	bmapgl.enableScrollWheelZoom(true);     //开启鼠标滚轮缩放
+    bmapgl.setMapStyleV2({     
+        styleId: '0c4e2c205d522daab0c5090baf1e0163'
+    });
+
+    var view = new mapvgl.View({
+        map: bmapgl
+    });
+
+    fetch('./data/heatmap_break.json').then(rs => {
+        return rs.json();
+    }).then(rs => {
+        var data = [];
+        for (var i = 0; i < rs.length; i++) {
+            var item = rs[i];
+            var bdcoord = wgs84tobdcoord(item["Longitude"], item["Latitude"]);
+            data.push({
+                geometry: {
+                    type: 'Point',
+                    coordinates: [bdcoord[0], bdcoord[1]]
+                },
+                properties: {
+                    count: item["Value"]
+                }
+            });
+        }
+        var heatmap = new mapvgl.HeatmapLayer({
+            size: 20, // 单个点绘制大小
+            max: 50000, // 最大阈值
+            height: 80, // 最大高度，默认为0
+            unit: 'px', // 单位，m:米，px: 像素
+            gradient: { // 对应比例渐变色
+                0.25: 'rgba(89, 233, 179, 1)',
+                0.55: 'rgba(182, 243, 147, 1)',
+                0.85: 'rgba(254, 255, 140, 1)',
+                0.9: 'rgba(217, 29, 28, 1)',
+            }
+        });
+        heatmap.setData(data);
+        view.addLayer(heatmap);
+    });
+
+</script>
