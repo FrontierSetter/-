@@ -246,22 +246,22 @@
             </div>
         </div>
         <div id="right_container">
-            <div id="div1">
+            <div class="image_box">
                 <img class="v2" id="img1" src="../static/jpg/0001.jpg"  />
                 <!-- <h3 style="color:#6D93AB;font-size:16px;">地图</h3> -->
             </div>
             
-            <div id="div2">
+            <div class="image_box">
                 <img class="v2" id="img2" src="../static/jpg/0002.jpg"  />
                 <!-- <h3 style="color:#6D93AB;font-size:16px;">地图</h3> -->
             </div>
 
-            <div id="div3">
+            <div class="image_box">
                 <img class="v2" id="img3" src="../static/jpg/0003.jpg"  />
                 <!-- <h3 style="color:#6D93AB;font-size:16px;">地图</h3> -->
             </div>
 
-            <div id="div1">
+            <div class="image_box">
                 <img class="v2" id="img4" src="../static/jpg/0004.jpg"  />
                 <!-- <h3 style="color:#6D93AB;font-size:16px;">地图</h3> -->
             </div>
@@ -298,12 +298,18 @@ ul.tag_options li.open_selected{background:transparent url("ubox-select.gif") no
         float:left;
     }
     .drop{
-        padding: 1px;
+        width:10%;
+        
         float:left;
         align-items: center;
     }
     #left_container{
         width: 75%;
+    }
+    #right_container div{
+        width: 98%;
+        height: 24%;
+        padding: 5px;
     }
     #right_container{
         width:25%;
@@ -319,6 +325,7 @@ ul.tag_options li.open_selected{background:transparent url("ubox-select.gif") no
     #left_down{
         width: 100%;
         height: 70%;
+        align-items: center;
     }
     button.b1{
         background-color:rgba(84, 85, 177, 0.568);
@@ -330,9 +337,8 @@ ul.tag_options li.open_selected{background:transparent url("ubox-select.gif") no
         object-position: 40px 50%;     
     }
     img.v2{
-        width: 24%;
-        /* object-fit: none; */
-        object-position: 20px 10px;     
+        width: 180px;
+            
     }
 
     .main_box{
