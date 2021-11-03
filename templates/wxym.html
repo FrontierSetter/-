@@ -100,91 +100,40 @@
     
     <div class="head_top"><span>课题三：自动驾驶电动汽车大数据云雾融合平台研究</span></div>
     <div class="visual">
-        <div id="left_container">
-            <div id="left_up">
-                <div class="visual_conBot" style="width: 100%; height: 100%;">
+        <div id="left_container1">
+                <!-- <div class="visual_conBot" style="width: 100%; height: 100%;">
                     <img class="visual_conBot_l" src="images/ksh42.png">
                     <img class="visual_conBot_2" src="images/ksh43.png">
                     <img class="visual_conBot_3" src="images/ksh44.png">
-                    <img class="visual_conBot_4" src="images/ksh45.png">
+                    <img class="visual_conBot_4" src="images/ksh45.png"> -->
                     <div style="margin: 1%; height: 70px; width: 98%;">
                         <div class="drop">
                             <div class="dropdown">
-                                <h3 style="color:#0f85ce;font-size:18px;">时间</h3>
-                                <select id="time" style="color: #6D93AB; background-color: rgb(5, 5, 54);font-size: 16px;width: 100px;">
+                                <h3 style="color:#0f85ce;font-size:18px;">道路线形</h3>
+                                <select id="dlxx" style="color: #6D93AB; background-color: rgb(5, 5, 54);font-size: 16px;width: 100px;">
                                     <option value="0">---</option>
-                                    <option value="1">白天</option>
-                                    <option value="2">晚上</option>
+                                    <option value="1">平面直线</option>
+                                    <option value="2">斜坡直线</option>
+                                    <option value="3">缓慢平曲线</option>
+                                    <option value="4">急转弯平曲线</option>
+                                    <option value="5">缓慢竖曲线</option>
+                                    <option value="6">急转弯竖曲线</option>
                                 </select>
                             </div>
                         </div>
 
                         <div class="drop">
                             <div class="dropdown">
-                                <h3 style="color:#0f85ce;font-size:18px;">天气</h3>
-                                <select id="weather" style="color: #6D93AB; background-color: rgb(5, 5, 54);font-size: 16px;width: 100px;">
-                                    <option value="0">---</option>
-                                    <option value="1">晴天</option>
-                                    <option value="2">雨天</option>
-                                </select>
-                            </div>
-                        </div>
-                        
-                        <div class="drop">
-                            <div class="dropdown">
-                                <h3 style="color:#0f85ce;font-size:18px;">行驶车辆行为</h3>
-                                <select id="xsclxw" style="color: #6D93AB; background-color: rgb(5, 5, 54);font-size: 16px;width: 100px;">
-                                    <option value="0">---</option>
-                                    <option value="1">右转弯</option>
-                                    <option value="2">左转弯</option>
-                                    <option value="3">直行前进</option>
-                                    <option value="4">变道</option>
-                                    <option value="5">超车</option>
-                                    <option value="6">倒车</option>
-                                </select>
-                            </div>
-                        </div>
-                        
-                        <div class="drop">
-                            <div class="dropdown">
-                                <h3 style="color:#0f85ce;font-size:18px;">危险对象行为</h3>
-                                <select id="wxdxxw" style="color: #6D93AB; background-color: rgb(5, 5, 54);font-size: 16px;width: 100px;">
-                                    <option value="0">---</option>
-                                    <option value="1">右转弯</option>
-                                    <option value="2">左转弯</option>
-                                    <option value="3">急停</option>
-                                    <option value="4">直行前进</option>
-                                    <option value="5">变道</option>
-                                    <option value="6">超车</option>
-                                    <option value="7">掉头</option>
-                                    <option value="8">倒车</option>
-                                </select>
-                            </div>
-                        </div>
-                
-                        <div class="drop">
-                            <div class="dropdown">
-                                <h3 style="color:#0f85ce;font-size:18px;">危险对象属性</h3>
-                                <select id="wxdxsx" style="color: #6D93AB; background-color: rgb(5, 5, 54);font-size: 16px;width: 100px;">
-                                    <option value="0">---</option>
-                                    <option value="1">摩托车</option>
-                                    <option value="2">自行车</option>
-                                    <option value="3">小型车</option>
-                                    <option value="4">行人</option>
-                                </select>
-                            </div>
-                        </div>
-        
-                        <div class="drop">
-                            <div class="dropdown">
                                 <h3 style="color:#0f85ce;font-size:18px;">路口类型</h3>
                                 <select id="lklx" style="color: #6D93AB; background-color: rgb(5, 5, 54);font-size: 16px;width: 100px;">
                                     <option value="0">---</option>
-                                    <option value="1">掉头路口</option>
-                                    <option value="2">合流路口</option>
-                                    <option value="3">非路口</option>
-                                    <option value="4">丁字路口</option>
-                                    <option value="5">十字路口</option>
+                                    <option value="1">合流路口</option>
+                                    <option value="2">分流路口</option>
+                                    <option value="3">十字形路口</option>
+                                    <option value="4">T字形路口</option>
+                                    <option value="5">环形路口</option>
+                                    <option value="6">掉头路口</option>
+                                    <option value="7">非路口</option>
                                 </select>
                             </div>
                         </div>
@@ -194,47 +143,255 @@
                                 <h3 style="color:#0f85ce;font-size:18px;">路面状态</h3>
                                 <select id="lmzt" style="color: #6D93AB; background-color: rgb(5, 5, 54);font-size: 16px;width: 100px;">
                                     <option value="0">---</option>
-                                    <option value="1">湿滑</option>
-                                    <option value="2">干燥</option>
+                                    <option value="1">干燥</option>
+                                    <option value="2">湿滑</option>
+                                    <option value="3">漫水</option>
+                                    <option value="4">泥泞</option>
+                                    <option value="5">结冰</option>
+             
                                 </select>
                             </div>
                         </div>
                         
+                        <div class="drop">
+                            <div class="dropdown">
+                                <h3 style="color:#0f85ce;font-size:18px;">车道数</h3>
+                                <select id="cds" style="color: #6D93AB; background-color: rgb(5, 5, 54);font-size: 16px;width: 100px;">
+                                    <option value="0">---</option>
+                                    <option value="1">1条</option>
+                                    <option value="2">2条</option>
+                                    <option value="3">4条</option>
+                                    <option value="4">6条</option>
+                                    <option value="5">8条</option>
+                                    <option value="6">10条</option>
+                            
+                                </select>
+                            </div>
+                        </div>
+                
                         <div class="drop">
                             <div class="dropdown">
                                 <h3 style="color:#0f85ce;font-size:18px;">道路标志线</h3>
                                 <select id="dlbzx" style="color: #6D93AB; background-color: rgb(5, 5, 54);font-size: 16px;width: 100px;">
                                     <option value="0">---</option>
-                                    <option value="1">无</option>
-                                    <option value="2">有</option>
+                                    <option value="1">有标志线</option>
+                                    <option value="2">无标志线</option>
+                             
+                                </select>
+                            </div>
+                        </div>
+        
+                        <div class="drop">
+                            <div class="dropdown">
+                                <h3 style="color:#0f85ce;font-size:18px;">道路标志牌</h3>
+                                <select id="dlbzp" style="color: #6D93AB; background-color: rgb(5, 5, 54);font-size: 16px;width: 100px;">
+                                    <option value="0">---</option>
+                                    <option value="1">有标志牌</option>
+                                    <option value="2">无标志牌</option>
+                                 
                                 </select>
                             </div>
                         </div>
                         
                         <div class="drop">
                             <div class="dropdown">
-                                <h3 style="color:#0f85ce;font-size:18px;">地图</h3>
-                                <select id="map" style="color: #6D93AB; background-color: rgb(5, 5, 54);font-size: 16px;width: 100px;">
+                                <h3 style="color:#0f85ce;font-size:18px;">道路隔离带</h3>
+                                <select id="dlgld" style="color: #6D93AB; background-color: rgb(5, 5, 54);font-size: 16px;width: 100px;">
                                     <option value="0">---</option>
-                                    <option value="1">城镇</option>
-                                    <option value="2">乡村</option>
+                                    <option value="1">有隔离带</option>
+                                    <option value="2">无隔离带</option>
                                 </select>
                             </div>
                         </div>
                         
-                        <div class="drop" style="padding: 10px;">
+                        <div class="drop">
                             <div class="dropdown">
-                                <button onclick="sousuo()" class="b1">搜索</button>
-                                <!-- <button onclick="playPause()" class="b1">播放</button> -->
+                                <h3 style="color:#0f85ce;font-size:18px;">交通信号灯</h3>
+                                <select id="jtxhd" style="color: #6D93AB; background-color: rgb(5, 5, 54);font-size: 16px;width: 100px;">
+                                    <option value="0">---</option>
+                                    <option value="1">有交通灯</option>
+                                    <option value="2">无交通灯</option>
+                                </select>
                             </div>
-                               
-                        </div>        
-                    </div>    
+                        </div>
+                        
+                        <div class="drop">
+                            <div class="dropdown">
+                                <h3 style="color:#0f85ce;font-size:18px;">时间</h3>
+                                <select id="sj" style="color: #6D93AB; background-color: rgb(5, 5, 54);font-size: 16px;width: 100px;">
+                                    <option value="0">---</option>
+                                    <option value="1">白天</option>
+                                    <option value="2">黑夜</option>
+                                </select>
+                            </div>
+                        </div>
+
                        
-                </div>
+                <!-- </div> -->
                 
 
             </div>
+            
+        </div>
+
+        <div id="left_container1">
+            <!-- <div class="visual_conBot" style="width: 100%; height: 100%;">
+                <img class="visual_conBot_l" src="images/ksh42.png">
+                <img class="visual_conBot_2" src="images/ksh43.png">
+                <img class="visual_conBot_3" src="images/ksh44.png">
+                <img class="visual_conBot_4" src="images/ksh45.png"> -->
+                <div style="margin: 1%; height: 70px; width: 98%;">
+                    <div class="drop">
+                        <div class="dropdown">
+                            <h3 style="color:#0f85ce;font-size:18px;">天气</h3>
+                            <select id="tq" style="color: #6D93AB; background-color: rgb(5, 5, 54);font-size: 16px;width: 100px;">
+                                <option value="0">---</option>
+                                <option value="1">晴天</option>
+                                <option value="2">雨天</option>
+                                <option value="3">雪天</option>
+                                <option value="4">雾天</option>
+                                <option value="5">沙尘</option>
+                                <option value="6">大风</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="drop">
+                        <div class="dropdown">
+                            <h3 style="color:#0f85ce;font-size:18px;">碰撞对象属性</h3>
+                            <select id="pzdxsx" style="color: #6D93AB; background-color: rgb(5, 5, 54);font-size: 16px;width: 100px;">
+                                <option value="0">---</option>
+                                <option value="1">道路设施</option>
+                                <option value="2">行人</option>
+                                <option value="3">动物</option>
+                                <option value="4">自行车</option>
+                                <option value="5">电动车</option>
+                                <option value="6">摩托车</option>
+                                <option value="7">三轮车</option>
+                                <option value="8">小型车</option>
+                                <option value="9">中型车</option>
+                                <option value="10">大型车</option>
+
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="drop">
+                        <div class="dropdown">
+                            <h3 style="color:#0f85ce;font-size:18px;">碰撞对象行为</h3>
+                            <select id="pzdxxw" style="color: #6D93AB; background-color: rgb(5, 5, 54);font-size: 16px;width: 100px;">
+                                <option value="0">---</option>
+                                <option value="1">停止</option>
+                                <option value="2">起步</option>
+                                <option value="3">漂移</option>
+                                <option value="4">变道</option>
+                                <option value="5">直行</option>
+                                <option value="6">左转</option>
+                                <option value="7">右转</option>
+                                <option value="8">倒行</option>
+                                <option value="9">右后倒行</option>
+                                <option value="10">左后倒行</option>
+                                <option value="11">超车</option>
+                                <option value="12">左掉头</option>
+                                <option value="13">右掉头</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="drop">
+                        <div class="dropdown">
+                            <h3 style="color:#0f85ce;font-size:18px;">碰撞对象相对主车位置</h3>
+                            <select id="pzdxxdzcwz" style="color: #6D93AB; background-color: rgb(5, 5, 54);font-size: 16px;width: 100px;">
+                                <option value="0">---</option>
+                                <option value="1">左侧</option>
+                                <option value="2">右侧</option>
+                                <option value="3">前方</option>
+                                <option value="4">后方</option>
+                               
+                            </select>
+                        </div>
+                    </div>
+            
+                    <div class="drop">
+                        <div class="dropdown">
+                            <h3 style="color:#0f85ce;font-size:18px;">碰撞对象相对主车方向</h3>
+                            <select id="pzdxxdzcxsfx" style="color: #6D93AB; background-color: rgb(5, 5, 54);font-size: 16px;width: 100px;">
+                                <option value="0">---</option>
+                                <option value="1">同向</option>
+                                <option value="2">逆向</option>
+                                <option value="3">横向</option>
+                                
+                            </select>
+                        </div>
+                    </div>
+    
+                    <div class="drop">
+                        <div class="dropdown">
+                            <h3 style="color:#0f85ce;font-size:18px;">主车属性</h3>
+                            <select id="zcsx" style="color: #6D93AB; background-color: rgb(5, 5, 54);font-size: 16px;width: 100px;">
+                                <option value="0">---</option>
+                                <option value="1">小型车</option>
+                                <option value="2">中型车</option>
+                                <option value="3">大型车</option>
+                             
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="drop">
+                        <div class="dropdown">
+                            <h3 style="color:#0f85ce;font-size:18px;">主车行为</h3>
+                            <select id="zcxw" style="color: #6D93AB; background-color: rgb(5, 5, 54);font-size: 16px;width: 100px;">
+                                <option value="0">---</option>
+                                <option value="1">停止</option>
+                                <option value="2">起步</option>
+                                <option value="3">漂移</option>
+                                <option value="4">变道</option>
+                                <option value="5">直行</option>
+                                <option value="6">左转</option>
+                                <option value="7">右转</option>
+                                <option value="8">倒行</option>
+                                <option value="9">右后倒行</option>
+                                <option value="10">左后倒行</option>
+                                <option value="11">超车</option>
+                                <option value="12">左掉头</option>
+                                <option value="13">右掉头</option>
+                                
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="drop">
+                        <div class="dropdown">
+                            <h3 style="color:#0f85ce;font-size:18px;">地图</h3>
+                            <select id="dt" style="color: #6D93AB; background-color: rgb(5, 5, 54);font-size: 16px;width: 100px;">
+                                <option value="0">---</option>
+                                <option value="1">城镇</option>
+                                <option value="2">乡村</option>
+                                <option value="3">高速公路</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                  
+                    
+                    
+                    <div class="drop" style="padding: 10px;">
+                        <div class="dropdown">
+                            <button onclick="sousuo()" class="b1">搜索</button>
+                            <!-- <button onclick="playPause()" class="b1">播放</button> -->
+                        </div>
+                           
+                    </div>        
+
+                   
+            <!-- </div> -->
+            
+
+        </div>
+        
+    </div>
+        <div id="middle_container">
             <div id="left_down">
                 <video class="v1" id="video1" controls>
                     <!-- <source src="mp4/0001.mp4" type="video/mp4"> -->
@@ -294,17 +451,23 @@ ul.tag_options li.open_selected{background:transparent url("ubox-select.gif") no
 
     
 
-    #left_container,#right_container{
+    #left_container1,left_container2,#middle_container,#right_container{
         float:left;
     }
     .drop{
         width:10%;
         
-        float:left;
+        /* float:left; */
         align-items: center;
     }
-    #left_container{
-        width: 75%;
+    #left_container1{
+        width: 10%;
+    }
+    #left_container2{
+        width: 10%;
+    }
+    #middle_container{
+        width: 55%;
     }
     #right_container div{
         width: 98%;
@@ -312,7 +475,7 @@ ul.tag_options li.open_selected{background:transparent url("ubox-select.gif") no
         padding: 5px;
     }
     #right_container{
-        width:25%;
+        width:20%;
     }
     #div1,#div2,#div3,#div4{
         width: 98%;
@@ -357,14 +520,14 @@ ul.tag_options li.open_selected{background:transparent url("ubox-select.gif") no
         width:75%;height:100%;float:left; position:relative;
     }
     .dropdown{
-        padding-top: 10px;
-        width: 150px;
+        padding: 30px;
+        width: 250px;
         height: 40px;
+        position: center;
     }
 
 
 </style>
-
 <script>
 
     var video_name1="0001.mp4";
@@ -487,80 +650,163 @@ function index_to_string4(index)
     
 }
 
+function index_to_string(index,length){
+    s=""
+    if(index==0){
+        for (var i=1;i<length;i++)
+        { 
+            s=s+"0"
+        }
+        return s
+    }
+
+    for (var i=1;i<length;i++)
+    { 
+        if(i==index){
+            s=s+"1"
+        }else{
+            s=s+"0"
+        }
+    }
+
+    return s
+}
+
 
 function sousuo()
 {
     var myVideo=document.getElementById("video1"); 
     var source = myVideo.getElementsByTagName('source');
 
-    //time
-    var time = document.getElementById("time");
-    var time_index = time.selectedIndex;
-    console.log(time_index);
-    var mytime = index_to_string2(time_index);
-    console.log(mytime)
+    var vec='';
 
-    //weather
-    var weather = document.getElementById("weather");
-    var weather_index = weather.selectedIndex;
-    console.log(weather_index);
-    var myweather =index_to_string2(weather_index);
-    console.log(myweather)
-
-    //xsclxw
-    var xsclxw = document.getElementById("xsclxw");
-    var xsclxw_index = xsclxw.selectedIndex;
-    console.log(xsclxw_index);
-    var myxsclxw = index_to_string3(xsclxw_index);
-    console.log(myxsclxw)
-
-    //wxdxxw
-    var wxdxxw = document.getElementById("wxdxxw");
-    var wxdxxw_index = wxdxxw.selectedIndex;
-    console.log(wxdxxw_index);
-    var mywxdxxw = index_to_string4(wxdxxw_index);
-    console.log(mywxdxxw)
-
-    //wxdxsx
-    var wxdxsx = document.getElementById("wxdxsx");
-    var wxdxsx_index = wxdxsx.selectedIndex;
-    console.log(wxdxsx_index);
-    var mywxdxsx = index_to_string3(wxdxsx_index);
-    console.log(mywxdxsx)
+    //dlxx
+    var dlxx = document.getElementById("dlxx");
+    var dlxx_index = dlxx.selectedIndex;
+    var mydlxx = index_to_string(dlxx_index,dlxx.length)
+    console.log(mydlxx)
+    vec=vec+mydlxx
 
     //lklx
     var lklx = document.getElementById("lklx");
     var lklx_index = lklx.selectedIndex;
-    console.log(lklx_index);
-    var mylklx = index_to_string3(lklx_index);
+    var mylklx = index_to_string(lklx_index,lklx.length)
     console.log(mylklx)
+    vec=vec+mylklx
 
     //lmzt
     var lmzt = document.getElementById("lmzt");
-    var lmzt_index =lmzt.selectedIndex;
-    console.log(lmzt_index);
-    var mylmzt = index_to_string2(lmzt_index);
+    var lmzt_index = lmzt.selectedIndex;
+    var mylmzt = index_to_string(lmzt_index,lmzt.length)
     console.log(mylmzt)
+    vec=vec+mylmzt
+
+    //cds
+    var cds = document.getElementById("cds");
+    var cds_index = cds.selectedIndex;
+    var mycds = index_to_string(cds_index,cds.length)
+    console.log(mycds)
+    vec=vec+mycds
 
     //dlbzx
     var dlbzx = document.getElementById("dlbzx");
     var dlbzx_index = dlbzx.selectedIndex;
-    console.log(dlbzx_index);
-    var mydlbzx = index_to_string2(dlbzx_index);
+    var mydlbzx = index_to_string(dlbzx_index,dlbzx.length)
     console.log(mydlbzx)
+    vec=vec+mydlbzx
 
-    //map
-    var map = document.getElementById("map");
-    var map_index = map.selectedIndex;
-    console.log(map_index);
-    var mymap = index_to_string2(map_index);
-    console.log(mymap)
+    //dlbzp
+    var dlbzp = document.getElementById("dlbzp");
+    var dlbzp_index = dlbzp.selectedIndex;
+    var mydlbzp = index_to_string(dlbzp_index,dlbzp.length)
+    console.log(mydlbzp)
+    vec=vec+mydlbzp
+
+    var element_object
+    var element_index
+    var myelement
+
+    //dlgld
+    element_object = document.getElementById("dlgld");
+    element_index = element_object.selectedIndex;
+    myelement = index_to_string(element_index,element_object.length)
+    console.log(myelement)
+    vec=vec+myelement
+
+    //jtxhd
+    element_object = document.getElementById("jtxhd");
+    element_index = element_object.selectedIndex;
+    myelement = index_to_string(element_index,element_object.length)
+    console.log(myelement)
+    vec=vec+myelement
+
+    //sj
+    element_object = document.getElementById("sj");
+    element_index = element_object.selectedIndex;
+    myelement = index_to_string(element_index,element_object.length)
+    console.log(myelement)
+    vec=vec+myelement
+
+    //tq
+    element_object = document.getElementById("tq");
+    element_index = element_object.selectedIndex;
+    myelement = index_to_string(element_index,element_object.length)
+    console.log(myelement)
+    vec=vec+myelement
+
+    //pzdxsx
+    element_object = document.getElementById("pzdxsx");
+    element_index = element_object.selectedIndex;
+    myelement = index_to_string(element_index,element_object.length)
+    console.log(myelement)
+    vec=vec+myelement
+
+    //pzdxxw
+    element_object = document.getElementById("pzdxxw");
+    element_index = element_object.selectedIndex;
+    myelement = index_to_string(element_index,element_object.length)
+    console.log(myelement)
+    vec=vec+myelement
+
+    //pzdxxdzcwz
+    element_object = document.getElementById("pzdxxdzcwz");
+    element_index = element_object.selectedIndex;
+    myelement = index_to_string(element_index,element_object.length)
+    console.log(myelement)
+    vec=vec+myelement
+
+    //pzdxxdzcxsfx
+    element_object = document.getElementById("pzdxxdzcxsfx");
+    element_index = element_object.selectedIndex;
+    myelement = index_to_string(element_index,element_object.length)
+    console.log(myelement)
+    vec=vec+myelement
+
+    //zcsx
+    element_object = document.getElementById("zcsx");
+    element_index = element_object.selectedIndex;
+    myelement = index_to_string(element_index,element_object.length)
+    console.log(myelement)
+    vec=vec+myelement
+
+    //zcxw
+    element_object = document.getElementById("zcxw");
+    element_index = element_object.selectedIndex;
+    myelement = index_to_string(element_index,element_object.length)
+    console.log(myelement)
+    vec=vec+myelement
+
+    //dt
+    element_object = document.getElementById("dt");
+    element_index = element_object.selectedIndex;
+    myelement = index_to_string(element_index,element_object.length)
+    console.log(myelement)
+    vec=vec+myelement
+
+    console.log(vec)
 
     var param = {};
 
-    var vec='';
-
-    vec=mytime+myweather+myxsclxw+mywxdxxw+mywxdxsx+mylklx+mylmzt+mydlbzx+mymap;
 
     param["vec"]=vec;
 

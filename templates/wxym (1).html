@@ -1,0 +1,701 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>智能车监管大数据平台</title>
+    <!--设置是否为缩放模式 -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- 新 Bootstrap 核心 CSS 文件 -->
+    <link rel="stylesheet" type="text/css" href="bootstrap/3.3.4/css/bootstrap.css">
+    <!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
+    <!-- <script src="js/jquery.min.js"></script> -->
+    <!-- <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.0/jquery.js"></script> -->
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+    <script src="js/bootstrap.min.js"></script>
+
+    <!-- 弹出式窗口 -->
+    <link rel="stylesheet" type="text/css" href="css/default.css" />
+    <link rel="stylesheet" type="text/css" href="css/component.css" />
+    <script src="js/modernizr.custom.js"></script>
+
+    <!-- 服务器配置 -->
+    <script src="js/server.js"></script>
+
+    <!--echarts JS-->
+    <!-- <script src="js/echarts.min.js"></script> -->
+    <script src="https://cdn.bootcdn.net/ajax/libs/echarts/5.0.2/echarts.js"></script>
+
+    <!-- 轮播swiper文件 -->
+    <link rel="stylesheet" type="text/css" href="css/swiper.min.css">
+    <script src="js/swiper.min.js"></script>
+
+    <!--界面样式-->
+    <script src="js/visual.js"></script>
+    <script src="js/china.js"></script>
+    <!-- <script src="js/xiamen.js"></script> -->
+    <script src="js/chartMap.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/visual.css">
+
+    <!-- semantic UI -->
+    <link href="https://cdn.bootcdn.net/ajax/libs/semantic-ui/2.4.1/components/icon.css" rel="stylesheet">
+    <!-- <link href="https://cdn.bootcss.com/semantic-ui/2.4.1/components/icon.css" rel="stylesheet"> -->
+    <link href="https://cdn.bootcdn.net/ajax/libs/semantic-ui/2.4.1/components/button.css" rel="stylesheet">
+    <script src="https://cdn.bootcdn.net/ajax/libs/semantic-ui/2.4.1/components/transition.js"></script>
+    <link href="https://cdn.bootcdn.net/ajax/libs/semantic-ui/2.4.1/components/transition.css" rel="stylesheet">
+    <link href="https://cdn.bootcdn.net/ajax/libs/semantic-ui/2.4.1/components/button.css" rel="stylesheet">
+    <link href="https://cdn.bootcss.com/semantic-ui/2.4.1/components/icon.css" rel="stylesheet">
+    <script src="https://cdn.bootcdn.net/ajax/libs/semantic-ui/2.4.1/components/dropdown.js"></script>
+    <link href="https://cdn.bootcdn.net/ajax/libs/semantic-ui/2.4.1/components/dropdown.css" rel="stylesheet">
+
+
+    <!-- semantic的下拉菜单不能反色，用formantic -->
+    <!-- <script src="https://cdn.bootcdn.net/ajax/libs/fomantic-ui/2.8.7/components/dropdown.js"></script>
+    <link href="https://cdn.bootcdn.net/ajax/libs/fomantic-ui/2.8.7/components/dropdown.css" rel="stylesheet"> -->
+
+
+    <!-- 百度地图 -->
+    <script type="text/javascript" src="http://api.map.baidu.com/api?v=3.0&ak=NjvQlGFSxuq5B7ld8vdIWwuGfdy2sTsq"></script>
+    <script type="text/javascript" src="http://api.map.baidu.com/api?v=1.0&type=webgl&ak=NjvQlGFSxuq5B7ld8vdIWwuGfdy2sTsq"></script>
+        <!-- 百度地图绘图需要的css，存在跨域问题，所以手动复制下来作为静态资源提供 -->
+    <link rel="stylesheet" type="text/css" href="css/bmap.css">
+
+    <!-- 容器反转 -->
+    <link rel="stylesheet" type="text/css" href="css/flip.css">
+    <script src="js/flip.js"></script>
+
+    <!-- echarts 绘图脚本 -->
+    <script src="js/charts.js"></script>
+
+    <!-- 数据请求脚本 -->
+    <script src="js/dashboard.js"></script>
+    <script src="js/scoreboard.js"></script>
+
+    <!-- 时钟 -->
+    <!-- <link rel="stylesheet" href="css/clock.css"> -->
+
+    <!-- 坐标转换 -->
+    <script src="js/coordtransform.js"></script>
+
+    <!-- 其他css -->
+    <link rel="stylesheet" type="text/css" href="css/mine.css">
+    <script src="js/mine.js"></script>
+
+    <!-- 下拉菜单 -->
+    <link href="dist/css/bootstrap.css" rel="stylesheet" type="text/css">
+    <link href="dist/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+    <link href="dist/css/bootstrap-theme.css" rel="stylesheet" type="text/css">
+    <link href="dist/css/bootstrap-theme.min.css" rel="stylesheet" type="text/css">
+    <script type="text/javascript" src="js/tests/vendor/jquery.min.js"></script>
+    <script type="text/javascript" src="dist/bootstrap.js"></script>
+    <script type="text/javascript" src="dist/bootstrap.min.js"></script>
+    <script type="text/javascript" src="dist/npm.js"></script>
+    <script type="text/javascript" src="js/tab.js"></script>
+    <script type="text/javascript" src="js/dropdown.js"></script>
+
+
+
+</head>
+<body class="ksh" id='main_body'>
+    
+    <div class="head_top"><span>课题三：自动驾驶电动汽车大数据云雾融合平台研究</span></div>
+    <div class="visual">
+        <div id="left_container">
+            <div id="left_up">
+                <div class="visual_conBot" style="width: 100%; height: 100%;">
+                    <img class="visual_conBot_l" src="images/ksh42.png">
+                    <img class="visual_conBot_2" src="images/ksh43.png">
+                    <img class="visual_conBot_3" src="images/ksh44.png">
+                    <img class="visual_conBot_4" src="images/ksh45.png">
+                    <div style="margin: 1%; height: 70px; width: 98%;">
+                        <div class="drop">
+                            <div class="dropdown">
+                                <h3 style="color:#0f85ce;font-size:18px;">时间</h3>
+                                <select id="time" style="color: #6D93AB; background-color: rgb(5, 5, 54);font-size: 16px;width: 100px;">
+                                    <option value="0">---</option>
+                                    <option value="1">白天</option>
+                                    <option value="2">晚上</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="drop">
+                            <div class="dropdown">
+                                <h3 style="color:#0f85ce;font-size:18px;">天气</h3>
+                                <select id="weather" style="color: #6D93AB; background-color: rgb(5, 5, 54);font-size: 16px;width: 100px;">
+                                    <option value="0">---</option>
+                                    <option value="1">晴天</option>
+                                    <option value="2">雨天</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <div class="drop">
+                            <div class="dropdown">
+                                <h3 style="color:#0f85ce;font-size:18px;">行驶车辆行为</h3>
+                                <select id="xsclxw" style="color: #6D93AB; background-color: rgb(5, 5, 54);font-size: 16px;width: 100px;">
+                                    <option value="0">---</option>
+                                    <option value="1">右转弯</option>
+                                    <option value="2">左转弯</option>
+                                    <option value="3">直行前进</option>
+                                    <option value="4">变道</option>
+                                    <option value="5">超车</option>
+                                    <option value="6">倒车</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <div class="drop">
+                            <div class="dropdown">
+                                <h3 style="color:#0f85ce;font-size:18px;">危险对象行为</h3>
+                                <select id="wxdxxw" style="color: #6D93AB; background-color: rgb(5, 5, 54);font-size: 16px;width: 100px;">
+                                    <option value="0">---</option>
+                                    <option value="1">右转弯</option>
+                                    <option value="2">左转弯</option>
+                                    <option value="3">急停</option>
+                                    <option value="4">直行前进</option>
+                                    <option value="5">变道</option>
+                                    <option value="6">超车</option>
+                                    <option value="7">掉头</option>
+                                    <option value="8">倒车</option>
+                                </select>
+                            </div>
+                        </div>
+                
+                        <div class="drop">
+                            <div class="dropdown">
+                                <h3 style="color:#0f85ce;font-size:18px;">危险对象属性</h3>
+                                <select id="wxdxsx" style="color: #6D93AB; background-color: rgb(5, 5, 54);font-size: 16px;width: 100px;">
+                                    <option value="0">---</option>
+                                    <option value="1">摩托车</option>
+                                    <option value="2">自行车</option>
+                                    <option value="3">小型车</option>
+                                    <option value="4">行人</option>
+                                </select>
+                            </div>
+                        </div>
+        
+                        <div class="drop">
+                            <div class="dropdown">
+                                <h3 style="color:#0f85ce;font-size:18px;">路口类型</h3>
+                                <select id="lklx" style="color: #6D93AB; background-color: rgb(5, 5, 54);font-size: 16px;width: 100px;">
+                                    <option value="0">---</option>
+                                    <option value="1">掉头路口</option>
+                                    <option value="2">合流路口</option>
+                                    <option value="3">非路口</option>
+                                    <option value="4">丁字路口</option>
+                                    <option value="5">十字路口</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <div class="drop">
+                            <div class="dropdown">
+                                <h3 style="color:#0f85ce;font-size:18px;">路面状态</h3>
+                                <select id="lmzt" style="color: #6D93AB; background-color: rgb(5, 5, 54);font-size: 16px;width: 100px;">
+                                    <option value="0">---</option>
+                                    <option value="1">湿滑</option>
+                                    <option value="2">干燥</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <div class="drop">
+                            <div class="dropdown">
+                                <h3 style="color:#0f85ce;font-size:18px;">道路标志线</h3>
+                                <select id="dlbzx" style="color: #6D93AB; background-color: rgb(5, 5, 54);font-size: 16px;width: 100px;">
+                                    <option value="0">---</option>
+                                    <option value="1">无</option>
+                                    <option value="2">有</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <div class="drop">
+                            <div class="dropdown">
+                                <h3 style="color:#0f85ce;font-size:18px;">地图</h3>
+                                <select id="map" style="color: #6D93AB; background-color: rgb(5, 5, 54);font-size: 16px;width: 100px;">
+                                    <option value="0">---</option>
+                                    <option value="1">城镇</option>
+                                    <option value="2">乡村</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <div class="drop" style="padding: 10px;">
+                            <div class="dropdown">
+                                <button onclick="sousuo()" class="b1">搜索</button>
+                                <!-- <button onclick="playPause()" class="b1">播放</button> -->
+                            </div>
+                               
+                        </div>        
+                    </div>    
+                       
+                </div>
+                
+
+            </div>
+            <div id="left_down">
+                <video class="v1" id="video1" controls>
+                    <!-- <source src="mp4/0001.mp4" type="video/mp4"> -->
+                    <source src="mp4/0001.mp4" type="video/mp4">
+                     <!-- <source src="mov_bbb.ogg" type="video/ogg"> -->
+                    </source>
+                 </video>
+
+            </div>
+        </div>
+        <div id="right_container">
+            <div class="image_box">
+                <img class="v2" id="img1" src="jpg/0001.jpg"  />
+                <h3 id="tag1" style="color:#6D93AB;font-size:18px;">白天；晴天；行驶车辆直行前进；危险对象：小型车；危险对象行为：变道；非路口；路面干燥；有道路标志线；城镇</h3>
+            </div>
+            
+            <div class="image_box">
+                <img class="v2" id="img2" src="jpg/0002.jpg"  />
+                <h3 id="tag2" style="color:#6D93AB;font-size:18px;">白天；晴天；行驶车辆直行前进；危险对象：小型车；危险对象行为：变道；非路口；路面干燥；有道路标志线；城镇</h3>
+            </div>
+
+            <div class="image_box">
+                <img class="v2" id="img3" src="jpg/0003.jpg"  />
+                <h3 id="tag3" style="color:#6D93AB;font-size:18px;">白天；晴天；行驶车辆直行前进；危险对象：行人；危险对象行为：直行前进；非路口；路面干燥；有道路标志线；城镇</h3>
+            </div>
+
+            <div class="image_box">
+                <img class="v2" id="img4" src="jpg/0004.jpg"  />
+                <h3 id="tag4" style="color:#6D93AB;font-size:18px;">白天；晴天；行驶车辆直行前进；危险对象：小型车；危险对象行为：掉头；非路口；路面干燥；有道路标志线；城镇</h3>
+            </div>
+
+        </div>
+        
+
+    </div>    
+       
+
+</body>
+</html>
+
+<style>
+body{background:#CFDFEF;font:12px/150% "Lucida Grande", Arial, Verdana, Helvetica, sans-serif;}
+
+.select_box{width:100px;height:24px;}
+
+
+div.tag_select{display:block;color:#79A2BD;width:80px;height:24px;background:transparent url("ubox-select.gif") no-repeat 0 0;padding:0 10px;line-height:24px;}
+div.tag_select_hover{display:block;color:#79A2BD;width:80px;height:24px;background:transparent url("ubox-select.gif") no-repeat 0 -24px;padding:0 10px;line-height:24px;}
+div.tag_select_open{display:block;color:#79A2BD;width:80px;height:24px;background:transparent url("ubox-select.gif") no-repeat 0 -48px;padding:0 10px;line-height:24px;}
+
+ul.tag_options{position:absolute;padding:0;margin:0;list-style:none;background:transparent url("ubox-select.gif") no-repeat right bottom;width:100px;padding:0 0 5px;margin:0;}
+ul.tag_options li{background:transparent url("ubox-select.gif") repeat-y -100px 0;display:block;width:80px;padding:0 10px;height:24px;text-decoration:none;line-height:24px;color:#79A2BD;}
+
+ul.tag_options li.open_hover{background:transparent url("ubox-select.gif") no-repeat 0 -72px;color:#fff}
+ul.tag_options li.open_selected{background:transparent url("ubox-select.gif") no-repeat 0 -96px;color:#fff}
+
+
+    
+
+    #left_container,#right_container{
+        float:left;
+    }
+    .drop{
+        width:10%;
+        
+        float:left;
+        align-items: center;
+    }
+    #left_container{
+        width: 75%;
+    }
+    #right_container div{
+        width: 98%;
+        height: 24%;
+        padding: 5px;
+    }
+    #right_container{
+        width:25%;
+    }
+    #div1,#div2,#div3,#div4{
+        width: 98%;
+        height: 100%;
+    }
+    #left_up{
+        width:100%;
+        height: 30%;
+    }
+    #left_down{
+        width: 100%;
+        height: 70%;
+        align-items: center;
+    }
+    button.b1{
+        background-color:rgba(84, 85, 177, 0.568);
+    }
+
+    video.v1{
+        width: 99%;
+        /* object-fit: none; */
+        object-position: 40px 50%;     
+    }
+    img.v2{
+        width: 180px;
+        /* height: 40%; */
+    }
+
+    .main_box{
+        height:max-content;
+        width: max-content;
+        position: absolute;
+        display: table-cell; /*主要是这个属性*/
+        vertical-align: middle;
+        text-align: center;
+    }
+
+    .main_box.left_box{
+        width:25%;height:100%;float:left; position:relative;
+    }
+    .main_box.right_box{
+        width:75%;height:100%;float:left; position:relative;
+    }
+    .dropdown{
+        padding-top: 10px;
+        width: 150px;
+        height: 40px;
+    }
+
+
+</style>
+
+<script>
+
+    var video_name1="0001.mp4";
+    var video_name2="0002.mp4";
+    var video_name3="0003.mp4";
+    var video_name4="0004.mp4";
+
+var img1=document.getElementById("img1");
+
+img1.addEventListener('click',function(){
+    var myVideo=document.getElementById("video1"); 
+    var sources = myVideo.getElementsByTagName('source');
+    sources[0].src="mp4/"+video_name1;
+    myVideo.load();
+});
+
+var img2=document.getElementById("img2");
+
+img2.addEventListener('click',function(){
+    var myVideo=document.getElementById("video1"); 
+    var sources = myVideo.getElementsByTagName('source');
+    sources[0].src="mp4/"+video_name2;
+    myVideo.load();
+});
+
+var img3=document.getElementById("img3");
+
+img3.addEventListener('click',function(){
+    var myVideo=document.getElementById("video1"); 
+    var sources = myVideo.getElementsByTagName('source');
+    sources[0].src="mp4/"+video_name3;
+    myVideo.load();
+});
+
+var img4=document.getElementById("img4");
+
+img4.addEventListener('click',function(){
+    var myVideo=document.getElementById("video1"); 
+    var sources = myVideo.getElementsByTagName('source');
+    sources[0].src="mp4/"+video_name4;
+    myVideo.load();
+});
+
+function index_to_string2(index)
+{
+    if (index==0){
+        return '00';
+    }
+    if(index==1){
+        return '01';
+    }
+    if (index==2){
+        return '10';
+    }
+    if(index==3){
+        return '11';
+    }
+}
+
+function index_to_string3(index)
+{
+    if (index==0){
+        return '000';
+    }
+    if(index==1){
+        return '001';
+    }
+    if (index==2){
+        return '010';
+    }
+    if(index==3){
+        return '011';
+    }
+    if (index==4){
+        return '100';
+    }
+    if(index==5){
+        return '101';
+    }
+    if (index==6){
+        return '110';
+    }
+    if(index==7){
+        return '111';
+    }
+}
+
+function index_to_string4(index)
+{
+    if (index==0){
+        return '0000';
+    }
+    if(index==1){
+        return '0001';
+    }
+    if (index==2){
+        return '0010';
+    }
+    if(index==3){
+        return '0011';
+    }
+    if (index==4){
+        return '0100';
+    }
+    if(index==5){
+        return '0101';
+    }
+    if (index==6){
+        return '0110';
+    }
+    if(index==7){
+        return '0111';
+    }
+    if (index==8){
+        return '1000';
+    }
+    if(index==9){
+        return '1001';
+    }
+    
+}
+
+
+function sousuo()
+{
+    var myVideo=document.getElementById("video1"); 
+    var source = myVideo.getElementsByTagName('source');
+
+    //time
+    var time = document.getElementById("time");
+    var time_index = time.selectedIndex;
+    console.log(time_index);
+    var mytime = index_to_string2(time_index);
+    console.log(mytime)
+
+    //weather
+    var weather = document.getElementById("weather");
+    var weather_index = weather.selectedIndex;
+    console.log(weather_index);
+    var myweather =index_to_string2(weather_index);
+    console.log(myweather)
+
+    //xsclxw
+    var xsclxw = document.getElementById("xsclxw");
+    var xsclxw_index = xsclxw.selectedIndex;
+    console.log(xsclxw_index);
+    var myxsclxw = index_to_string3(xsclxw_index);
+    console.log(myxsclxw)
+
+    //wxdxxw
+    var wxdxxw = document.getElementById("wxdxxw");
+    var wxdxxw_index = wxdxxw.selectedIndex;
+    console.log(wxdxxw_index);
+    var mywxdxxw = index_to_string4(wxdxxw_index);
+    console.log(mywxdxxw)
+
+    //wxdxsx
+    var wxdxsx = document.getElementById("wxdxsx");
+    var wxdxsx_index = wxdxsx.selectedIndex;
+    console.log(wxdxsx_index);
+    var mywxdxsx = index_to_string3(wxdxsx_index);
+    console.log(mywxdxsx)
+
+    //lklx
+    var lklx = document.getElementById("lklx");
+    var lklx_index = lklx.selectedIndex;
+    console.log(lklx_index);
+    var mylklx = index_to_string3(lklx_index);
+    console.log(mylklx)
+
+    //lmzt
+    var lmzt = document.getElementById("lmzt");
+    var lmzt_index =lmzt.selectedIndex;
+    console.log(lmzt_index);
+    var mylmzt = index_to_string2(lmzt_index);
+    console.log(mylmzt)
+
+    //dlbzx
+    var dlbzx = document.getElementById("dlbzx");
+    var dlbzx_index = dlbzx.selectedIndex;
+    console.log(dlbzx_index);
+    var mydlbzx = index_to_string2(dlbzx_index);
+    console.log(mydlbzx)
+
+    //map
+    var map = document.getElementById("map");
+    var map_index = map.selectedIndex;
+    console.log(map_index);
+    var mymap = index_to_string2(map_index);
+    console.log(mymap)
+
+    var param = {};
+
+    var vec='';
+
+    vec=mytime+myweather+myxsclxw+mywxdxxw+mywxdxsx+mylklx+mylmzt+mydlbzx+mymap;
+
+    param["vec"]=vec;
+
+    var json = JSON.stringify(param);
+
+    var img1=document.getElementById("img1");
+    var img2=document.getElementById("img2");
+    var img3=document.getElementById("img3");
+    var img4=document.getElementById("img4");
+
+    $.ajax({
+        type: 'get',
+//         url: 'http://202.120.60.31:6000/search',
+//         dataType: 'json',
+//         data: json,
+        // url:'http://202.120.60.31:3357/search?vec='+vec,
+        url:'http://47.103.85.106/search?vec='+vec,
+        success: function(data) {
+            var newData=JSON.parse(data)
+
+            video_name1=newData[0].video_name;
+            video_name2=newData[1].video_name;
+            video_name3=newData[2].video_name;
+            video_name4=newData[3].video_name;
+            source[0].src="mp4/"+video_name1;
+            myVideo.load();
+
+            img1.src="jpg/"+newData[0].image_name;
+            img2.src="jpg/"+newData[1].image_name;
+            img3.src="jpg/"+newData[2].image_name;
+            img4.src="jpg/"+newData[3].image_name;
+            
+            document.getElementById("tag1").innerHTML=newData[0].tag_str;
+            document.getElementById("tag2").innerHTML=newData[1].tag_str;
+            document.getElementById("tag3").innerHTML=newData[2].tag_str;
+            document.getElementById("tag4").innerHTML=newData[3].tag_str;
+        },
+        error: function(error) {
+            console.log(error);
+        }
+    })
+
+    // myVideo.load();
+}
+
+function playPause()
+{ 
+    var myVideo=document.getElementById("video1"); 
+	if (myVideo.paused) 
+	  myVideo.play(); 
+	else 
+	  myVideo.pause(); 
+} 
+</script>
+
+<script type="text/javascript">
+    $('.ui.dropdown').dropdown();
+</script>
+
+<script>
+    function getVinList(){
+        $.ajax({
+            
+            url: server_ip+'api/current_vin', //请求的url
+            type: 'get', //请求的方式
+            error: function (data) {
+                console.log('getVinList请求失败');
+            },
+            success: function (data) {
+
+                console.log('getVinList请求成功');
+                console.log(data);
+
+                var obj = document.getElementById("vin_menu");
+
+                for(var i = 0; i < data.length; ++i){
+                    var new_tex = document.createElement("div");
+                    new_tex.setAttribute("class", "item");
+                    new_tex.setAttribute("style", "font-size: 20px;");
+                    new_tex.setAttribute("onclick", "onClickMenu(this)");
+                    new_tex.innerHTML = data[i];
+                    obj.appendChild(new_tex);
+                }
+            }
+        });
+
+    }
+</script>
+<script>
+    $(function () {
+$(".ul-item").hide();
+$(".li-item").hover(function () {
+$(this).find(".ul-item").stop(true,true).slideDown();
+}, function () {
+$(this).find(".ul-item").stop(true, true).slideUp();
+});
+
+$(".ul-item li a").hover(function () {
+$(this).addClass("bg");
+}, function () {
+$(this).removeClass("bg");
+});
+
+//总结stop（）
+//$("#box").stop();//默认的
+//$("#box").stop(true);//暂停
+//$("#box").stop(true, true);//立马停止
+</script>
+<script>
+    getVinList();
+
+    setTimeout(function(){
+        backgroundRequest();
+    }, 1000);
+
+    // dashboard
+    requestTotalCarNum();
+    setTimeout(function(){
+        requestOnCarNum();
+    }, 100);
+
+    // scoreboard
+    requestAverageSpeed();
+
+</script>
+
+<script>
+    function add_warning(){
+        $('#warning_button').prepend('<button id="warning_button_3" class="md-trigger" data-modal="modal-3">插入告警信息测试</button>')
+        $('#main_body').prepend('<div class="md-modal md-effect-1" id="modal-3"><div class="md-content"><h3>插入告警信息测试</h3><div><p>车辆告警详情:</p><ul><li><strong>危险程度:</strong> 危险.</li><li><strong>位置:</strong> xxxx, xxxx.</li><li><strong>详情:</strong> xxxxxx.</li></ul><button class="md-close">关闭</button> <button onclick="removeButton(\'warning_button_3\')">处理完成</button></div></div></div>')
+        // 新插入的弹出式窗口需要重新初始化
+        re_init_pop_window()
+    }
+
+    setTimeout(function(){
+        add_warning();
+    }, 5000);
+</script>
