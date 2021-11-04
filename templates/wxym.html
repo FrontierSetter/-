@@ -281,19 +281,20 @@
                             <h3 style="color:#0f85ce;font-size:18px;">碰撞对象行为</h3>
                             <select id="pzdxxw" style="color: #6D93AB; background-color: rgb(5, 5, 54);font-size: 16px;width: 100px;">
                                 <option value="0">---</option>
-                                <option value="1">停止</option>
-                                <option value="2">起步</option>
-                                <option value="3">漂移</option>
-                                <option value="4">变道</option>
-                                <option value="5">直行</option>
-                                <option value="6">左转</option>
-                                <option value="7">右转</option>
-                                <option value="8">倒行</option>
-                                <option value="9">右后倒行</option>
-                                <option value="10">左后倒行</option>
-                                <option value="11">超车</option>
-                                <option value="12">左掉头</option>
-                                <option value="13">右掉头</option>
+                                <option value="1">静止</option>
+                                <option value="2">停止</option>
+                                <option value="3">起步</option>
+                                <option value="4">漂移</option>
+                                <option value="5">变道</option>
+                                <option value="6">直行</option>
+                                <option value="7">左转</option>
+                                <option value="8">右转</option>
+                                <option value="9">倒行</option>
+                                <option value="10">右后倒行</option>
+                                <option value="11">左后倒行</option>
+                                <option value="12">超车</option>
+                                <option value="13">左掉头</option>
+                                <option value="14">右掉头</option>
                             </select>
                         </div>
                     </div>
@@ -792,7 +793,7 @@ function sousuo()
     //zcxw
     element_object = document.getElementById("zcxw");
     element_index = element_object.selectedIndex;
-    myelement = index_to_string(element_index,element_object.length)
+    myelement = index_to_string(0,element_object.length)
     console.log(myelement)
     vec=vec+myelement
 
@@ -804,6 +805,7 @@ function sousuo()
     vec=vec+myelement
 
     console.log(vec)
+    console.log(vec.length)
 
     var param = {};
 
