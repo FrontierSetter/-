@@ -800,12 +800,12 @@ carTimeScatterRequest()
 
 // =========== 数据联动 =======================
 myChart3.on('mouseover', {seriesIndex: 0}, function (params) {
-    console.log(params.data[3]+' mouseover myChart3');
+    // console.log(params.data[3]+' mouseover myChart3');
     highlight_vin(params.data[3], true);
 });
 
 myChart3.on('mouseout', {seriesIndex: 0}, function (params) {
-    console.log(params.data[3]+' mouseout myChart3');
+    // console.log(params.data[3]+' mouseout myChart3');
     downplay_vin(params.data[3]);
 });
 
@@ -816,12 +816,12 @@ myChart3.on('click', {seriesIndex: 0}, function (params) {
 });
 
 myChart1_1.on('mouseover', {seriesIndex: 0}, function (params) {
-    console.log(option_global_mile_time['xAxis']['data'][params.dataIndex]+' mouseover myChart1_1');
+    // console.log(option_global_mile_time['xAxis']['data'][params.dataIndex]+' mouseover myChart1_1');
     highlight_vin(option_global_mile_time['xAxis']['data'][params.dataIndex], true);
 });
 
 myChart1_1.on('mouseout', {seriesIndex: 0}, function (params) {
-    console.log(option_global_mile_time['xAxis']['data'][params.dataIndex]+' mouseout myChart1_1');
+    // console.log(option_global_mile_time['xAxis']['data'][params.dataIndex]+' mouseout myChart1_1');
     downplay_vin(option_global_mile_time['xAxis']['data'][params.dataIndex]);
 });
 
@@ -832,12 +832,12 @@ myChart1_1.on('click', {seriesIndex: 0}, function (params) {
 });
 
 myChart7_1.on('mouseover', function (params) {
-    console.log(params.name+' mouseout myChart7_1');
+    // console.log(params.name+' mouseout myChart7_1');
     highlight_multiple_vin(position_to_car_vin[params.name]);
 });
 
 myChart7_1.on('mouseout', function (params) {
-    console.log(params.name+' mouseout myChart7_1');
+    // console.log(params.name+' mouseout myChart7_1');
     downplay_multiple_vin(position_to_car_vin[params.name]);
 });
 
@@ -851,7 +851,7 @@ myChart7_1.on('click', function (params) {
 
     cur_area = target_area;
 
-    console.log(target_area+' click myChart7_1');
+    // console.log(target_area+' click myChart7_1');
     focus_on_multiple_vin(position_to_car_vin[target_area], map);
 });
 
