@@ -5,6 +5,9 @@
     <title>课题三：自动驾驶电动汽车大数据云雾融合平台研究</title>
     <!--设置是否为缩放模式 -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- 新 Bootstrap 核心 CSS 文件 -->
+    <link rel="stylesheet" type="text/css" href="bootstrap/3.3.4/css/bootstrap.css">
+    <!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
     <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
     <script src="js/bootstrap.min.js"></script>
@@ -25,6 +28,10 @@
     <!-- <script src="js/swiper.min.js"></script> -->
 
     <!--界面样式-->
+    <script src="js/visual.js"></script>
+    <!-- <script src="js/china.js"></script> -->
+    <!-- <script src="js/xiamen.js"></script> -->
+    <script src="js/chartMap.js"></script>
     <link rel="stylesheet" type="text/css" href="css/visual.css">
 
     <!-- semantic UI -->
@@ -32,7 +39,7 @@
     <!-- <link href="https://cdn.bootcss.com/semantic-ui/2.4.1/components/icon.css" rel="stylesheet"> -->
     <!-- <script src="https://cdn.bootcdn.net/ajax/libs/semantic-ui/2.4.1/components/transition.js"></script> -->
     <!-- <link href="https://cdn.bootcdn.net/ajax/libs/semantic-ui/2.4.1/components/transition.css" rel="stylesheet"> -->
-    <!-- <link href="https://cdn.bootcdn.net/ajax/libs/semantic-ui/2.4.1/components/button.css" rel="stylesheet"> -->
+    <link href="https://cdn.bootcdn.net/ajax/libs/semantic-ui/2.4.1/components/button.css" rel="stylesheet">
     <!-- <link href="https://cdn.bootcss.com/semantic-ui/2.4.1/components/icon.css" rel="stylesheet"> -->
     <!-- <script src="https://cdn.bootcdn.net/ajax/libs/semantic-ui/2.4.1/components/dropdown.js"></script> -->
     <!-- <link href="https://cdn.bootcdn.net/ajax/libs/semantic-ui/2.4.1/components/dropdown.css" rel="stylesheet"> -->
@@ -139,7 +146,19 @@
 </head>
 <body class="ksh" id='main_body'>
     <!-- 告警信息必须放置在body的头部，并且不能包含在div中 -->
-       
+    <div class="md-modal md-effect-1" id="modal-1">
+        <div class="md-content" style="height: 96%; background: #4BACC6;">
+            <!-- <h3 id='warning_detail_head'>告警详情1</h3> -->
+            <div style="height: 95%;">
+                <iframe id="directory_frame" src="http://47.103.85.106/directory_1/" style="width: 100%; height: 98%; "  frameborder="no" border="0" marginwidth="0" marginheight="0" scrolling="hidden" allowtransparency="yes"></iframe>
+                <!-- <button class="md-close">关闭</button> -->
+                <button onclick="changeIframe('http://47.103.85.106/directory_1_alia/')">目录1</button>
+                <button onclick="changeIframe('http://47.103.85.106/directory_2_alia/')">目录2</button>
+                <button onclick="changeIframe('http://47.103.85.106/directory_3_alia/')">目录3</button>
+            </div>
+        </div>
+    </div>
+
     <div id="load">
         <div class="load_img">
             <!-- 加载动画 -->
@@ -173,7 +192,8 @@
                     <img class="visual_conBot_3" src="images/ksh44.png">
                     <img class="visual_conBot_4" src="images/ksh45.png">
                     <div class="visual_chart_text">
-                        <h1>数据明细</h1>
+                        <h1>数据明细<span id="warning_button_1" class="md-trigger" data-modal="modal-1">（细则）</span></h1>
+                        
                     </div>
                     <div class="visual_chart" style="margin: 1%; height: 98%; width: 98%; margin-top: 25%;">
                         <div style="width: 50%; display: flex; float: left; margin-bottom: 5%;">
@@ -520,6 +540,12 @@
     <script src="js/cssParser.js"></script>
     <script src="js/css-filters-polyfill.js"></script>
 
+    <!-- 弹出式窗口 -->
+    <div class="md-overlay"></div><!-- the overlay element -->
+    <!-- classie.js by @desandro: https://github.com/desandro/classie -->
+    <script src="js/classie.js"></script>
+    <script src="js/modalEffects.js"></script>
+
 </body>
 </html>
 
@@ -690,4 +716,9 @@ pieChart.setOption(optionPie);
     }
 
     requestSystemStatus()
+    re_init_pop_window()
+
+    function changeIframe(desSrc){
+		document.getElementById("directory_frame").src=desSrc;
+	}
 </script>
