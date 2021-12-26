@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+	<style type="text/css">
+	body, html,#allmap {width: 100%;height: 100%;overflow: hidden;margin:0;font-family:"微软雅黑";}
+	</style>
+	<script type="text/javascript" src="//api.map.baidu.com/api?type=webgl&v=1.0&ak=NjvQlGFSxuq5B7ld8vdIWwuGfdy2sTsq"></script>
+	<script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="js/coordtransform.js"></script>
+    <script src="js/mine.js"></script>
+	<title>远程决策</title>
+</head>
+<body>
+	<div id="allmap"></div>
+</body>
+</html>
+<script type="text/javascript">
+    // GL版命名空间为BMapGL
+    // 按住鼠标右键，修改倾斜角和角度
+	var map = new BMapGL.Map("allmap");    // 创建Map实例
+	map.centerAndZoom(wgs84tobdpoint(117.993374,24.348046),18);  // 初始化地图,设置中心点坐标和地图级别
+	map.disableScrollWheelZoom();     //开启鼠标滚轮缩放
+	// map.enableScrollWheelZoom();     //开启鼠标滚轮缩放
+	// map.setHeading(64.5);
+	// map.setTilt(73);
+    map.setMapStyleV2({     
+        styleId: '0c4e2c205d522daab0c5090baf1e0163'
+    });
+
+
+	var iconblue = new BMapGL.Icon("img/arrow-blue.png", new BMapGL.Size(70, 70));
+	var iconred = new BMapGL.Icon("img/arrow-red.png", new BMapGL.Size(70, 70));
+
+	var curPoint_1 = new BMapGL.Point(117.993374,24.348046);
+	var curPoint_2 = new BMapGL.Point(117.993374,24.348046);
+
+	var marker_1 = new BMapGL.Marker(curPoint_1);
+	marker_1.setIcon(iconblue);
+	// map.addOverlay(marker_1);
+	marker_1.setRotation(90);
+
+	var line_1 = [
+		new BMapGL.Point(117.993374,24.348046),
+		new BMapGL.Point(117.993374,24.348046),
+	];
+	var polyline_1= new BMapGL.Polyline(line_1, { strokeColor: "#81D8D0", strokeWeight: 15, strokeOpacity: 0.8});
+    // map.addOverlay(polyline_1);
+
+	var opts_1 = {
+		position: new BMapGL.Point(116.2787, 40.0492), // 指定文本标注所在的地理位置
+		offset: new BMapGL.Size(30, -30) // 设置文本偏移量
+	};
+	// 创建文本标注对象
+	var label_1 = new BMapGL.Label('欢迎使用百度地图JSAPI GL版本', opts_1);
+	// 自定义文本标注样式
+	label_1.setStyle({
+		color: '#81D8D0',
+		borderRadius: '5px',
+		borderColor: '#81D8D0',
+		padding: '10px',
+		fontSize: '16px',
+		height: '30px',
+		lineHeight: '30px',
+		fontFamily: '微软雅黑',
+	});
+	// map.addOverlay(label);
+
+	var marker_2 = new BMapGL.Marker(curPoint_2);
+	marker_2.setIcon(iconred);
+	// map.addOverlay(marker_2);
+	marker_2.setRotation(190);
+
+	var line_2 = [
+		new BMapGL.Point(117.993374,24.348046),
+		new BMapGL.Point(117.993374,24.348046),
+	];
+	var polyline_2= new BMapGL.Polyline(line_2, { strokeColor: "#800020", strokeWeight: 15, strokeOpacity: 0.8, strokeStyle: "dashed"});
+    // map.addOverlay(polyline_2);
+
+	var opts_2 = {
+		position: new BMapGL.Point(116.2787, 40.0492), // 指定文本标注所在的地理位置
+		offset: new BMapGL.Size(30, -30) // 设置文本偏移量
+	};
+	// 创建文本标注对象
+	var label_2 = new BMapGL.Label('欢迎使用百度地图JSAPI GL版本', opts_2);
+	// 自定义文本标注样式
+	label_2.setStyle({
+		color: '#800020',
+		borderRadius: '5px',
+		borderColor: '#800020',
+		padding: '10px',
+		fontSize: '16px',
+		height: '30px',
+		lineHeight: '30px',
+		fontFamily: '微软雅黑',
+	});
+	// map.addOverlay(label_2);
+
+
+	function requestRedCarInfo(){
+        $.ajax({
+            url: 'http://47.103.85.106:80/carmeet/VehicleGPSInfo', //请求的url
+            type: 'get', //请求的方式
+			data: "Car=RedVehicle",
+			dataType: "json",
+            error: function (data) {
+                console.log('requestRedCarInfo请求失败');
+            },
+            success: function (data) {
+				if(data["Visibility"]){
+					curPoint_2 = wgs84tobdpoint(parseFloat(data['VehLongitude']), parseFloat(data['VehLatitude']));
+					// curPoint_2 = new BMapGL.Point(parseFloat(data['VehLongitude']), parseFloat(['VehLatitude']));
+					line_2 = [
+						wgs84tobdpoint(parseFloat(data['VehLongitude']), parseFloat(data['VehLatitude'])),
+						// new BMapGL.Point(parseFloat(data['VehLongitude']), parseFloat(data['VehLatitude'])),
+						wgs84tobdpoint(parseFloat(data['DesLongitude']), parseFloat(data['DesLatitude'])),
+						// new BMapGL.Point(parseFloat(data['DesLongitude']), parseFloat(data['DesLatitude'])),
+						// new BMapGL.Point(121.447376,31.033731),
+					];
+					map.removeOverlay(marker_2);
+					map.removeOverlay(label_2);
+					map.removeOverlay(polyline_2);
+
+					marker_2 = new BMapGL.Marker(curPoint_2);
+					marker_2.setIcon(iconred);
+					marker_2.setRotation(data['Angle2North']);
+					// marker_2.setZIndex(15);
+
+					polyline_2 = new BMapGL.Polyline(line_2, { strokeColor: "#800020", strokeWeight: 15, strokeOpacity: 0.8, strokeStyle: "dashed"});
+					
+					opts_2['position'] = curPoint_2;
+					label_2 = new BMapGL.Label('车速: '+data['Velocity'].toFixed(2).toString()+"km/h", opts_2);
+					label_2.setStyle({
+						color: '#800020',
+						borderRadius: '5px',
+						borderColor: '#800020',
+						padding: '10px',
+						fontSize: '16px',
+						height: '30px',
+						lineHeight: '30px',
+						fontFamily: '微软雅黑',
+					});
+					// label_2.setZIndex(15);
+					
+					map.addOverlay(polyline_2);
+					map.addOverlay(label_2);
+					map.addOverlay(marker_2);
+
+					var view = map.getViewport(line_1.concat(line_2));
+					var mapZoom = view.zoom;
+					var centerPoint = view.center;
+					// console.log(mapZoom);
+					// console.log(centerPoint)
+					if(mapZoom > 19){
+						mapZoom = 19;
+					}
+					map.centerAndZoom(centerPoint, mapZoom);
+				}else{
+					map.removeOverlay(marker_2);
+					map.removeOverlay(polyline_2);
+				}
+                
+                setTimeout(function(){
+                    requestRedCarInfo();
+                }, 1000);
+            }
+        });
+    }
+
+	function requestBlueCarInfo(){
+        $.ajax({
+            url: 'http://47.103.85.106:80/carmeet/VehicleGPSInfo', //请求的url
+            type: 'get', //请求的方式
+			data: "Car=BlueVehicle",
+			dataType: "json",
+            error: function (data) {
+                console.log('requestBlueCarInfo请求失败');
+            },
+            success: function (data) {
+				if(data["Visibility"]){
+					curPoint_1 = wgs84tobdpoint(parseFloat(data['VehLongitude']), parseFloat(data['VehLatitude']));
+					// curPoint_1 = new BMapGL.Point(parseFloat(data['VehLongitude']), parseFloat(['VehLatitude']));
+					line_1 = [
+						wgs84tobdpoint(parseFloat(data['VehLongitude']), parseFloat(data['VehLatitude'])),
+						// new BMapGL.Point(parseFloat(data['VehLongitude']), parseFloat(data['VehLatitude'])),
+						wgs84tobdpoint(parseFloat(data['DesLongitude']), parseFloat(data['DesLatitude'])),
+						// new BMapGL.Point(parseFloat(data['DesLongitude']), parseFloat(data['DesLatitude'])),
+						// new BMapGL.Point(121.447376,31.033731),
+					];
+					map.removeOverlay(marker_1);
+					map.removeOverlay(label_1);
+					map.removeOverlay(polyline_1);
+
+					marker_1 = new BMapGL.Marker(curPoint_1);
+					marker_1.setIcon(iconblue);
+					marker_1.setRotation(data['Angle2North']);
+					// marker_1.setZIndex(5);
+
+					polyline_1 = new BMapGL.Polyline(line_1, { strokeColor: "#81D8D0", strokeWeight: 15, strokeOpacity: 0.8, strokeStyle: "dashed"});
+					
+					opts_1['position'] = curPoint_1;
+					label_1 = new BMapGL.Label('车速: '+data['Velocity'].toFixed(2).toString()+"km/h", opts_1);
+					label_1.setStyle({
+						color: '#81D8D0',
+						borderRadius: '5px',
+						borderColor: '#81D8D0',
+						padding: '10px',
+						fontSize: '16px',
+						height: '30px',
+						lineHeight: '30px',
+						fontFamily: '微软雅黑',
+					});
+					// label_1.setZIndex(5);
+
+					map.addOverlay(polyline_1);
+					map.addOverlay(label_1);
+					map.addOverlay(marker_1);
+
+					var view = map.getViewport(line_1.concat(line_2));
+					var mapZoom = view.zoom;
+					var centerPoint = view.center;
+					if(mapZoom > 19){
+						mapZoom = 19;
+					}
+					map.centerAndZoom(centerPoint, mapZoom);
+				}else{
+					map.removeOverlay(marker_1);
+					map.removeOverlay(polyline_1);
+				}
+                
+                setTimeout(function(){
+                    requestBlueCarInfo();
+                }, 1000);
+            }
+        });
+    }
+
+	requestRedCarInfo();
+	requestBlueCarInfo();
+</script>
