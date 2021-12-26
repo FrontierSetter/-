@@ -406,7 +406,7 @@ function requestCarStatus(){
         // 3
         url: server_ip+'api/global_car_status_history', //请求的url
         type: 'get', //请求的方式
-        data: "st="+getTimeHour(7)+"&et="+getTimeHour(0),
+        data: "st="+getTimeHour(3)+"&et="+getTimeHour(0),
         error: function (data) {
             console.log('requestCarStatus请求失败');
         },

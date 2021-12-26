@@ -623,7 +623,7 @@ pieChart.setOption(optionPie);
 
     function set_decision_latency(curLatency){
         // console.log(curLatency)
-        if(curLatency <= 10){
+        if(curLatency <= 20){
             $('#decision_latency').parent().removeClass('red');
             $('#decision_latency').parent().addClass('green');
         }else{
