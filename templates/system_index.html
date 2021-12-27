@@ -232,7 +232,7 @@
                                     1 GB
                                 </div>
                                 <div class="label" style="font-size: 30px;">
-                                    其他数据
+                                    元数据
                                 </div>
                             </div>
                         </div>
@@ -599,7 +599,7 @@
                     { value: 580, name: '表单数据' },
                     { value: 1048, name: '视频数据' },
                     { value: 735, name: '点云数据' },
-                    { value: 484, name: '其他数据' },
+                    { value: 484, name: '元数据' },
                 ]
             }
         ]
@@ -611,6 +611,9 @@ pieChart.setOption(optionPie);
 <script>
     function set_car_cloud_latency(curLatency){
         // console.log(curLatency)
+        while(curLatency > 20){
+            curLatency -= 20;
+        }
         if(curLatency <= 5000){
             $('#car_cloud_latency').parent().removeClass('red');
             $('#car_cloud_latency').parent().addClass('green');
