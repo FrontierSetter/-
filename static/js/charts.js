@@ -1543,7 +1543,7 @@ function geocodeSearch(pt){
 
 function createCircleData(){
     // console.log(car_position);
-    console.log(position_to_car_vin)
+    // console.log(position_to_car_vin)
     echartCircleData = [];
     var i = -1, j = -1;
     for(curProvince in car_position){
@@ -1720,9 +1720,17 @@ function carTimeScatterRequest(){
             result_data = new Array();
 
             for(var i = 0; i < data.length; ++i){
-                if(data[i]['Mileage'] <= 0){
+                if(data[i]['Mileage'] < 0 || data[i]['Mileage'] > 500000){
                     continue;
                 }
+
+                if(data[i]['DriveTime'] <= 0 && data[i]['Mileage'] > 0){
+                    continue;
+                }
+                // if(data[i]['Mileage']/(data[i]['DriveTime']/3600) > 2000.0){
+                //     continue;
+                // }
+                // console.log(data[i]['Mileage']/(data[i]['DriveTime']/3600));
 
                 result_data.push([data[i]['ChargeTime'], data[i]['DriveTime'], data[i]['Mileage'], data[i]['Vin']])
             }
