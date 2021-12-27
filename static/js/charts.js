@@ -507,9 +507,223 @@ option_car_position = {
             focus: 'ancestor'
         },
         radius: [0, '100%'],
-        data: []
+        data: [
+            {
+                "name": "福建省",
+                "children": [
+                    {
+                        "name": "厦门市",
+                        "children": [
+                            {
+                                "name": "湖里区",
+                                "value": 35
+                            },
+                            {
+                                "name": "思明区",
+                                "value": 40
+                            },
+                            {
+                                "name": "海沧区",
+                                "value": 1
+                            },
+                            {
+                                "name": "翔安区",
+                                "value": 5
+                            }
+                        ]
+                    },
+                    {
+                        "name": "漳州市",
+                        "children": [
+                            {
+                                "name": "龙海区",
+                                "value": 2
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "name": "广东省",
+                "children": [
+                    {
+                        "name": "深圳市",
+                        "children": [
+                            {
+                                "name": "南山区",
+                                "value": 1
+                            }
+                        ]
+                    },
+                    {
+                        "name": "珠海市",
+                        "children": [
+                            {
+                                "name": "金湾区",
+                                "value": 1
+                            }
+                        ]
+                    },
+                    {
+                        "name": "佛山市",
+                        "children": [
+                            {
+                                "name": "南海区",
+                                "value": 1
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "name": "浙江省",
+                "children": [
+                    {
+                        "name": "嘉兴市",
+                        "children": [
+                            {
+                                "name": "嘉善县",
+                                "value": 5
+                            },
+                            {
+                                "name": "桐乡市",
+                                "value": 4
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "name": "江苏省",
+                "children": [
+                    {
+                        "name": "无锡市",
+                        "children": [
+                            {
+                                "name": "滨湖区",
+                                "value": 1
+                            },
+                            {
+                                "name": "锡山区",
+                                "value": 5
+                            }
+                        ]
+                    },
+                    {
+                        "name": "苏州市",
+                        "children": [
+                            {
+                                "name": "相城区",
+                                "value": 35
+                            },
+                            {
+                                "name": "常熟市",
+                                "value": 1
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "name": "湖南省",
+                "children": [
+                    {
+                        "name": "衡阳市",
+                        "children": [
+                            {
+                                "name": "雁峰区",
+                                "value": 5
+                            },
+                            {
+                                "name": "蒸湘区",
+                                "value": 1
+                            },
+                            {
+                                "name": "石鼓区",
+                                "value": 1
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "name": "北京市（省）",
+                "children": [
+                    {
+                        "name": "北京市",
+                        "children": [
+                            {
+                                "name": "大兴区",
+                                "value": 1
+                            },
+                            {
+                                "name": "通州区",
+                                "value": 1
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "name": "内蒙古自治区",
+                "children": [
+                    {
+                        "name": "鄂尔多斯市",
+                        "children": [
+                            {
+                                "name": "准格尔旗",
+                                "value": 1
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "name": "重庆市（省）",
+                "children": [
+                    {
+                        "name": "重庆市",
+                        "children": [
+                            {
+                                "name": "渝北区",
+                                "value": 4
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "name": "湖北省",
+                "children": [
+                    {
+                        "name": "武汉市",
+                        "children": [
+                            {
+                                "name": "蔡甸区",
+                                "value": 3
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "name": "上海市（省）",
+                "children": [
+                    {
+                        "name": "上海市",
+                        "children": [
+                            {
+                                "name": "浦东新区",
+                                "value": 1
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
     }
 };
+myChart7_1.setOption(option_car_position, true);
 
 var car_point_arr = new Array();
 var car_position_vin_arr = new Array();  // 用来记录车辆Vin
@@ -519,10 +733,730 @@ var myGeo = new BMapGL.Geocoder();
 var echartCircleData = new Array();
 
 var car_vin_to_district = {};    // 用来记录vin到区的映射，用于之后的数据联动
-var position_to_car_vin = {'All':[]};    // 用来记录行政区域到vin的映射，省、市、区放在一个词典里，便于使用
+var position_to_car_vin = {
+    "All": [
+        "LL3ABCJ20KA010806",
+        "LL3ABCJ20LA011300",
+        "LL3ABCJ20LA011989",
+        "LL3ABCJ20MA010083",
+        "LL3ABCJ20MA010245",
+        "LL3ABCJ20MA010780",
+        "LL3ABCJ20MA010782",
+        "LL3ABCJ20MA010827",
+        "LL3ABCJ20MA010830",
+        "LL3ABCJ21LA010172",
+        "LL3ABCJ21LA011385",
+        "LL3ABCJ21MA010495",
+        "LL3ABCJ21MA010801",
+        "LL3ABCJ21MA010819",
+        "LL3ABCJ21MA010822",
+        "LL3ABCJ22KA011491",
+        "LL3ABCJ22LA010732",
+        "LL3ABCJ22MA010084",
+        "LL3ABCJ22MA010246",
+        "LL3ABCJ22MA010490",
+        "LL3ABCJ22MA010781",
+        "LL3ABCJ22MA010828",
+        "LL3ABCJ22MA010831",
+        "LL3ABCJ23LA011386",
+        "LL3ABCJ23LA011985",
+        "LL3ABCJ23MA010496",
+        "LL3ABCJ23MA010823",
+        "LL3ABCJ24LA010621",
+        "LL3ABCJ24LA010690",
+        "LL3ABCJ24LA011381",
+        "LL3ABCJ24MA010116",
+        "LL3ABCJ24MA010247",
+        "LL3ABCJ24MA010491",
+        "LL3ABCJ24MA010779",
+        "LL3ABCJ24MA010782",
+        "LL3ABCJ24MA010827",
+        "LL3ABCJ24MA010829",
+        "LL3ABCJ24MA010832",
+        "LL3ABCJ24MA010881",
+        "LL3ABCJ25LA011387",
+        "LL3ABCJ25LA011986",
+        "LL3ABCJ25MA010497",
+        "LL3ABCJ25MA010824",
+        "LL3ABCJ26KA011350",
+        "LL3ABCJ26LA011382",
+        "LL3ABCJ26MA010248",
+        "LL3ABCJ26MA010492",
+        "LL3ABCJ26MA010816",
+        "LL3ABCJ26MA010833",
+        "LL3ABCJ27KA010737",
+        "LL3ABCJ27LA011116",
+        "LL3ABCJ27LA011987",
+        "LL3ABCJ27MA010498",
+        "LL3ABCJ27MA010825",
+        "LL3ABCJ28KA010794",
+        "LL3ABCJ28LA010170",
+        "LL3ABCJ28LA010895",
+        "LL3ABCJ28LA011299",
+        "LL3ABCJ28LA011383",
+        "LL3ABCJ28MA010087",
+        "LL3ABCJ28MA010493",
+        "LL3ABCJ28MA010817",
+        "LL3ABCJ28MA010820",
+        "LL3ABCJ28MA010834",
+        "LL3ABCJ29LA011117",
+        "LL3ABCJ29LA011988",
+        "LL3ABCJ29MA010244",
+        "LL3ABCJ29MA010499",
+        "LL3ABCJ29MA010826",
+        "LL3ABCJ2XKA011349",
+        "LL3ABCJ2XLA010171",
+        "LL3ABCJ2XLA011384",
+        "LL3ABCJ2XMA010494",
+        "LL3ABCJ2XMA010818",
+        "LL3ABCJ2XMA010821",
+        "LL3ABCJ2XMA010835",
+        "LL3ACCJ20JA011517",
+        "LL3ACCJ20KA010742",
+        "LL3ACCJ20KA010787",
+        "LL3ACCJ20KA010790",
+        "LL3ACCJ20KA010806",
+        "LL3ACCJ20LA010421",
+        "LL3ACCJ20MA010730",
+        "LL3ACCJ21KA010734",
+        "LL3ACCJ21KA010748",
+        "LL3ACCJ21KA010751",
+        "LL3ACCJ21KA010773",
+        "LL3ACCJ21KA010779",
+        "LL3ACCJ21KA010782",
+        "LL3ACCJ21KA010796",
+        "LL3ACCJ21KA010801",
+        "LL3ACCJ21KA010881",
+        "LL3ACCJ22JA011664",
+        "LL3ACCJ22KA010743",
+        "LL3ACCJ22KA010788",
+        "LL3ACCJ22KA010791",
+        "LL3ACCJ22KA010807",
+        "LL3ACCJ22KA010810",
+        "LL3ACCJ22LA010412",
+        "LL3ACCJ22LA010413",
+        "LL3ACCJ22LA010419",
+        "LL3ACCJ22LA010799",
+        "LL3ACCJ22LA010804",
+        "LL3ACCJ22LA011411",
+        "LL3ACCJ23KA010735",
+        "LL3ACCJ23KA010748",
+        "LL3ACCJ23KA010749",
+        "LL3ACCJ23KA010783",
+        "LL3ACCJ23KA010797",
+        "LL3ACCJ23KA010802",
+        "LL3ACCJ23KA010845",
+        "LL3ACCJ24KA010744",
+        "LL3ACCJ24KA010789",
+        "LL3ACCJ24KA010792",
+        "LL3ACCJ24KA010808",
+        "LL3ACCJ24KA010811",
+        "LL3ACCJ24KA010819",
+        "LL3ACCJ25JA011514",
+        "LL3ACCJ25KA010736",
+        "LL3ACCJ25KA010753",
+        "LL3ACCJ25KA010754",
+        "LL3ACCJ25KA010784",
+        "LL3ACCJ25KA010796",
+        "LL3ACCJ25KA010798",
+        "LL3ACCJ25KA010803",
+        "LL3ACCJ25LA011337",
+        "LL3ACCJ26KA010745",
+        "LL3ACCJ26KA010793",
+        "LL3ACCJ26KA010809",
+        "LL3ACCJ27JA011515",
+        "LL3ACCJ27KA010737",
+        "LL3ACCJ27KA010740",
+        "LL3ACCJ27KA010751",
+        "LL3ACCJ27KA010754",
+        "LL3ACCJ27KA010785",
+        "LL3ACCJ27KA010799",
+        "LL3ACCJ27KA010804",
+        "LL3ACCJ27LA010170",
+        "LL3ACCJ28KA010746",
+        "LL3ACCJ28KA010780",
+        "LL3ACCJ28KA010794",
+        "LL3ACCJ29KA010738",
+        "LL3ACCJ29KA010741",
+        "LL3ACCJ29KA010780",
+        "LL3ACCJ29KA010786",
+        "LL3ACCJ29KA010795",
+        "LL3ACCJ29KA010805",
+        "LL3ACCJ2XKA010733",
+        "LL3ACCJ2XKA010747",
+        "LL3ACCJ2XKA010750",
+        "LL3ACCJ2XKA010781",
+        "LL3ACCJ2XKA010795",
+        "LL3ACCJ2XKA010800",
+        "LL3ACCJ2XLA011384",
+        "XY123456789888888"
+    ],
+    "福建省": [
+        "LL3ABCJ20KA010806",
+        "LL3ABCJ21LA010172",
+        "LL3ABCJ21MA010801",
+        "LL3ABCJ22KA011491",
+        "LL3ABCJ27KA010737",
+        "LL3ABCJ28KA010794",
+        "LL3ABCJ28LA010170",
+        "LL3ABCJ2XLA010171",
+        "LL3ACCJ20KA010742",
+        "LL3ACCJ20KA010787",
+        "LL3ACCJ20KA010790",
+        "LL3ACCJ20KA010806",
+        "LL3ACCJ20LA010421",
+        "LL3ACCJ20MA010730",
+        "LL3ACCJ21KA010734",
+        "LL3ACCJ21KA010748",
+        "LL3ACCJ21KA010751",
+        "LL3ACCJ21KA010773",
+        "LL3ACCJ21KA010779",
+        "LL3ACCJ21KA010782",
+        "LL3ACCJ21KA010796",
+        "LL3ACCJ21KA010801",
+        "LL3ACCJ21KA010881",
+        "LL3ACCJ22JA011664",
+        "LL3ACCJ22KA010743",
+        "LL3ACCJ22KA010788",
+        "LL3ACCJ22KA010791",
+        "LL3ACCJ22KA010807",
+        "LL3ACCJ22KA010810",
+        "LL3ACCJ22LA010412",
+        "LL3ACCJ22LA010413",
+        "LL3ACCJ22LA010419",
+        "LL3ACCJ22LA010799",
+        "LL3ACCJ22LA010804",
+        "LL3ACCJ22LA011411",
+        "LL3ACCJ23KA010735",
+        "LL3ACCJ23KA010748",
+        "LL3ACCJ23KA010749",
+        "LL3ACCJ23KA010783",
+        "LL3ACCJ23KA010797",
+        "LL3ACCJ23KA010802",
+        "LL3ACCJ23KA010845",
+        "LL3ACCJ24KA010744",
+        "LL3ACCJ24KA010789",
+        "LL3ACCJ24KA010792",
+        "LL3ACCJ24KA010808",
+        "LL3ACCJ24KA010811",
+        "LL3ACCJ24KA010819",
+        "LL3ACCJ25KA010736",
+        "LL3ACCJ25KA010753",
+        "LL3ACCJ25KA010754",
+        "LL3ACCJ25KA010784",
+        "LL3ACCJ25KA010796",
+        "LL3ACCJ25KA010798",
+        "LL3ACCJ25KA010803",
+        "LL3ACCJ26KA010745",
+        "LL3ACCJ26KA010793",
+        "LL3ACCJ26KA010809",
+        "LL3ACCJ27JA011515",
+        "LL3ACCJ27KA010737",
+        "LL3ACCJ27KA010740",
+        "LL3ACCJ27KA010751",
+        "LL3ACCJ27KA010754",
+        "LL3ACCJ27KA010785",
+        "LL3ACCJ27KA010799",
+        "LL3ACCJ27KA010804",
+        "LL3ACCJ27LA010170",
+        "LL3ACCJ28KA010746",
+        "LL3ACCJ28KA010780",
+        "LL3ACCJ28KA010794",
+        "LL3ACCJ29KA010738",
+        "LL3ACCJ29KA010741",
+        "LL3ACCJ29KA010780",
+        "LL3ACCJ29KA010786",
+        "LL3ACCJ29KA010795",
+        "LL3ACCJ29KA010805",
+        "LL3ACCJ2XKA010733",
+        "LL3ACCJ2XKA010747",
+        "LL3ACCJ2XKA010750",
+        "LL3ACCJ2XKA010781",
+        "LL3ACCJ2XKA010795",
+        "LL3ACCJ2XKA010800",
+        "LL3ACCJ2XLA011384"
+    ],
+    "厦门市": [
+        "LL3ABCJ20KA010806",
+        "LL3ABCJ21LA010172",
+        "LL3ABCJ21MA010801",
+        "LL3ABCJ22KA011491",
+        "LL3ABCJ27KA010737",
+        "LL3ABCJ28KA010794",
+        "LL3ABCJ28LA010170",
+        "LL3ABCJ2XLA010171",
+        "LL3ACCJ20KA010742",
+        "LL3ACCJ20KA010787",
+        "LL3ACCJ20KA010790",
+        "LL3ACCJ20KA010806",
+        "LL3ACCJ20LA010421",
+        "LL3ACCJ20MA010730",
+        "LL3ACCJ21KA010734",
+        "LL3ACCJ21KA010748",
+        "LL3ACCJ21KA010751",
+        "LL3ACCJ21KA010773",
+        "LL3ACCJ21KA010779",
+        "LL3ACCJ21KA010782",
+        "LL3ACCJ21KA010796",
+        "LL3ACCJ21KA010801",
+        "LL3ACCJ21KA010881",
+        "LL3ACCJ22KA010743",
+        "LL3ACCJ22KA010788",
+        "LL3ACCJ22KA010791",
+        "LL3ACCJ22KA010807",
+        "LL3ACCJ22KA010810",
+        "LL3ACCJ22LA010412",
+        "LL3ACCJ22LA010413",
+        "LL3ACCJ22LA010419",
+        "LL3ACCJ22LA010799",
+        "LL3ACCJ22LA010804",
+        "LL3ACCJ22LA011411",
+        "LL3ACCJ23KA010735",
+        "LL3ACCJ23KA010748",
+        "LL3ACCJ23KA010749",
+        "LL3ACCJ23KA010783",
+        "LL3ACCJ23KA010797",
+        "LL3ACCJ23KA010802",
+        "LL3ACCJ23KA010845",
+        "LL3ACCJ24KA010744",
+        "LL3ACCJ24KA010789",
+        "LL3ACCJ24KA010792",
+        "LL3ACCJ24KA010808",
+        "LL3ACCJ24KA010811",
+        "LL3ACCJ24KA010819",
+        "LL3ACCJ25KA010736",
+        "LL3ACCJ25KA010753",
+        "LL3ACCJ25KA010754",
+        "LL3ACCJ25KA010784",
+        "LL3ACCJ25KA010796",
+        "LL3ACCJ25KA010798",
+        "LL3ACCJ25KA010803",
+        "LL3ACCJ26KA010745",
+        "LL3ACCJ26KA010793",
+        "LL3ACCJ26KA010809",
+        "LL3ACCJ27KA010737",
+        "LL3ACCJ27KA010740",
+        "LL3ACCJ27KA010751",
+        "LL3ACCJ27KA010754",
+        "LL3ACCJ27KA010785",
+        "LL3ACCJ27KA010799",
+        "LL3ACCJ27KA010804",
+        "LL3ACCJ27LA010170",
+        "LL3ACCJ28KA010746",
+        "LL3ACCJ28KA010780",
+        "LL3ACCJ28KA010794",
+        "LL3ACCJ29KA010738",
+        "LL3ACCJ29KA010741",
+        "LL3ACCJ29KA010780",
+        "LL3ACCJ29KA010786",
+        "LL3ACCJ29KA010795",
+        "LL3ACCJ29KA010805",
+        "LL3ACCJ2XKA010733",
+        "LL3ACCJ2XKA010747",
+        "LL3ACCJ2XKA010750",
+        "LL3ACCJ2XKA010781",
+        "LL3ACCJ2XKA010795",
+        "LL3ACCJ2XKA010800",
+        "LL3ACCJ2XLA011384"
+    ],
+    "湖里区": [
+        "LL3ABCJ20KA010806",
+        "LL3ABCJ27KA010737",
+        "LL3ACCJ20KA010806",
+        "LL3ACCJ20LA010421",
+        "LL3ACCJ21KA010734",
+        "LL3ACCJ21KA010751",
+        "LL3ACCJ21KA010779",
+        "LL3ACCJ22KA010810",
+        "LL3ACCJ22LA010412",
+        "LL3ACCJ22LA010413",
+        "LL3ACCJ22LA010419",
+        "LL3ACCJ22LA010799",
+        "LL3ACCJ22LA010804",
+        "LL3ACCJ22LA011411",
+        "LL3ACCJ23KA010735",
+        "LL3ACCJ23KA010748",
+        "LL3ACCJ23KA010749",
+        "LL3ACCJ23KA010802",
+        "LL3ACCJ24KA010744",
+        "LL3ACCJ24KA010789",
+        "LL3ACCJ24KA010792",
+        "LL3ACCJ24KA010808",
+        "LL3ACCJ24KA010811",
+        "LL3ACCJ24KA010819",
+        "LL3ACCJ25KA010736",
+        "LL3ACCJ25KA010803",
+        "LL3ACCJ26KA010793",
+        "LL3ACCJ26KA010809",
+        "LL3ACCJ27KA010737",
+        "LL3ACCJ27KA010751",
+        "LL3ACCJ27KA010799",
+        "LL3ACCJ27KA010804",
+        "LL3ACCJ29KA010780",
+        "LL3ACCJ29KA010805",
+        "LL3ACCJ2XKA010733",
+        "LL3ACCJ2XKA010800",
+        "LL3ACCJ2XLA011384"
+    ],
+    "广东省": [
+        "LL3ABCJ20LA011300",
+        "LL3ABCJ28LA011299",
+        "LL3ACCJ25LA011337"
+    ],
+    "深圳市": [
+        "LL3ABCJ20LA011300"
+    ],
+    "南山区": [
+        "LL3ABCJ20LA011300"
+    ],
+    "浙江省": [
+        "LL3ABCJ20LA011989",
+        "LL3ABCJ23LA011985",
+        "LL3ABCJ25LA011986",
+        "LL3ABCJ26KA011350",
+        "LL3ABCJ27LA011987",
+        "LL3ABCJ29LA011988",
+        "LL3ABCJ2XKA011349",
+        "LL3ACCJ20JA011517",
+        "LL3ACCJ25JA011514"
+    ],
+    "嘉兴市": [
+        "LL3ABCJ20LA011989",
+        "LL3ABCJ23LA011985",
+        "LL3ABCJ25LA011986",
+        "LL3ABCJ26KA011350",
+        "LL3ABCJ27LA011987",
+        "LL3ABCJ29LA011988",
+        "LL3ABCJ2XKA011349",
+        "LL3ACCJ20JA011517",
+        "LL3ACCJ25JA011514"
+    ],
+    "嘉善县": [
+        "LL3ABCJ20LA011989",
+        "LL3ABCJ23LA011985",
+        "LL3ABCJ25LA011986",
+        "LL3ABCJ27LA011987",
+        "LL3ABCJ29LA011988"
+    ],
+    "江苏省": [
+        "LL3ABCJ20MA010083",
+        "LL3ABCJ20MA010245",
+        "LL3ABCJ20MA010780",
+        "LL3ABCJ20MA010782",
+        "LL3ABCJ20MA010827",
+        "LL3ABCJ20MA010830",
+        "LL3ABCJ21MA010819",
+        "LL3ABCJ21MA010822",
+        "LL3ABCJ22MA010084",
+        "LL3ABCJ22MA010246",
+        "LL3ABCJ22MA010490",
+        "LL3ABCJ22MA010781",
+        "LL3ABCJ22MA010828",
+        "LL3ABCJ22MA010831",
+        "LL3ABCJ23MA010823",
+        "LL3ABCJ24LA010621",
+        "LL3ABCJ24LA010690",
+        "LL3ABCJ24MA010116",
+        "LL3ABCJ24MA010247",
+        "LL3ABCJ24MA010779",
+        "LL3ABCJ24MA010782",
+        "LL3ABCJ24MA010827",
+        "LL3ABCJ24MA010829",
+        "LL3ABCJ24MA010832",
+        "LL3ABCJ24MA010881",
+        "LL3ABCJ25MA010824",
+        "LL3ABCJ26MA010492",
+        "LL3ABCJ26MA010816",
+        "LL3ABCJ26MA010833",
+        "LL3ABCJ27LA011116",
+        "LL3ABCJ27MA010825",
+        "LL3ABCJ28LA010895",
+        "LL3ABCJ28MA010087",
+        "LL3ABCJ28MA010817",
+        "LL3ABCJ28MA010820",
+        "LL3ABCJ28MA010834",
+        "LL3ABCJ29MA010499",
+        "LL3ABCJ29MA010826",
+        "LL3ABCJ2XMA010494",
+        "LL3ABCJ2XMA010818",
+        "LL3ABCJ2XMA010821",
+        "LL3ABCJ2XMA010835"
+    ],
+    "无锡市": [
+        "LL3ABCJ20MA010083",
+        "LL3ABCJ20MA010780",
+        "LL3ABCJ22MA010781",
+        "LL3ABCJ24MA010116",
+        "LL3ABCJ24MA010779",
+        "LL3ABCJ24MA010782"
+    ],
+    "滨湖区": [
+        "LL3ABCJ20MA010083"
+    ],
+    "苏州市": [
+        "LL3ABCJ20MA010245",
+        "LL3ABCJ20MA010782",
+        "LL3ABCJ20MA010827",
+        "LL3ABCJ20MA010830",
+        "LL3ABCJ21MA010819",
+        "LL3ABCJ21MA010822",
+        "LL3ABCJ22MA010084",
+        "LL3ABCJ22MA010246",
+        "LL3ABCJ22MA010490",
+        "LL3ABCJ22MA010828",
+        "LL3ABCJ22MA010831",
+        "LL3ABCJ23MA010823",
+        "LL3ABCJ24LA010621",
+        "LL3ABCJ24LA010690",
+        "LL3ABCJ24MA010247",
+        "LL3ABCJ24MA010827",
+        "LL3ABCJ24MA010829",
+        "LL3ABCJ24MA010832",
+        "LL3ABCJ24MA010881",
+        "LL3ABCJ25MA010824",
+        "LL3ABCJ26MA010492",
+        "LL3ABCJ26MA010816",
+        "LL3ABCJ26MA010833",
+        "LL3ABCJ27LA011116",
+        "LL3ABCJ27MA010825",
+        "LL3ABCJ28LA010895",
+        "LL3ABCJ28MA010087",
+        "LL3ABCJ28MA010817",
+        "LL3ABCJ28MA010820",
+        "LL3ABCJ28MA010834",
+        "LL3ABCJ29MA010499",
+        "LL3ABCJ29MA010826",
+        "LL3ABCJ2XMA010494",
+        "LL3ABCJ2XMA010818",
+        "LL3ABCJ2XMA010821",
+        "LL3ABCJ2XMA010835"
+    ],
+    "相城区": [
+        "LL3ABCJ20MA010245",
+        "LL3ABCJ20MA010782",
+        "LL3ABCJ20MA010827",
+        "LL3ABCJ20MA010830",
+        "LL3ABCJ21MA010819",
+        "LL3ABCJ21MA010822",
+        "LL3ABCJ22MA010084",
+        "LL3ABCJ22MA010246",
+        "LL3ABCJ22MA010490",
+        "LL3ABCJ22MA010828",
+        "LL3ABCJ22MA010831",
+        "LL3ABCJ23MA010823",
+        "LL3ABCJ24LA010621",
+        "LL3ABCJ24LA010690",
+        "LL3ABCJ24MA010247",
+        "LL3ABCJ24MA010827",
+        "LL3ABCJ24MA010829",
+        "LL3ABCJ24MA010832",
+        "LL3ABCJ25MA010824",
+        "LL3ABCJ26MA010492",
+        "LL3ABCJ26MA010816",
+        "LL3ABCJ26MA010833",
+        "LL3ABCJ27LA011116",
+        "LL3ABCJ27MA010825",
+        "LL3ABCJ28LA010895",
+        "LL3ABCJ28MA010087",
+        "LL3ABCJ28MA010817",
+        "LL3ABCJ28MA010820",
+        "LL3ABCJ28MA010834",
+        "LL3ABCJ29MA010499",
+        "LL3ABCJ29MA010826",
+        "LL3ABCJ2XMA010494",
+        "LL3ABCJ2XMA010818",
+        "LL3ABCJ2XMA010821",
+        "LL3ABCJ2XMA010835"
+    ],
+    "锡山区": [
+        "LL3ABCJ20MA010780",
+        "LL3ABCJ22MA010781",
+        "LL3ABCJ24MA010116",
+        "LL3ABCJ24MA010779",
+        "LL3ABCJ24MA010782"
+    ],
+    "思明区": [
+        "LL3ABCJ21LA010172",
+        "LL3ABCJ21MA010801",
+        "LL3ABCJ28KA010794",
+        "LL3ABCJ28LA010170",
+        "LL3ABCJ2XLA010171",
+        "LL3ACCJ20KA010742",
+        "LL3ACCJ20KA010787",
+        "LL3ACCJ20MA010730",
+        "LL3ACCJ21KA010748",
+        "LL3ACCJ21KA010773",
+        "LL3ACCJ21KA010796",
+        "LL3ACCJ21KA010801",
+        "LL3ACCJ21KA010881",
+        "LL3ACCJ22KA010743",
+        "LL3ACCJ22KA010788",
+        "LL3ACCJ22KA010791",
+        "LL3ACCJ23KA010783",
+        "LL3ACCJ23KA010797",
+        "LL3ACCJ23KA010845",
+        "LL3ACCJ25KA010753",
+        "LL3ACCJ25KA010754",
+        "LL3ACCJ25KA010784",
+        "LL3ACCJ25KA010796",
+        "LL3ACCJ25KA010798",
+        "LL3ACCJ26KA010745",
+        "LL3ACCJ27KA010740",
+        "LL3ACCJ27KA010754",
+        "LL3ACCJ27KA010785",
+        "LL3ACCJ27LA010170",
+        "LL3ACCJ28KA010746",
+        "LL3ACCJ28KA010780",
+        "LL3ACCJ28KA010794",
+        "LL3ACCJ29KA010741",
+        "LL3ACCJ29KA010786",
+        "LL3ACCJ29KA010795",
+        "LL3ACCJ2XKA010747",
+        "LL3ACCJ2XKA010750",
+        "LL3ACCJ2XKA010795"
+    ],
+    "湖南省": [
+        "LL3ABCJ21LA011385",
+        "LL3ABCJ23LA011386",
+        "LL3ABCJ24LA011381",
+        "LL3ABCJ25LA011387",
+        "LL3ABCJ26LA011382",
+        "LL3ABCJ28LA011383",
+        "LL3ABCJ2XLA011384"
+    ],
+    "衡阳市": [
+        "LL3ABCJ21LA011385",
+        "LL3ABCJ23LA011386",
+        "LL3ABCJ24LA011381",
+        "LL3ABCJ25LA011387",
+        "LL3ABCJ26LA011382",
+        "LL3ABCJ28LA011383",
+        "LL3ABCJ2XLA011384"
+    ],
+    "雁峰区": [
+        "LL3ABCJ21LA011385",
+        "LL3ABCJ23LA011386",
+        "LL3ABCJ26LA011382",
+        "LL3ABCJ28LA011383",
+        "LL3ABCJ2XLA011384"
+    ],
+    "北京市（省）": [
+        "LL3ABCJ21MA010495",
+        "LL3ABCJ27MA010498"
+    ],
+    "北京市": [
+        "LL3ABCJ21MA010495",
+        "LL3ABCJ27MA010498"
+    ],
+    "大兴区": [
+        "LL3ABCJ21MA010495"
+    ],
+    "海沧区": [
+        "LL3ABCJ22KA011491"
+    ],
+    "内蒙古自治区": [
+        "LL3ABCJ22LA010732"
+    ],
+    "鄂尔多斯市": [
+        "LL3ABCJ22LA010732"
+    ],
+    "准格尔旗": [
+        "LL3ABCJ22LA010732"
+    ],
+    "重庆市（省）": [
+        "LL3ABCJ23MA010496",
+        "LL3ABCJ24MA010491",
+        "LL3ABCJ25MA010497",
+        "LL3ABCJ28MA010493"
+    ],
+    "重庆市": [
+        "LL3ABCJ23MA010496",
+        "LL3ABCJ24MA010491",
+        "LL3ABCJ25MA010497",
+        "LL3ABCJ28MA010493"
+    ],
+    "渝北区": [
+        "LL3ABCJ23MA010496",
+        "LL3ABCJ24MA010491",
+        "LL3ABCJ25MA010497",
+        "LL3ABCJ28MA010493"
+    ],
+    "蒸湘区": [
+        "LL3ABCJ24LA011381"
+    ],
+    "常熟市": [
+        "LL3ABCJ24MA010881"
+    ],
+    "石鼓区": [
+        "LL3ABCJ25LA011387"
+    ],
+    "桐乡市": [
+        "LL3ABCJ26KA011350",
+        "LL3ABCJ2XKA011349",
+        "LL3ACCJ20JA011517",
+        "LL3ACCJ25JA011514"
+    ],
+    "湖北省": [
+        "LL3ABCJ26MA010248",
+        "LL3ABCJ29LA011117",
+        "LL3ABCJ29MA010244"
+    ],
+    "武汉市": [
+        "LL3ABCJ26MA010248",
+        "LL3ABCJ29LA011117",
+        "LL3ABCJ29MA010244"
+    ],
+    "蔡甸区": [
+        "LL3ABCJ26MA010248",
+        "LL3ABCJ29LA011117",
+        "LL3ABCJ29MA010244"
+    ],
+    "通州区": [
+        "LL3ABCJ27MA010498"
+    ],
+    "珠海市": [
+        "LL3ABCJ28LA011299"
+    ],
+    "金湾区": [
+        "LL3ABCJ28LA011299"
+    ],
+    "翔安区": [
+        "LL3ACCJ20KA010790",
+        "LL3ACCJ21KA010782",
+        "LL3ACCJ22KA010807",
+        "LL3ACCJ29KA010738",
+        "LL3ACCJ2XKA010781"
+    ],
+    "漳州市": [
+        "LL3ACCJ22JA011664",
+        "LL3ACCJ27JA011515"
+    ],
+    "龙海区": [
+        "LL3ACCJ22JA011664",
+        "LL3ACCJ27JA011515"
+    ],
+    "佛山市": [
+        "LL3ACCJ25LA011337"
+    ],
+    "南海区": [
+        "LL3ACCJ25LA011337"
+    ],
+    "上海市（省）": [
+        "XY123456789888888"
+    ],
+    "上海市": [
+        "XY123456789888888"
+    ],
+    "浦东新区": [
+        "XY123456789888888"
+    ]
+}    
+var position_to_car_vin_new = {'All':[]};   // 用来记录行政区域到vin的映射，省、市、区放在一个词典里，便于使用
 var position_parent = {};
 
 function carPositionRequest(){
+    // car_position.clear();
+    position_to_car_vin_new = {'All':[]}
     $.ajax({
         url: server_ip+'api/car_location_and_status', //请求的url
         type: 'get', //请求的方式
@@ -574,15 +1508,15 @@ function geocodeSearch(pt){
 
         if(!(curProvince in car_position)){
             car_position[curProvince] = {}
-            position_to_car_vin[curProvince] = new Array();
+            position_to_car_vin_new[curProvince] = new Array();
         }
         if(!(curCity in car_position[curProvince])){
             car_position[curProvince][curCity] = {}
-            position_to_car_vin[curCity] = new Array();
+            position_to_car_vin_new[curCity] = new Array();
         }
         if(!(curDistrict in car_position[curProvince][curCity])){
             car_position[curProvince][curCity][curDistrict] = 0;
-            position_to_car_vin[curDistrict] = new Array();
+            position_to_car_vin_new[curDistrict] = new Array();
         }
 
         car_position[curProvince][curCity][curDistrict] += 1;
@@ -590,13 +1524,13 @@ function geocodeSearch(pt){
         var cur_vin = car_position_vin_arr[position_index]
         car_vin_to_district[cur_vin] = curDistrict;
 
-        position_to_car_vin[curDistrict].push(cur_vin);
-        position_to_car_vin[curCity].push(cur_vin);
+        position_to_car_vin_new[curDistrict].push(cur_vin);
+        position_to_car_vin_new[curCity].push(cur_vin);
         // 防止直辖市导致的重复
-        if(position_to_car_vin[curProvince][position_to_car_vin[curProvince].length-1] != cur_vin){
-            position_to_car_vin[curProvince].push(cur_vin);
+        if(position_to_car_vin_new[curProvince][position_to_car_vin_new[curProvince].length-1] != cur_vin){
+            position_to_car_vin_new[curProvince].push(cur_vin);
         }
-        position_to_car_vin['All'].push(cur_vin);
+        position_to_car_vin_new['All'].push(cur_vin);
 
         position_parent[curDistrict] = curCity;
         position_parent[curCity] = curProvince;
@@ -608,6 +1542,9 @@ function geocodeSearch(pt){
 }
 
 function createCircleData(){
+    // console.log(car_position);
+    console.log(position_to_car_vin)
+    echartCircleData = [];
     var i = -1, j = -1;
     for(curProvince in car_position){
         // console.log(curProvince)
@@ -639,9 +1576,13 @@ function createCircleData(){
     // console.log(echartCircleData)
 
     option_car_position['series']['data'] = echartCircleData;
+    // console.log(echartCircleData)
+
+    position_to_car_vin = position_to_car_vin_new;
 
     myChart7_1.setOption(option_car_position, true);
 }
+
 
 carPositionRequest();
 
@@ -1004,7 +1945,7 @@ function focus_on_multiple_vin(vin_arr, cur_map){
 
 function highlight_multiple_vin(vin_arr){
     // 旭日图中心返回按钮
-    if(vin_arr == undefined){
+    if(vin_arr == undefined || vin_arr.length == 0){
         return;
     }
 
