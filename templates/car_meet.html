@@ -21,8 +21,8 @@
     // 按住鼠标右键，修改倾斜角和角度
 	var map = new BMapGL.Map("allmap");    // 创建Map实例
 	map.centerAndZoom(wgs84tobdpoint(117.993374,24.348046),18);  // 初始化地图,设置中心点坐标和地图级别
-	map.disableScrollWheelZoom();     //开启鼠标滚轮缩放
-	// map.enableScrollWheelZoom();     //开启鼠标滚轮缩放
+	// map.disableScrollWheelZoom();     //开启鼠标滚轮缩放
+	map.enableScrollWheelZoom();     //开启鼠标滚轮缩放
 	// map.setHeading(64.5);
 	// map.setTilt(73);
     map.setMapStyleV2({     
@@ -144,22 +144,21 @@
 					});
 					// label_2.setZIndex(15);
 					
-					map.addOverlay(polyline_2);
-					map.addOverlay(label_2);
+					// map.addOverlay(polyline_2);
+					// map.addOverlay(label_2);
 					map.addOverlay(marker_2);
+					map.addOverlay(polyline_1);
 
 					var view = map.getViewport(line_1.concat(line_2));
 					var mapZoom = view.zoom;
 					var centerPoint = view.center;
 					// console.log(mapZoom);
 					// console.log(centerPoint)
-					if(mapZoom > 19){
-						mapZoom = 19;
-					}
 					map.centerAndZoom(centerPoint, mapZoom);
 				}else{
 					map.removeOverlay(marker_2);
 					map.removeOverlay(polyline_2);
+					map.removeOverlay(label_2);
 				}
                 
                 setTimeout(function(){
@@ -214,20 +213,18 @@
 					});
 					// label_1.setZIndex(5);
 
-					map.addOverlay(polyline_1);
+					// map.addOverlay(polyline_1);
 					map.addOverlay(label_1);
 					map.addOverlay(marker_1);
 
 					var view = map.getViewport(line_1.concat(line_2));
 					var mapZoom = view.zoom;
 					var centerPoint = view.center;
-					if(mapZoom > 19){
-						mapZoom = 19;
-					}
-					map.centerAndZoom(centerPoint, mapZoom);
+					// map.centerAndZoom(centerPoint, mapZoom);
 				}else{
 					map.removeOverlay(marker_1);
 					map.removeOverlay(polyline_1);
+					map.removeOverlay(marker_1);
 				}
                 
                 setTimeout(function(){
