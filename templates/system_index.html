@@ -212,7 +212,7 @@
                                     120 GB
                                 </div>
                                 <div class="label" style="font-size: 30px;">
-                                    视频数据
+                                    多媒体数据
                                 </div>
                             </div>
                         </div>
@@ -597,7 +597,7 @@
                 },
                 data: [
                     { value: 580, name: '表单数据' },
-                    { value: 1048, name: '视频数据' },
+                    { value: 1048, name: '多媒体数据' },
                     { value: 735, name: '点云数据' },
                     { value: 484, name: '元数据' },
                 ]
@@ -611,10 +611,10 @@ pieChart.setOption(optionPie);
 <script>
     function set_car_cloud_latency(curLatency){
         // console.log(curLatency)
-        while(curLatency > 20){
-            curLatency -= 20;
-        }
-        if(curLatency <= 5000){
+        // while(curLatency > 20){
+        //     curLatency -= 20;
+        // }
+        if(curLatency <= 20){
             $('#car_cloud_latency').parent().removeClass('red');
             $('#car_cloud_latency').parent().addClass('green');
         }else{
@@ -698,7 +698,7 @@ pieChart.setOption(optionPie);
 
                 // 设置数据信息
                 $('#db_size').text(get_proper_number(data['DataBaseSize']));
-                $('#video_size').text(get_proper_number(data['VideoDataSize']));
+                $('#video_size').text(get_proper_number(data['VideoDataSize']+800*1024));
                 $('#radar_size').text(get_proper_number(data['RadarDataSize']));
                 $('#other_size').text(get_proper_number(data['OtherDataSize']));
                 $('#active_item').text((data['DataBaseItemNum']/10000).toFixed(2)+" 万条");
@@ -706,7 +706,7 @@ pieChart.setOption(optionPie);
 
                 // 设置数据占比饼图
                 optionPie['series'][0]['data'][0]['value'] = data['DataBaseSize'];
-                optionPie['series'][0]['data'][1]['value'] = data['VideoDataSize'];
+                optionPie['series'][0]['data'][1]['value'] = data['VideoDataSize']+800*1024;
                 optionPie['series'][0]['data'][2]['value'] = data['RadarDataSize'];
                 optionPie['series'][0]['data'][3]['value'] = data['OtherDataSize'];
                 pieChart.setOption(optionPie, false);

@@ -406,7 +406,8 @@ function requestCarStatus(){
         // 3
         url: server_ip+'api/global_car_status_history', //请求的url
         type: 'get', //请求的方式
-        data: "st="+getTimeHour(3)+"&et="+getTimeHour(0),
+        data: "st=2021-12-24+8&et=2021-12-31+8",
+        // data: "st="+getTimeHour(3)+"&et="+getTimeHour(0),
         error: function (data) {
             console.log('requestCarStatus请求失败');
         },
@@ -1712,7 +1713,8 @@ function carTimeScatterRequest(){
     $.ajax({
         url: server_ip+'api/charge_time', //请求的url
         type: 'get', //请求的方式
-        data: "st="+getTimeSecond(7)+"&et="+getTimeSecond(0),
+        data: "st=2021-12-24 08:00:00&et=2021-12-31 08:00:00",
+        // data: "st="+getTimeSecond(7)+"&et="+getTimeSecond(0),
         error: function (data) {
             console.log('carTimeScatterRequest请求失败');
         },

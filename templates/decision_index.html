@@ -712,78 +712,79 @@
                 },
                 data: [{ value: 40, name: 'km/h' }]
             },
-            {
-                name: '转速',
-                type: 'gauge',
-                center: ['25%', '55%'],    // 默认全局居中
-                radius: '50%',
-                min: 0,
-                max: 7,
-                endAngle: 45,
-                splitNumber: 7,
-                axisLine: {            // 坐标轴线
-                    lineStyle: {       // 属性lineStyle控制线条样式
-                        color: [[0.29, 'lime'], [0.86, '#1e90ff'], [1, '#ff4500']],
-                        width: 2,
-                        shadowColor: '#fff', //默认透明
-                        shadowBlur: 10
-                    }
-                },
-                axisLabel: {            // 坐标轴小标记
-                    fontWeight: 'bolder',
-                    color: '#fff',
-                    shadowColor: '#fff', //默认透明
-                    shadowBlur: 10
-                },
-                axisTick: {            // 坐标轴小标记
-                    length: 12,        // 属性length控制线长
-                    lineStyle: {       // 属性lineStyle控制线条样式
-                        color: 'auto',
-                        shadowColor: '#fff', //默认透明
-                        shadowBlur: 10
-                    }
-                },
-                splitLine: {           // 分隔线
-                    length: 20,         // 属性length控制线长
-                    lineStyle: {       // 属性lineStyle（详见lineStyle）控制线条样式
-                        width: 3,
-                        color: '#fff',
-                        shadowColor: '#fff', //默认透明
-                        shadowBlur: 10
-                    }
-                },
-                pointer: {
-                    width: 5,
-                    shadowColor: '#fff', //默认透明
-                    shadowBlur: 5
-                },
-                title: {
-                    offsetCenter: [0, '-30%'],       // x, y，单位px
-                    textStyle: {       // 其余属性默认使用全局文本样式，详见TEXTSTYLE
-                        fontWeight: 'bolder',
-                        fontStyle: 'italic',
-                        color: '#fff',
-                        shadowColor: '#fff', //默认透明
-                        shadowBlur: 10
-                    }
-                },
-                detail: {
-                    show: false,
-                    //backgroundColor: 'rgba(30,144,255,0.8)',
-                    // borderWidth: 1,
-                    borderColor: '#fff',
-                    shadowColor: '#fff', //默认透明
-                    shadowBlur: 5,
-                    width: 80,
-                    height: 30,
-                    offsetCenter: [25, '20%'],       // x, y，单位px
-                    textStyle: {       // 其余属性默认使用全局文本样式，详见TEXTSTYLE
-                        fontWeight: 'bolder',
-                        color: '#fff'
-                    }
-                },
-                data: [{ value: 1.5, name: 'x1000 r/min' }]
-            },
+            // {
+            //     name: '转速',
+            //     type: 'gauge',
+            //     center: ['25%', '55%'],    // 默认全局居中
+            //     radius: '50%',
+            //     min: 0,
+            //     max: 7,
+            //     endAngle: 45,
+            //     show: false,
+            //     splitNumber: 7,
+            //     axisLine: {            // 坐标轴线
+            //         lineStyle: {       // 属性lineStyle控制线条样式
+            //             color: [[0.29, 'lime'], [0.86, '#1e90ff'], [1, '#ff4500']],
+            //             width: 2,
+            //             shadowColor: '#fff', //默认透明
+            //             shadowBlur: 10
+            //         }
+            //     },
+            //     axisLabel: {            // 坐标轴小标记
+            //         fontWeight: 'bolder',
+            //         color: '#fff',
+            //         shadowColor: '#fff', //默认透明
+            //         shadowBlur: 10
+            //     },
+            //     axisTick: {            // 坐标轴小标记
+            //         length: 12,        // 属性length控制线长
+            //         lineStyle: {       // 属性lineStyle控制线条样式
+            //             color: 'auto',
+            //             shadowColor: '#fff', //默认透明
+            //             shadowBlur: 10
+            //         }
+            //     },
+            //     splitLine: {           // 分隔线
+            //         length: 20,         // 属性length控制线长
+            //         lineStyle: {       // 属性lineStyle（详见lineStyle）控制线条样式
+            //             width: 3,
+            //             color: '#fff',
+            //             shadowColor: '#fff', //默认透明
+            //             shadowBlur: 10
+            //         }
+            //     },
+            //     pointer: {
+            //         width: 5,
+            //         shadowColor: '#fff', //默认透明
+            //         shadowBlur: 5
+            //     },
+            //     title: {
+            //         offsetCenter: [0, '-30%'],       // x, y，单位px
+            //         textStyle: {       // 其余属性默认使用全局文本样式，详见TEXTSTYLE
+            //             fontWeight: 'bolder',
+            //             fontStyle: 'italic',
+            //             color: '#fff',
+            //             shadowColor: '#fff', //默认透明
+            //             shadowBlur: 10
+            //         }
+            //     },
+            //     detail: {
+            //         show: false,
+            //         //backgroundColor: 'rgba(30,144,255,0.8)',
+            //         // borderWidth: 1,
+            //         borderColor: '#fff',
+            //         shadowColor: '#fff', //默认透明
+            //         shadowBlur: 5,
+            //         width: 80,
+            //         height: 30,
+            //         offsetCenter: [25, '20%'],       // x, y，单位px
+            //         textStyle: {       // 其余属性默认使用全局文本样式，详见TEXTSTYLE
+            //             fontWeight: 'bolder',
+            //             color: '#fff'
+            //         }
+            //     },
+            //     data: [{ value: 1.5, name: 'x1000 r/min' }]
+            // },
             {
                 name: '电表',
                 type: 'gauge',
@@ -1375,16 +1376,36 @@
                 
 
                 // 设置仪表盘
-                optionGuage['series'][0]['data'][0]['value'] = cur_speed;
-                optionGuage['series'][1]['data'][0]['value'] = cur_motor/1000;
-                optionGuage['series'][2]['data'][0]['value'] = parseFloat(cur_power);
-                optionGuage['series'][3]['data'][0]['value'] = cur_temp;
+                // optionGuage['series'][0]['data'][0]['value'] = cur_speed;
+                // optionGuage['series'][1]['data'][0]['value'] = cur_motor/1000;
+                optionGuage['series'][1]['data'][0]['value'] = parseFloat(cur_power);
+                optionGuage['series'][2]['data'][0]['value'] = cur_temp;
 
                 chartGuage.setOption(optionGuage);
 
                 setTimeout(function(){
                     requestSingleCarDetail();
                 }, 3000);
+            }
+        });
+    }
+
+    function requestBlueCarInfo(){
+        $.ajax({
+            url: 'http://47.103.85.106:80/carmeet/VehicleGPSInfo', //请求的url
+            type: 'get', //请求的方式
+			data: "Car=BlueVehicle",
+			dataType: "json",
+            error: function (data) {
+                console.log('requestBlueCarInfo请求失败');
+            },
+            success: function (data) {
+                optionGuage['series'][0]['data'][0]['value'] = data['Velocity'].toFixed(2);
+                chartGuage.setOption(optionGuage);
+                
+                setTimeout(function(){
+                    requestBlueCarInfo();
+                }, 100);
             }
         });
     }
@@ -1551,6 +1572,7 @@
 <!-- 启动功能 -->
 <script>
     requestSingleCarDetail();
+    requestBlueCarInfo();
     requestSingleCarPath();
     requestSingleCarSpeed();
     requestSingleCarMotor();

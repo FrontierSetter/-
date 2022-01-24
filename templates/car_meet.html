@@ -121,14 +121,14 @@
 					];
 					map.removeOverlay(marker_2);
 					map.removeOverlay(label_2);
-					map.removeOverlay(polyline_2);
+					// map.removeOverlay(polyline_2);
 
 					marker_2 = new BMapGL.Marker(curPoint_2);
 					marker_2.setIcon(iconred);
 					marker_2.setRotation(data['Angle2North']);
 					// marker_2.setZIndex(15);
 
-					polyline_2 = new BMapGL.Polyline(line_2, { strokeColor: "#800020", strokeWeight: 15, strokeOpacity: 0.8, strokeStyle: "dashed"});
+					// polyline_2 = new BMapGL.Polyline(line_2, { strokeColor: "#800020", strokeWeight: 15, strokeOpacity: 0.8, strokeStyle: "dashed"});
 					
 					opts_2['position'] = curPoint_2;
 					label_2 = new BMapGL.Label('车速: '+data['Velocity'].toFixed(2).toString()+"km/h", opts_2);
@@ -147,7 +147,7 @@
 					// map.addOverlay(polyline_2);
 					// map.addOverlay(label_2);
 					map.addOverlay(marker_2);
-					map.addOverlay(polyline_1);
+					// map.addOverlay(polyline_1);
 
 					var view = map.getViewport(line_1.concat(line_2));
 					var mapZoom = view.zoom;
@@ -157,7 +157,7 @@
 					map.centerAndZoom(centerPoint, mapZoom);
 				}else{
 					map.removeOverlay(marker_2);
-					map.removeOverlay(polyline_2);
+					// map.removeOverlay(polyline_2);
 					map.removeOverlay(label_2);
 				}
                 
@@ -190,14 +190,14 @@
 					];
 					map.removeOverlay(marker_1);
 					map.removeOverlay(label_1);
-					map.removeOverlay(polyline_1);
+					// map.removeOverlay(polyline_1);
 
 					marker_1 = new BMapGL.Marker(curPoint_1);
 					marker_1.setIcon(iconblue);
 					marker_1.setRotation(data['Angle2North']);
 					// marker_1.setZIndex(5);
 
-					polyline_1 = new BMapGL.Polyline(line_1, { strokeColor: "#81D8D0", strokeWeight: 15, strokeOpacity: 0.8, strokeStyle: "dashed"});
+					// polyline_1 = new BMapGL.Polyline(line_1, { strokeColor: "#81D8D0", strokeWeight: 15, strokeOpacity: 0.8, strokeStyle: "dashed"});
 					
 					opts_1['position'] = curPoint_1;
 					label_1 = new BMapGL.Label('车速: '+data['Velocity'].toFixed(2).toString()+"km/h", opts_1);
@@ -223,7 +223,7 @@
 					// map.centerAndZoom(centerPoint, mapZoom);
 				}else{
 					map.removeOverlay(marker_1);
-					map.removeOverlay(polyline_1);
+					// map.removeOverlay(polyline_1);
 					map.removeOverlay(marker_1);
 				}
                 
